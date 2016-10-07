@@ -114,6 +114,11 @@ public class GroupPanel extends javax.swing.JPanel {
             }
         }
     }
+    
+    public String getMeetingType(int day, int period) throws Exception{
+        this.initGroupInfo();
+        return this.groupInfo.getMeetingType(day, period);
+    }
 
     public String generateString() throws Exception {
         StringBuilder sb = new StringBuilder();
