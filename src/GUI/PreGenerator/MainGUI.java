@@ -73,10 +73,7 @@ public class MainGUI extends javax.swing.JFrame {
             }
             return sb.toString();
         } catch (Exception ex) {
-            String error = "";
-            if (ex.getMessage().equals("-1")) {
-                error = "secondary lecture far from main lecture";
-            }
+            String error = ex.getMessage();
             JOptionPane.showMessageDialog(null, error, "Cannot generate", JOptionPane.ERROR_MESSAGE);
             return "Error";
         }
