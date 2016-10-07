@@ -5,6 +5,7 @@
  */
 package GUI.PreGenerator;
 
+import Core.Differentiator;
 import Core.Generator;
 import GUI.PostGenerator.ResultMainGui;
 import GUI.PreGenerator.Files.FileLoader;
@@ -38,8 +39,15 @@ public class MainGUI extends javax.swing.JFrame {
 
     private void startScheduleGeneration(String str) {
         ArrayList<String[][]> results = Generator.getGeneratedSchedules(str);
-        generateButton.setText("Generate");
-        new ResultMainGui(results);
+        try {
+            Differentiator.differentiate(this, results);
+        } catch (Exception ex) {
+            System.out.println(ex.getMessage());
+            JOptionPane.showMessageDialog(null, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        } finally {
+            generateButton.setText("Generate");
+            new ResultMainGui(results);
+        }
     }
 
     private void saveToFile(String str) {
@@ -65,10 +73,7 @@ public class MainGUI extends javax.swing.JFrame {
             }
             return sb.toString();
         } catch (Exception ex) {
-            String error = "";
-            if (ex.getMessage().equals("-1")) {
-                error = "secondary lecture far from main lecture";
-            }
+            String error = ex.getMessage();
             JOptionPane.showMessageDialog(null, error, "Cannot generate", JOptionPane.ERROR_MESSAGE);
             return "Error";
         }
@@ -80,6 +85,19 @@ public class MainGUI extends javax.swing.JFrame {
         subjectsTabbedPane.addTab(subjectName, subject);
         subjectNameTextField.setText("");
         return subject;
+    }
+    
+    public String getMeetingType(String subjectName, int day, int period) throws Exception{
+        for (SubjectPanel subject : subjects){
+            if (subjectName.equals(subject.getSubjectName())){
+                try {
+                    return subject.getMeetingType(day, period);
+                } catch (Exception ex) {
+                    System.out.println(ex.getMessage());
+                }
+            }
+        }
+        throw new Exception("Internal fatal error");
     }
 
     /**

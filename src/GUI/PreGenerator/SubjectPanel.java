@@ -9,6 +9,8 @@ import GUI.Extras.GroupInfo;
 import GUI.Extras.SubjectInfo;
 import GUI.PreGenerator.GroupPanel.SecondLecturePossibility;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -20,9 +22,14 @@ public class SubjectPanel extends javax.swing.JPanel {
     private final ArrayList<GroupPanel> groups;
     private final String subjectName;
 
+    public String getSubjectName() {
+        return subjectName;
+    }
+
     /**
      * Creates new form SubjectPanel
      *
+     * @param subjectName
      * @param secLecExists
      * @param tutExists
      * @param tutBiWeek
@@ -43,6 +50,17 @@ public class SubjectPanel extends javax.swing.JPanel {
             groupsTabbedPane.addTab("Group " + (groupsTabbedPane.getTabCount() + 1), newGroup);
             newGroup.setGroupInfo(groupInfo);
         }
+    }
+    
+    public String getMeetingType(int day, int period) throws Exception{
+        for (GroupPanel group : groups){
+            try {
+                return group.getMeetingType(day, period);
+            } catch (Exception ex) {
+                System.out.println(ex.getMessage());
+            }
+        }
+        throw new Exception ("Not found in this subject: " + this.subjectName);
     }
 
     public String generateSubjectString() throws Exception {
