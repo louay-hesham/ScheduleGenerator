@@ -5,6 +5,7 @@
  */
 package GUI.PreGenerator;
 
+import Core.Differentiator;
 import Core.Generator;
 import GUI.PostGenerator.ResultMainGui;
 import GUI.PreGenerator.Files.FileLoader;
@@ -38,8 +39,15 @@ public class MainGUI extends javax.swing.JFrame {
 
     private void startScheduleGeneration(String str) {
         ArrayList<String[][]> results = Generator.getGeneratedSchedules(str);
-        generateButton.setText("Generate");
-        new ResultMainGui(results);
+        try {
+            Differentiator.differentiate(this, results);
+        } catch (Exception ex) {
+            System.out.println(ex.getMessage());
+            JOptionPane.showMessageDialog(null, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        } finally {
+            generateButton.setText("Generate");
+            new ResultMainGui(results);
+        }
     }
 
     private void saveToFile(String str) {
