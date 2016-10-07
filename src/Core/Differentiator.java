@@ -18,7 +18,7 @@ public class Differentiator {
             for (int i=0; i<schedule.length; i++){
                 for (int j=0; j<schedule[i].length; j++){
                     if (!schedule[i][j].equals("___")){
-                        schedule[i][j] += ("\r\n" + gui.getMeetingType(schedule[i][j], j, (i/2)+1 ));
+                        schedule[i][j] += ("!" + gui.getMeetingType(schedule[i][j], j, (i/2)+1 ));
                     } else {
                         schedule[i][j] = "";
                     }

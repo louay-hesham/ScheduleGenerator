@@ -27,7 +27,7 @@ public class Schedule extends javax.swing.JPanel {
         this.timetable.setDefaultRenderer(String.class, renderer);
         setTableModel();
         int lines = 2;
-        this.timetable.setRowHeight(this.timetable.getRowHeight() * lines);
+        this.timetable.setRowHeight(this.timetable.getRowHeight() * (lines+1));
     }
 
     private void setTableModel() {
