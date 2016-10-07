@@ -16,6 +16,7 @@ public class GroupPanel extends javax.swing.JPanel {
 
     private final SubjectInfo subjectInfo;
     private SecondLecturePossibility secondLecturePlace;
+    private GroupInfo groupInfo = null;
 
     public enum SecondLecturePossibility {
         NO_SEC_LEC, MAIN_LECTURE, TUTORIAL, LAB, NOT_POSSIBLE
@@ -66,13 +67,14 @@ public class GroupPanel extends javax.swing.JPanel {
     }
 
     public void setGroupInfo(GroupInfo groupInfo) {
+        this.groupInfo = groupInfo;
         this.lectureDayComboBox.setSelectedIndex(groupInfo.lecture.day);
         this.lecturePeriodSpinner.setValue(groupInfo.lecture.period);
         if (this.subjectInfo.secLecExists) {
             this.secLectureDayComboBox.setSelectedIndex(groupInfo.secLecture.day);
             this.secLecturePeriodSpinner.setValue(groupInfo.secLecture.period);
         }
-        
+
         if (this.subjectInfo.tutExists) {
             this.tut1DayComboBox.setSelectedIndex(groupInfo.tutorial1.day);
             this.tut1PeriodSpinner.setValue(groupInfo.tutorial1.period);
@@ -81,7 +83,7 @@ public class GroupPanel extends javax.swing.JPanel {
                 this.tut2PeriodSpinner.setValue(groupInfo.tutorial2.period);
             }
         }
-        
+
         if (this.subjectInfo.labExists) {
             this.lab1DayComboBox.setSelectedIndex(groupInfo.lab1.day);
             this.lab1PeriodSpinner.setValue(groupInfo.lab1.period);
@@ -135,6 +137,7 @@ public class GroupPanel extends javax.swing.JPanel {
             case NOT_POSSIBLE:
                 throw new Exception("-1");
         }
+        this.initGroupInfo();
         return sb.toString();
     }
 
@@ -258,6 +261,36 @@ public class GroupPanel extends javax.swing.JPanel {
             }
         }
         return sb.toString();
+    }
+
+    private void initGroupInfo() {
+        if (this.groupInfo == null) {
+            this.groupInfo = new GroupInfo();
+            groupInfo.lecture.day = this.lectureDayComboBox.getSelectedIndex();
+            groupInfo.lecture.period = (int)this.lecturePeriodSpinner.getValue();
+            if (this.subjectInfo.secLecExists) {
+                groupInfo.secLecture.day = this.secLectureDayComboBox.getSelectedIndex();
+                groupInfo.secLecture.period = (int)this.secLecturePeriodSpinner.getValue();
+            }
+
+            if (this.subjectInfo.tutExists) {
+                groupInfo.tutorial1.day = this.tut1DayComboBox.getSelectedIndex();
+                groupInfo.tutorial1.period = (int)this.tut1PeriodSpinner.getValue();
+                if (!this.subjectInfo.tutBiWeek) {
+                    groupInfo.tutorial2.day = this.tut2DayComboBox.getSelectedIndex();
+                    groupInfo.tutorial2.period = (int)this.tut2PeriodSpinner.getValue();
+                }
+            }
+
+            if (this.subjectInfo.labExists) {
+                groupInfo.lab1.day = this.lab1DayComboBox.getSelectedIndex();
+                groupInfo.lab1.period = (int)this.lab1PeriodSpinner.getValue();
+                if (!this.subjectInfo.labBiWeek) {
+                    groupInfo.lab2.day = this.lab2DayComboBox.getSelectedIndex();
+                    groupInfo.lab2.period = (int)this.lab2PeriodSpinner.getValue();
+                }
+            }
+        }
     }
 
     /**
