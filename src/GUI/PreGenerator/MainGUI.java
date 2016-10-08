@@ -91,7 +91,7 @@ public class MainGUI extends javax.swing.JFrame {
                 }
             }
         }
-        throw new Exception("Internal fatal error");
+        throw new Exception("Meeting Not Found!\r\nSubject name is: " + subjectName + "\r\n at day " + day + " at period " + period);
     }
 
     private void showErrorMessage(String error, String title) {

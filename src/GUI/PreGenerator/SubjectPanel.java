@@ -82,7 +82,7 @@ public class SubjectPanel extends javax.swing.JPanel {
                 }
             }
             if (p.equals(SecondLecturePossibility.NOT_POSSIBLE)) {
-                throw new Exception("-1");
+                throw new Exception("Unhandled case: secondary lecture is far from main lecture AND lab and tutorial exist.");
             } else {
                 for (GroupPanel g : this.groups) {
                     g.setSecondLecturePlace(p);

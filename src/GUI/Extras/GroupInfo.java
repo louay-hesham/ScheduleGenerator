@@ -18,7 +18,7 @@ public class GroupInfo{
         secLecture = new Time();
         tutorial1 = new Time();
         tutorial2 = new Time();
-        lab2 = new Time();
+        lab1 = new Time();
         lab2 = new Time();
     }
 
