@@ -5,58 +5,65 @@
  */
 package GUI.PostGenerator;
 
+import GUI.Extras.MultiLineTableCellRenderer;
+
 /**
  *
  * @author louay
  */
 public class Schedule extends javax.swing.JPanel {
-    
+
     String[][] schedule;
 
     /**
      * Creates new form Schedule
+     *
      * @param schedule
      */
     public Schedule(String[][] schedule) {
         initComponents();
         this.schedule = schedule;
+        MultiLineTableCellRenderer renderer = new MultiLineTableCellRenderer();
+        this.timetable.setDefaultRenderer(String.class, renderer);
         setTableModel();
+        int lines = 2;
+        this.timetable.setRowHeight(this.timetable.getRowHeight() * (lines+1));
     }
-    
-    private void setTableModel(){
-        
+
+    private void setTableModel() {
+
         Object[][] model = new Object[14][8];
-        for (int i=0; i<14; i++){
-            for (int j=0; j<8; j++){
-                if (j==0){
-                    model[i][j] = i+1;
-                } else if (j!=7){
-                    model[i][j] = schedule[i][j-1];
+        for (int i = 0; i < 14; i++) {
+            for (int j = 0; j < 8; j++) {
+                if (j == 0) {
+                    model[i][j] = i + 1;
+                } else if (j != 7) {
+                    model[i][j] = schedule[i][j - 1];
                 } else {
                     model[i][j] = " ";
                 }
             }
         }
-        
+
         timetable.setModel(new javax.swing.table.DefaultTableModel(
-            model,
-            new String [] {
-                "", "Saturday", "Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday"
-            }
+                model,
+                new String[]{
+                    "", "Saturday", "Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday"
+                }
         ) {
-            Class[] types = new Class [] {
+            Class[] types = new Class[]{
                 java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
             };
-            boolean[] canEdit = new boolean [] {
+            boolean[] canEdit = new boolean[]{
                 false, false, false, false, false, false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
-                return types [columnIndex];
+                return types[columnIndex];
             }
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
+                return canEdit[columnIndex];
             }
         });
     }
@@ -116,13 +123,13 @@ public class Schedule extends javax.swing.JPanel {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 582, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 1047, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 763, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents

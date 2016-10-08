@@ -23,15 +23,12 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Component id="schedulesTabbedPane" alignment="0" pref="586" max="32767" attributes="0"/>
+          <Component id="schedulesTabbedPane" alignment="0" pref="1016" max="32767" attributes="0"/>
       </Group>
     </DimensionLayout>
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Group type="102" alignment="0" attributes="0">
-              <Component id="schedulesTabbedPane" min="-2" pref="437" max="-2" attributes="0"/>
-              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-          </Group>
+          <Component id="schedulesTabbedPane" alignment="0" pref="705" max="32767" attributes="0"/>
       </Group>
     </DimensionLayout>
   </Layout>
