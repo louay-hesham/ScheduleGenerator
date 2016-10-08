@@ -43,7 +43,7 @@ public class MainGUI extends javax.swing.JFrame {
             Differentiator.differentiate(this, results);
         } catch (Exception ex) {
             System.out.println(ex.getMessage());
-            JOptionPane.showMessageDialog(null, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+            this.showErrorMessage(ex.getMessage(), "Error");
         } finally {
             generateButton.setText("Generate");
             new ResultMainGui(results);
@@ -64,19 +64,13 @@ public class MainGUI extends javax.swing.JFrame {
         }
     }
 
-    private String generateInputString() {
+    private String generateInputString() throws Exception {
         StringBuilder sb = new StringBuilder();
         sb.append(this.subjectsTabbedPane.getTabCount()).append("\r\n\r\n");
-        try {
-            for (SubjectPanel s : subjects) {
-                sb.append(s.generateSubjectString()).append("\r\n");
-            }
-            return sb.toString();
-        } catch (Exception ex) {
-            String error = ex.getMessage();
-            JOptionPane.showMessageDialog(null, error, "Cannot generate", JOptionPane.ERROR_MESSAGE);
-            return "Error";
+        for (SubjectPanel s : subjects) {
+            sb.append(s.generateSubjectString()).append("\r\n");
         }
+        return sb.toString();
     }
 
     public SubjectPanel addSubject(String subjectName, boolean secLecExists, boolean tutExists, boolean tutBiWeek, boolean labExists, boolean labBiweek) {
@@ -98,6 +92,10 @@ public class MainGUI extends javax.swing.JFrame {
             }
         }
         throw new Exception("Internal fatal error");
+    }
+
+    private void showErrorMessage(String error, String title) {
+        JOptionPane.showMessageDialog(null, error, title, JOptionPane.ERROR_MESSAGE);
     }
 
     /**
@@ -270,7 +268,15 @@ public class MainGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_labCheckBoxActionPerformed
 
     private void generateButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_generateButtonActionPerformed
-        this.startScheduleGeneration(generateInputString());
+        if (this.subjects.isEmpty()) {
+            this.showErrorMessage("Must have at least one subject!", "Error");
+        } else {
+            try {
+                this.startScheduleGeneration(generateInputString());
+            } catch (Exception ex) {
+                this.showErrorMessage(ex.getMessage(), "Error");
+            }
+        }
     }//GEN-LAST:event_generateButtonActionPerformed
 
     private void loadFileButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loadFileButtonActionPerformed
@@ -288,7 +294,15 @@ public class MainGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_loadFileButtonActionPerformed
 
     private void saveFileButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveFileButtonActionPerformed
-        this.saveToFile(generateInputString());
+        if (this.subjects.isEmpty()) {
+            this.showErrorMessage("Must have at least one subject!", "Error");
+        } else {
+            try {
+                this.saveToFile(generateInputString());
+            } catch (Exception ex) {
+                this.showErrorMessage(ex.getMessage(), "Error");
+            }
+        }
     }//GEN-LAST:event_saveFileButtonActionPerformed
 
     /**

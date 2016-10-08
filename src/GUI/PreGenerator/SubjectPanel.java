@@ -64,6 +64,9 @@ public class SubjectPanel extends javax.swing.JPanel {
     }
 
     public String generateSubjectString() throws Exception {
+        if (this.groups == null || this.groups.isEmpty()){
+            throw new Exception(this.subjectName + " has no groups!");
+        }
         StringBuilder sb = new StringBuilder();
         sb.append(this.removeSpaces(this.subjectName)).append("\r\n");
         sb.append(this.groupsTabbedPane.getTabCount()).append(" ");
