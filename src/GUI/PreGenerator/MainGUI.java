@@ -52,7 +52,7 @@ public class MainGUI extends javax.swing.JFrame {
 
     private void saveToFile(String str) {
         String path = MainGUI.class.getProtectionDomain().getCodeSource().getLocation().getPath();
-        path =  (new File(path)).getParentFile().getPath();
+        path = (new File(path)).getParentFile().getPath();
         String fileName = JOptionPane.showInputDialog(null, "Enter file name", "Save file", JOptionPane.INFORMATION_MESSAGE) + ".SGEN";
         path += (File.separator + fileName);
         try {
@@ -245,16 +245,20 @@ public class MainGUI extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void addSubjectButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addSubjectButtonActionPerformed
-        SubjectPanel subject = new SubjectPanel(
-                subjectNameTextField.getText(),
-                secondaryLectureCheckBox.isSelected(),
-                tutorialCheckBox.isSelected(),
-                tutBiWeekCheckBox.isSelected(),
-                labCheckBox.isSelected(),
-                labBiWeekCheckBox.isSelected());
-        subjects.add(subject);
-        subjectsTabbedPane.addTab(subjectNameTextField.getText(), subject);
-        subjectNameTextField.setText("");
+        if (subjectNameTextField.getText() == null || subjectNameTextField.getText().equals("")) {
+            JOptionPane.showMessageDialog(null, "Subject name can not be empty!", "Subject name error", JOptionPane.ERROR_MESSAGE);
+        } else {
+            SubjectPanel subject = new SubjectPanel(
+                    subjectNameTextField.getText(),
+                    secondaryLectureCheckBox.isSelected(),
+                    tutorialCheckBox.isSelected(),
+                    tutBiWeekCheckBox.isSelected(),
+                    labCheckBox.isSelected(),
+                    labBiWeekCheckBox.isSelected());
+            subjects.add(subject);
+            subjectsTabbedPane.addTab(subjectNameTextField.getText(), subject);
+            subjectNameTextField.setText("");
+        }
     }//GEN-LAST:event_addSubjectButtonActionPerformed
 
     private void tutorialCheckBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tutorialCheckBoxActionPerformed
