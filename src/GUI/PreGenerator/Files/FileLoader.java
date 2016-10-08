@@ -37,7 +37,10 @@ public class FileLoader {
         int numberOfSubjects = scanner.nextInt();
 
         for (int i = 0; i < numberOfSubjects; i++) {
-            String subjectName = scanner.next();
+            String subjectName = null;
+            do {
+                subjectName = scanner.nextLine();
+            }while(subjectName == null || subjectName.equals(""));
             int numberOfGroups = scanner.nextInt();
             int tut = scanner.nextInt();
             int lab = scanner.nextInt();

@@ -65,7 +65,7 @@ public class SubjectPanel extends javax.swing.JPanel {
 
     public String generateSubjectString() throws Exception {
         StringBuilder sb = new StringBuilder();
-        sb.append(this.subjectName).append("\r\n");
+        sb.append(this.removeSpaces(this.subjectName)).append("\r\n");
         sb.append(this.groupsTabbedPane.getTabCount()).append(" ");
 
         SecondLecturePossibility p = SecondLecturePossibility.NO_SEC_LEC;
@@ -130,6 +130,10 @@ public class SubjectPanel extends javax.swing.JPanel {
         }
 
         return sb.toString();
+    }
+    
+    private String removeSpaces(String str){
+        return str.replaceAll(" ", "_");
     }
 
     /**

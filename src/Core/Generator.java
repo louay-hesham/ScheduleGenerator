@@ -56,8 +56,8 @@ public class Generator {
             while (true){
                 if (getStreamOutput(in).endsWith("*")){
                     writeToStream(out, "2\n");
-                    int exit = waitForExit(p);
-                    System.out.println("Exit code is: " + exit);
+                    //int exit = waitForExit(p);
+                    //System.out.println("Exit code is: " + exit);
                     String str = getStreamOutput(in);
                     System.out.println(str);
                     return str;

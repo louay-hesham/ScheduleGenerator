@@ -86,10 +86,10 @@ public class MainGUI extends javax.swing.JFrame {
         subjectNameTextField.setText("");
         return subject;
     }
-    
-    public String getMeetingType(String subjectName, int day, int period) throws Exception{
-        for (SubjectPanel subject : subjects){
-            if (subjectName.equals(subject.getSubjectName())){
+
+    public String getMeetingType(String subjectName, int day, int period) throws Exception {
+        for (SubjectPanel subject : subjects) {
+            if (subjectName.equals(subject.getSubjectName())) {
                 try {
                     return subject.getMeetingType(day, period);
                 } catch (Exception ex) {
