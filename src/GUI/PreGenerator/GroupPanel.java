@@ -7,6 +7,8 @@ package GUI.PreGenerator;
 
 import GUI.Extras.GroupInfo;
 import GUI.Extras.SubjectInfo;
+import GUI.Extras.Time;
+import java.util.ArrayList;
 
 /**
  *
@@ -117,13 +119,17 @@ public class GroupPanel extends javax.swing.JPanel {
             }
         }
     }
-    
-    public String getMeetingType(int day, int period) throws Exception{
+
+    public String getMeetingType(int day, int period) throws Exception {
         this.initGroupInfo();
         return this.groupInfo.getMeetingType(day, period);
     }
 
     public String generateString() throws Exception {
+        this.initGroupInfo();
+        if (this.isConflicting()){
+            throw new Exception("There is a group that conflicts with itself in " + subject.getSubjectName());
+        }
         StringBuilder sb = new StringBuilder();
         String lecStrings = generateLectureString();
         switch (this.secondLecturePlace) {
@@ -145,7 +151,6 @@ public class GroupPanel extends javax.swing.JPanel {
             case NOT_POSSIBLE:
                 throw new Exception("-1");
         }
-        this.initGroupInfo();
         return sb.toString();
     }
 
@@ -272,35 +277,53 @@ public class GroupPanel extends javax.swing.JPanel {
     }
 
     private void initGroupInfo() {
-        if (this.groupInfo == null) {
-            this.groupInfo = new GroupInfo();
-            groupInfo.lecture.day = this.lectureDayComboBox.getSelectedIndex();
-            groupInfo.lecture.period = (int)this.lecturePeriodSpinner.getValue();
-            if (this.subjectInfo.secLecExists) {
-                groupInfo.secLecture.day = this.secLectureDayComboBox.getSelectedIndex();
-                groupInfo.secLecture.period = (int)this.secLecturePeriodSpinner.getValue();
-            }
+        this.groupInfo = new GroupInfo();
+        groupInfo.lecture.day = this.lectureDayComboBox.getSelectedIndex();
+        groupInfo.lecture.period = (int) this.lecturePeriodSpinner.getValue();
+        if (this.subjectInfo.secLecExists) {
+            groupInfo.secLecture.day = this.secLectureDayComboBox.getSelectedIndex();
+            groupInfo.secLecture.period = (int) this.secLecturePeriodSpinner.getValue();
+        }
 
-            if (this.subjectInfo.tutExists) {
-                groupInfo.tutorial1.day = this.tut1DayComboBox.getSelectedIndex();
-                groupInfo.tutorial1.period = (int)this.tut1PeriodSpinner.getValue();
-                if (!this.subjectInfo.tutBiWeek) {
-                    groupInfo.tutorial2.day = this.tut2DayComboBox.getSelectedIndex();
-                    groupInfo.tutorial2.period = (int)this.tut2PeriodSpinner.getValue();
-                }
+        if (this.subjectInfo.tutExists) {
+            groupInfo.tutorial1.day = this.tut1DayComboBox.getSelectedIndex();
+            groupInfo.tutorial1.period = (int) this.tut1PeriodSpinner.getValue();
+            if (!this.subjectInfo.tutBiWeek) {
+                groupInfo.tutorial2.day = this.tut2DayComboBox.getSelectedIndex();
+                groupInfo.tutorial2.period = (int) this.tut2PeriodSpinner.getValue();
             }
+        }
 
-            if (this.subjectInfo.labExists) {
-                groupInfo.lab1.day = this.lab1DayComboBox.getSelectedIndex();
-                groupInfo.lab1.period = (int)this.lab1PeriodSpinner.getValue();
-                if (!this.subjectInfo.labBiWeek) {
-                    groupInfo.lab2.day = this.lab2DayComboBox.getSelectedIndex();
-                    groupInfo.lab2.period = (int)this.lab2PeriodSpinner.getValue();
-                }
+        if (this.subjectInfo.labExists) {
+            groupInfo.lab1.day = this.lab1DayComboBox.getSelectedIndex();
+            groupInfo.lab1.period = (int) this.lab1PeriodSpinner.getValue();
+            if (!this.subjectInfo.labBiWeek) {
+                groupInfo.lab2.day = this.lab2DayComboBox.getSelectedIndex();
+                groupInfo.lab2.period = (int) this.lab2PeriodSpinner.getValue();
             }
         }
     }
 
+    private boolean isConflicting(){
+        ArrayList<Time> times = new ArrayList<>();
+        times.add(groupInfo.lecture);
+        if (subjectInfo.secLecExists){
+            times.add(groupInfo.secLecture);
+        }
+        if (subjectInfo.tutExists){
+            times.add(groupInfo.tutorial1);
+            if (!subjectInfo.tutBiWeek){
+                times.add(groupInfo.tutorial2);
+            }
+        }
+        if (subjectInfo.labExists){
+            times.add(groupInfo.lab1);
+            if (!subjectInfo.labBiWeek){
+                times.add(groupInfo.lab2);
+            }
+        }
+        return Time.checkConflict(times);
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always

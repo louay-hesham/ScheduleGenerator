@@ -63,19 +63,4 @@ public class GroupInfo{
             throw new Exception("Not present");
         }
     }
-    
-    public class Time{
-
-        public Time() {
-            this.day = 0;
-            this.period = 0;
-        }
-
-        public Time(int day, int period) {
-            this.day = day;
-            this.period = period;
-        }
-        
-        public int day, period;
-    }
 }
