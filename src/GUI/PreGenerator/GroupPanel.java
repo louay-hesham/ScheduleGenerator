@@ -17,6 +17,7 @@ public class GroupPanel extends javax.swing.JPanel {
     private final SubjectInfo subjectInfo;
     private SecondLecturePossibility secondLecturePlace;
     private GroupInfo groupInfo = null;
+    private final SubjectPanel subject;
 
     public enum SecondLecturePossibility {
         NO_SEC_LEC, MAIN_LECTURE, TUTORIAL, LAB, NOT_POSSIBLE
@@ -25,9 +26,11 @@ public class GroupPanel extends javax.swing.JPanel {
     /**
      * Creates new form GroupPanel
      *
+     * @param subject
      * @param subjectInfo
      */
-    public GroupPanel(SubjectInfo subjectInfo) {
+    public GroupPanel(SubjectPanel subject, SubjectInfo subjectInfo) {
+        this.subject = subject;
         this.secondLecturePlace = SecondLecturePossibility.NO_SEC_LEC;
         this.subjectInfo = subjectInfo;
         initComponents();
@@ -331,6 +334,7 @@ public class GroupPanel extends javax.swing.JPanel {
         lab2PeriodSpinner = new javax.swing.JSpinner();
         lab2Label = new javax.swing.JLabel();
         lab1Label = new javax.swing.JLabel();
+        deleteGroupButton = new javax.swing.JButton();
 
         lectureLabel.setText("Main Lecture:");
 
@@ -379,6 +383,14 @@ public class GroupPanel extends javax.swing.JPanel {
         lab2Label.setText("Lab 2");
 
         lab1Label.setText("jLabel1");
+
+        deleteGroupButton.setBackground(new java.awt.Color(255, 0, 0));
+        deleteGroupButton.setText("Delete Group");
+        deleteGroupButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                deleteGroupButtonActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -437,7 +449,11 @@ public class GroupPanel extends javax.swing.JPanel {
                                 .addComponent(lab2PeriodLabel)
                                 .addGap(18, 18, 18)
                                 .addComponent(lab2PeriodSpinner, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                .addGap(54, 54, 54))
+                .addGap(50, 50, 50))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(144, 144, 144)
+                .addComponent(deleteGroupButton, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -478,12 +494,19 @@ public class GroupPanel extends javax.swing.JPanel {
                     .addComponent(lab2DayComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lab2PeriodLabel)
                     .addComponent(lab2PeriodSpinner, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(20, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(deleteGroupButton, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(19, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void deleteGroupButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteGroupButtonActionPerformed
+        this.subject.deleteGroup(this);
+    }//GEN-LAST:event_deleteGroupButtonActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton deleteGroupButton;
     private javax.swing.JComboBox<String> lab1DayComboBox;
     private javax.swing.JLabel lab1Label;
     private javax.swing.JLabel lab1PeriodLabel;

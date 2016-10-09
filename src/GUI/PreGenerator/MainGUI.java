@@ -94,7 +94,7 @@ public class MainGUI extends javax.swing.JFrame {
         throw new Exception("Meeting Not Found!\r\nSubject name is: " + subjectName + "\r\n at day " + day + " at period " + period);
     }
     
-    public void deleteSubject(SubjectPanel subject){
+    protected void deleteSubject(SubjectPanel subject){
         int choice = JOptionPane.showConfirmDialog(null, "Are you sure wou want to delete the subject?", "Confirm deletion", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
         if (choice == 0){
             this.subjects.remove(subject);

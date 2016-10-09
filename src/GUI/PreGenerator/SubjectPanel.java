@@ -11,6 +11,7 @@ import GUI.PreGenerator.GroupPanel.SecondLecturePossibility;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -47,7 +48,7 @@ public class SubjectPanel extends javax.swing.JPanel {
 
     public void setGroups(ArrayList<GroupInfo> groupsInfo) {
         for (GroupInfo groupInfo : groupsInfo) {
-            GroupPanel newGroup = new GroupPanel(subjectInfo);
+            GroupPanel newGroup = new GroupPanel(this, subjectInfo);
             groups.add(newGroup);
             groupsTabbedPane.addTab("Group " + (groupsTabbedPane.getTabCount() + 1), newGroup);
             newGroup.setGroupInfo(groupInfo);
@@ -137,6 +138,14 @@ public class SubjectPanel extends javax.swing.JPanel {
         return sb.toString();
     }
     
+    protected void deleteGroup(GroupPanel group){
+        int choice = JOptionPane.showConfirmDialog(null, "Are you sure wou want to delete this group?", "Confirm deletion", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
+        if (choice == 0){
+            this.groups.remove(group);
+            this.groupsTabbedPane.remove(group);
+        }
+    }
+    
     private String removeSpaces(String str){
         return str.replaceAll(" ", "_");
     }
@@ -197,7 +206,7 @@ public class SubjectPanel extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void newGroupButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_newGroupButtonActionPerformed
-        GroupPanel newGroup = new GroupPanel(subjectInfo);
+        GroupPanel newGroup = new GroupPanel(this, subjectInfo);
         groups.add(newGroup);
         groupsTabbedPane.addTab("Group " + (groupsTabbedPane.getTabCount() + 1), newGroup);
     }//GEN-LAST:event_newGroupButtonActionPerformed
