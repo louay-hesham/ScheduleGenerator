@@ -127,9 +127,9 @@ public class GroupPanel extends javax.swing.JPanel {
 
     public String generateString() throws Exception {
         this.initGroupInfo();
-        if (this.isConflicting()){
-            throw new Exception("There is a group that conflicts with itself in " + subject.getSubjectName());
-        }
+        //if (this.isConflicting()){
+            //throw new Exception("There is a group that conflicts with itself in " + subject.getSubjectName());
+        //}
         StringBuilder sb = new StringBuilder();
         String lecStrings = generateLectureString();
         switch (this.secondLecturePlace) {

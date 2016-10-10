@@ -32,18 +32,10 @@ public class Time {
     @Override
     public boolean equals(Object obj) {
         if (obj instanceof Time) {
-            return ((Time) obj).hashCode() == this.hashCode();
+            return ((Time)obj).day == this.day && ((Time)obj).period == this.period;
         } else {
             return false;
         }
-    }
-
-    @Override
-    public int hashCode() {
-        int hash = 5;
-        hash = 71 * hash + this.day;
-        hash = 71 * hash + this.period;
-        return hash;
     }
 
     public Time(int day, int period) {

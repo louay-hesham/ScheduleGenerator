@@ -58,6 +58,8 @@ public class MainGUI extends javax.swing.JFrame {
         try {
             PrintWriter writer = new PrintWriter(path, "UTF-8");
             writer.println(str);
+            writer.println("بتعمل إيه عندك يا خلبوص؟");
+            writer.println("e5la3 yad men hena");
             writer.close();
         } catch (FileNotFoundException | UnsupportedEncodingException ex) {
             Logger.getLogger(MainGUI.class.getName()).log(Level.SEVERE, null, ex);
