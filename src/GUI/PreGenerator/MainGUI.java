@@ -31,6 +31,7 @@ public class MainGUI extends javax.swing.JFrame {
      * Creates new form MainGUI
      */
     public MainGUI() {
+        super("Schedule Generator for Handasa Alex SSP");
         initComponents();
         labBiWeekCheckBox.setVisible(false);
         tutBiWeekCheckBox.setVisible(false);

@@ -19,6 +19,7 @@ public class ResultMainGui extends javax.swing.JFrame {
      * Creates new form ResultMainGui
      */
     public ResultMainGui(ArrayList<String[][]> results) {
+        super("Generated Schedules");
         initComponents();
         schedules = new ArrayList<>();
         int i = 1;
