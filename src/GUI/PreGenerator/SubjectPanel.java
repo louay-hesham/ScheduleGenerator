@@ -11,6 +11,7 @@ import GUI.PreGenerator.GroupPanel.SecondLecturePossibility;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -21,6 +22,7 @@ public class SubjectPanel extends javax.swing.JPanel {
     private final SubjectInfo subjectInfo;
     private final ArrayList<GroupPanel> groups;
     private final String subjectName;
+    private final MainGUI gui;
 
     public String getSubjectName() {
         return subjectName;
@@ -36,7 +38,8 @@ public class SubjectPanel extends javax.swing.JPanel {
      * @param labExists
      * @param labBiweek
      */
-    public SubjectPanel(String subjectName, boolean secLecExists, boolean tutExists, boolean tutBiWeek, boolean labExists, boolean labBiweek) {
+    public SubjectPanel(MainGUI gui, String subjectName, boolean secLecExists, boolean tutExists, boolean tutBiWeek, boolean labExists, boolean labBiweek) {
+        this.gui = gui;
         subjectInfo = new SubjectInfo(secLecExists, tutExists, tutBiWeek, labExists, labBiweek);
         groups = new ArrayList<>();
         this.subjectName = subjectName;
@@ -45,7 +48,7 @@ public class SubjectPanel extends javax.swing.JPanel {
 
     public void setGroups(ArrayList<GroupInfo> groupsInfo) {
         for (GroupInfo groupInfo : groupsInfo) {
-            GroupPanel newGroup = new GroupPanel(subjectInfo);
+            GroupPanel newGroup = new GroupPanel(this, subjectInfo);
             groups.add(newGroup);
             groupsTabbedPane.addTab("Group " + (groupsTabbedPane.getTabCount() + 1), newGroup);
             newGroup.setGroupInfo(groupInfo);
@@ -135,6 +138,14 @@ public class SubjectPanel extends javax.swing.JPanel {
         return sb.toString();
     }
     
+    protected void deleteGroup(GroupPanel group){
+        int choice = JOptionPane.showConfirmDialog(null, "Are you sure wou want to delete this group?", "Confirm deletion", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
+        if (choice == 0){
+            this.groups.remove(group);
+            this.groupsTabbedPane.remove(group);
+        }
+    }
+    
     private String removeSpaces(String str){
         return str.replaceAll(" ", "_");
     }
@@ -150,11 +161,20 @@ public class SubjectPanel extends javax.swing.JPanel {
 
         groupsTabbedPane = new javax.swing.JTabbedPane();
         newGroupButton = new javax.swing.JButton();
+        deleteSubjectButton = new javax.swing.JButton();
 
         newGroupButton.setText("New group");
         newGroupButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 newGroupButtonActionPerformed(evt);
+            }
+        });
+
+        deleteSubjectButton.setBackground(new java.awt.Color(255, 0, 0));
+        deleteSubjectButton.setText("Delete Subject");
+        deleteSubjectButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                deleteSubjectButtonActionPerformed(evt);
             }
         });
 
@@ -164,32 +184,40 @@ public class SubjectPanel extends javax.swing.JPanel {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(groupsTabbedPane)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(groupsTabbedPane, javax.swing.GroupLayout.DEFAULT_SIZE, 546, Short.MAX_VALUE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(newGroupButton, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(deleteSubjectButton)))
                 .addContainerGap())
-            .addGroup(layout.createSequentialGroup()
-                .addGap(224, 224, 224)
-                .addComponent(newGroupButton)
-                .addContainerGap(257, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(newGroupButton)
-                .addGap(10, 10, 10)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(newGroupButton, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(deleteSubjectButton, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(groupsTabbedPane, javax.swing.GroupLayout.PREFERRED_SIZE, 563, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
     private void newGroupButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_newGroupButtonActionPerformed
-        GroupPanel newGroup = new GroupPanel(subjectInfo);
+        GroupPanel newGroup = new GroupPanel(this, subjectInfo);
         groups.add(newGroup);
         groupsTabbedPane.addTab("Group " + (groupsTabbedPane.getTabCount() + 1), newGroup);
     }//GEN-LAST:event_newGroupButtonActionPerformed
 
+    private void deleteSubjectButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteSubjectButtonActionPerformed
+        this.gui.deleteSubject(this);
+    }//GEN-LAST:event_deleteSubjectButtonActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton deleteSubjectButton;
     private javax.swing.JTabbedPane groupsTabbedPane;
     private javax.swing.JButton newGroupButton;
     // End of variables declaration//GEN-END:variables

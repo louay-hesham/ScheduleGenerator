@@ -13,17 +13,37 @@ import java.util.ArrayList;
  * @author louay
  */
 public class Differentiator {
-    public static void differentiate(MainGUI gui, ArrayList<String[][]> schedules) throws Exception{
-        for (String[][] schedule : schedules){
-            for (int i=0; i<schedule.length; i++){
-                for (int j=0; j<schedule[i].length; j++){
-                    if (!schedule[i][j].equals("___")){
+
+    public static void differentiate(MainGUI gui, ArrayList<String[][]> schedules) {
+        for (int k = 0; k < schedules.size(); k++) {
+            String[][] schedule = schedules.get(k);
+            boolean corrupted = false;
+            for (int i = 0; i < schedule.length; i++) {
+                if (corrupted || schedule[i] == null) {
+                    corrupted = true;
+                    break;
+                }
+                for (int j = 0; j < schedule[i].length; j++) {
+                    if (schedule[i][j] == null) {
+                        corrupted = true;
+                        break;
+                    }
+                    if (!schedule[i][j].equals("___")) {
                         schedule[i][j] = schedule[i][j].replaceAll("_", " ");
-                        schedule[i][j] += ("!" + gui.getMeetingType(schedule[i][j], j, (i/2)+1 ));
+                        try {
+                            schedule[i][j] += ("!" + gui.getMeetingType(schedule[i][j], j, (i / 2) + 1));
+                        } catch (Exception ex) {
+                            corrupted = true;
+                            break;
+                        }
                     } else {
                         schedule[i][j] = "";
                     }
                 }
+            }
+            if (corrupted) {
+                schedules.remove(schedule);
+                k--;
             }
         }
     }

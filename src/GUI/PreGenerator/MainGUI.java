@@ -58,6 +58,8 @@ public class MainGUI extends javax.swing.JFrame {
         try {
             PrintWriter writer = new PrintWriter(path, "UTF-8");
             writer.println(str);
+            writer.println("بتعمل إيه عندك يا خلبوص؟");
+            writer.println("e5la3 yad men hena");
             writer.close();
         } catch (FileNotFoundException | UnsupportedEncodingException ex) {
             Logger.getLogger(MainGUI.class.getName()).log(Level.SEVERE, null, ex);
@@ -74,7 +76,7 @@ public class MainGUI extends javax.swing.JFrame {
     }
 
     public SubjectPanel addSubject(String subjectName, boolean secLecExists, boolean tutExists, boolean tutBiWeek, boolean labExists, boolean labBiweek) {
-        SubjectPanel subject = new SubjectPanel(subjectName, secLecExists, tutExists, tutBiWeek, labExists, labBiweek);
+        SubjectPanel subject = new SubjectPanel(this, subjectName, secLecExists, tutExists, tutBiWeek, labExists, labBiweek);
         subjects.add(subject);
         subjectsTabbedPane.addTab(subjectName, subject);
         subjectNameTextField.setText("");
@@ -92,6 +94,14 @@ public class MainGUI extends javax.swing.JFrame {
             }
         }
         throw new Exception("Meeting Not Found!\r\nSubject name is: " + subjectName + "\r\n at day " + day + " at period " + period);
+    }
+    
+    protected void deleteSubject(SubjectPanel subject){
+        int choice = JOptionPane.showConfirmDialog(null, "Are you sure wou want to delete the subject?", "Confirm deletion", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
+        if (choice == 0){
+            this.subjects.remove(subject);
+            this.subjectsTabbedPane.remove(subject);
+        }
     }
 
     private void showErrorMessage(String error, String title) {
@@ -128,7 +138,7 @@ public class MainGUI extends javax.swing.JFrame {
             }
         });
 
-        secondaryLectureCheckBox.setText("Secondary bi-weekly lecture");
+        secondaryLectureCheckBox.setText("Has a secondary lecture");
 
         tutorialCheckBox.setText("Tutorial");
         tutorialCheckBox.addActionListener(new java.awt.event.ActionListener() {
@@ -137,7 +147,7 @@ public class MainGUI extends javax.swing.JFrame {
             }
         });
 
-        tutBiWeekCheckBox.setText("Bi-weekly?");
+        tutBiWeekCheckBox.setText("Every Two Weeks?");
 
         labCheckBox.setText("Lab");
         labCheckBox.addActionListener(new java.awt.event.ActionListener() {
@@ -146,7 +156,7 @@ public class MainGUI extends javax.swing.JFrame {
             }
         });
 
-        labBiWeekCheckBox.setText("Bi-weekly?");
+        labBiWeekCheckBox.setText("Every Two Weeks?");
 
         generateButton.setBackground(new java.awt.Color(51, 153, 0));
         generateButton.setText("Generate");
@@ -197,7 +207,7 @@ public class MainGUI extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(generateButton, javax.swing.GroupLayout.DEFAULT_SIZE, 124, Short.MAX_VALUE)
                             .addComponent(addSubjectButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 52, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 17, Short.MAX_VALUE)
                         .addComponent(saveFileButton, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(48, 48, 48)
                         .addComponent(loadFileButton, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -246,7 +256,7 @@ public class MainGUI extends javax.swing.JFrame {
         if (subjectNameTextField.getText() == null || subjectNameTextField.getText().equals("")) {
             JOptionPane.showMessageDialog(null, "Subject name can not be empty!", "Subject name error", JOptionPane.ERROR_MESSAGE);
         } else {
-            SubjectPanel subject = new SubjectPanel(
+            SubjectPanel subject = new SubjectPanel(this,
                     subjectNameTextField.getText(),
                     secondaryLectureCheckBox.isSelected(),
                     tutorialCheckBox.isSelected(),
