@@ -53,7 +53,7 @@
                           <Component id="generateButton" pref="124" max="32767" attributes="0"/>
                           <Component id="addSubjectButton" max="32767" attributes="0"/>
                       </Group>
-                      <EmptySpace pref="52" max="32767" attributes="0"/>
+                      <EmptySpace pref="17" max="32767" attributes="0"/>
                       <Component id="saveFileButton" min="-2" pref="137" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="48" max="-2" attributes="0"/>
                       <Component id="loadFileButton" min="-2" pref="135" max="-2" attributes="0"/>
@@ -129,7 +129,7 @@
     </Component>
     <Component class="javax.swing.JCheckBox" name="secondaryLectureCheckBox">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Secondary bi-weekly lecture"/>
+        <Property name="text" type="java.lang.String" value="Has a secondary lecture"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JCheckBox" name="tutorialCheckBox">
@@ -142,7 +142,7 @@
     </Component>
     <Component class="javax.swing.JCheckBox" name="tutBiWeekCheckBox">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Bi-weekly?"/>
+        <Property name="text" type="java.lang.String" value="Every Two Weeks?"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JCheckBox" name="labCheckBox">
@@ -155,7 +155,7 @@
     </Component>
     <Component class="javax.swing.JCheckBox" name="labBiWeekCheckBox">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Bi-weekly?"/>
+        <Property name="text" type="java.lang.String" value="Every Two Weeks?"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JButton" name="generateButton">

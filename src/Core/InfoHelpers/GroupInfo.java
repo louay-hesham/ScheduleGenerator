@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package GUI.Extras;
+package Core.InfoHelpers;
 
 /**
  *
@@ -18,7 +18,7 @@ public class GroupInfo{
         secLecture = new Time();
         tutorial1 = new Time();
         tutorial2 = new Time();
-        lab2 = new Time();
+        lab1 = new Time();
         lab2 = new Time();
     }
 
@@ -62,20 +62,5 @@ public class GroupInfo{
         } else {
             throw new Exception("Not present");
         }
-    }
-    
-    public class Time{
-
-        public Time() {
-            this.day = 0;
-            this.period = 0;
-        }
-
-        public Time(int day, int period) {
-            this.day = day;
-            this.period = period;
-        }
-        
-        public int day, period;
     }
 }
