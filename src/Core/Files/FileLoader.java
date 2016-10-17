@@ -3,9 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package GUI.PreGenerator.Files;
+package Core.Files;
 
-import GUI.Extras.GroupInfo;
+import Core.InfoHelpers.GroupInfo;
 import GUI.PreGenerator.MainGUI;
 import GUI.PreGenerator.SubjectPanel;
 import java.io.File;

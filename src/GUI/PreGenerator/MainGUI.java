@@ -5,10 +5,10 @@
  */
 package GUI.PreGenerator;
 
-import Core.Differentiator;
-import Core.Generator;
+import Core.Generator.Differentiator;
+import Core.Generator.Generator;
 import GUI.PostGenerator.ResultMainGui;
-import GUI.PreGenerator.Files.FileLoader;
+import Core.Files.FileLoader;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;

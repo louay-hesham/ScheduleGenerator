@@ -5,9 +5,9 @@
  */
 package GUI.PreGenerator;
 
-import GUI.Extras.GroupInfo;
-import GUI.Extras.SubjectInfo;
-import GUI.Extras.Time;
+import Core.InfoHelpers.GroupInfo;
+import Core.InfoHelpers.SubjectInfo;
+import Core.InfoHelpers.Time;
 import java.util.ArrayList;
 
 /**

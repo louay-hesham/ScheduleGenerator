@@ -5,8 +5,8 @@
  */
 package GUI.PreGenerator;
 
-import GUI.Extras.GroupInfo;
-import GUI.Extras.SubjectInfo;
+import Core.InfoHelpers.GroupInfo;
+import Core.InfoHelpers.SubjectInfo;
 import GUI.PreGenerator.GroupPanel.SecondLecturePossibility;
 import java.util.ArrayList;
 import java.util.logging.Level;
