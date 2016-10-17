@@ -17,6 +17,7 @@ public class ResultMainGui extends javax.swing.JFrame {
 
     /**
      * Creates new form ResultMainGui
+     * @param results
      */
     public ResultMainGui(ArrayList<String[][]> results) {
         super("Generated Schedules");
