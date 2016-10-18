@@ -33,8 +33,12 @@ public class Differentiator {
                         try {
                             schedule[i][j] += ("!" + gui.getMeetingType(schedule[i][j], j, (i / 2) + 1));
                         } catch (Exception ex) {
-                            corrupted = true;
-                            break;
+                            if (ex.getMessage().startsWith("Meeting Not Found!")){
+                                schedule[i][j] += ("!" + "Unknown meeting type");
+                            } else {
+                                corrupted = true;
+                                break;
+                            }
                         }
                     } else {
                         schedule[i][j] = "";
