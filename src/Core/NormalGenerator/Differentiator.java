@@ -3,9 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Core.Generator;
+package Core.NormalGenerator;
 
-import GUI.PreGenerator.MainGUI;
+import GUI.MainGUI;
 import java.util.ArrayList;
 
 /**

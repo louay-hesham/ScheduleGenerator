@@ -6,8 +6,8 @@
 package Core.Files;
 
 import Core.InfoHelpers.GroupInfo;
-import GUI.PreGenerator.MainGUI;
-import GUI.PreGenerator.SubjectPanel;
+import GUI.MainGUI;
+import GUI.NormalMode.SubjectPanel;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;

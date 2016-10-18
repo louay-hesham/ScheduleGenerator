@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package GUI.PreGenerator;
+package GUI.NormalMode;
 
 import Core.InfoHelpers.GroupInfo;
 import Core.InfoHelpers.SubjectInfo;

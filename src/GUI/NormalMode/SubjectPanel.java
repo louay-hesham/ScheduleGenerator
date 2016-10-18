@@ -3,14 +3,13 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package GUI.PreGenerator;
+package GUI.NormalMode;
 
 import Core.InfoHelpers.GroupInfo;
 import Core.InfoHelpers.SubjectInfo;
-import GUI.PreGenerator.GroupPanel.SecondLecturePossibility;
+import GUI.MainGUI;
+import GUI.NormalMode.GroupPanel.SecondLecturePossibility;
 import java.util.ArrayList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 /**
