@@ -39,7 +39,7 @@ public class FileLoader {
         for (int i = 0; i < numberOfSubjects; i++) {
             String subjectName = null;
             do {
-                subjectName = scanner.nextLine();
+                subjectName = scanner.nextLine().replaceAll("_", " ");
             }while(subjectName == null || subjectName.equals(""));
             int numberOfGroups = scanner.nextInt();
             int tut = scanner.nextInt();
