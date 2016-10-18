@@ -27,12 +27,14 @@ import javax.swing.JOptionPane;
 public class MainGUI extends javax.swing.JFrame {
 
     private final ArrayList<SubjectPanel> subjects;
+    private boolean chaosMode;
 
     /**
      * Creates new form MainGUI
      */
     public MainGUI() {
         super("Schedule Generator for Handasa Alex SSP");
+        this.chaosMode = false;
         initComponents();
         labBiWeekCheckBox.setVisible(false);
         tutBiWeekCheckBox.setVisible(false);
@@ -130,8 +132,7 @@ public class MainGUI extends javax.swing.JFrame {
         generateButton = new javax.swing.JButton();
         loadFileButton = new javax.swing.JButton();
         saveFileButton = new javax.swing.JButton();
-        chaosModeSlider = new javax.swing.JSlider();
-        chaosModeLabel = new javax.swing.JLabel();
+        chaosModeCheckbox = new javax.swing.JCheckBox();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -184,9 +185,13 @@ public class MainGUI extends javax.swing.JFrame {
             }
         });
 
-        chaosModeSlider.setMaximum(1);
-
-        chaosModeLabel.setText("7eby mode");
+        chaosModeCheckbox.setFont(new java.awt.Font("Comic Sans MS", 1, 18)); // NOI18N
+        chaosModeCheckbox.setText("7eby mode");
+        chaosModeCheckbox.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                chaosModeCheckboxActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -212,20 +217,14 @@ public class MainGUI extends javax.swing.JFrame {
                                     .addComponent(secondaryLectureCheckBox)))
                             .addComponent(subjectNameTextField))
                         .addGap(40, 40, 40)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(generateButton, javax.swing.GroupLayout.DEFAULT_SIZE, 124, Short.MAX_VALUE)
-                                    .addComponent(addSubjectButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 17, Short.MAX_VALUE)
-                                .addComponent(saveFileButton, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(48, 48, 48)
-                                .addComponent(loadFileButton, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(chaosModeSlider, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(chaosModeLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 0, Short.MAX_VALUE)))))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(generateButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(addSubjectButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(chaosModeCheckbox, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 17, Short.MAX_VALUE)
+                        .addComponent(saveFileButton, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(48, 48, 48)
+                        .addComponent(loadFileButton, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -254,15 +253,9 @@ public class MainGUI extends javax.swing.JFrame {
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(14, 14, 14)
                                 .addComponent(generateButton, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGap(18, 18, 18)
-                                        .addComponent(chaosModeSlider, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(chaosModeLabel)
-                                        .addGap(18, 18, 18)))))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(chaosModeCheckbox)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                         .addComponent(subjectsTabbedPane, javax.swing.GroupLayout.PREFERRED_SIZE, 454, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -338,6 +331,10 @@ public class MainGUI extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_saveFileButtonActionPerformed
 
+    private void chaosModeCheckboxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chaosModeCheckboxActionPerformed
+       this.chaosMode = this.chaosModeCheckbox.isSelected();
+    }//GEN-LAST:event_chaosModeCheckboxActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -375,8 +372,7 @@ public class MainGUI extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton addSubjectButton;
-    private javax.swing.JLabel chaosModeLabel;
-    private javax.swing.JSlider chaosModeSlider;
+    private javax.swing.JCheckBox chaosModeCheckbox;
     private javax.swing.JButton generateButton;
     private javax.swing.JCheckBox labBiWeekCheckBox;
     private javax.swing.JCheckBox labCheckBox;
