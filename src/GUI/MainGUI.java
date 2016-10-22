@@ -9,6 +9,7 @@ import Core.NormalGenerator.Differentiator;
 import Core.NormalGenerator.Generator;
 import GUI.PostGenerator.ResultMainGui;
 import Core.Files.FileLoader;
+import GUI.ChaosMode.SubjectPanelChaos;
 import GUI.NormalMode.SubjectPanelNormal;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -26,7 +27,8 @@ import javax.swing.JOptionPane;
  */
 public class MainGUI extends javax.swing.JFrame {
 
-    private final ArrayList<SubjectPanelNormal> subjects;
+    private final ArrayList<SubjectPanelNormal> subjectsNormal;
+    private final ArrayList<SubjectPanelChaos> subjectsChaos;
     private boolean chaosMode;
 
     /**
@@ -38,19 +40,20 @@ public class MainGUI extends javax.swing.JFrame {
         initComponents();
         labBiWeekCheckBox.setVisible(false);
         tutBiWeekCheckBox.setVisible(false);
-        subjects = new ArrayList<>();
+        subjectsNormal = new ArrayList<>();
+        subjectsChaos = new ArrayList<>();
     }
 
     public SubjectPanelNormal addSubject(String subjectName, boolean secLecExists, boolean tutExists, boolean tutBiWeek, boolean labExists, boolean labBiweek) {
         SubjectPanelNormal subject = new SubjectPanelNormal(this, subjectName, secLecExists, tutExists, tutBiWeek, labExists, labBiweek);
-        subjects.add(subject);
+        subjectsNormal.add(subject);
         subjectsTabbedPane.addTab(subjectName, subject);
         subjectNameTextField.setText("");
         return subject;
     }
 
     public String getMeetingType(String subjectName, int day, int period) throws Exception {
-        for (SubjectPanelNormal subject : subjects) {
+        for (SubjectPanelNormal subject : subjectsNormal) {
             if (subjectName.equals(subject.getSubjectName())) {
                 try {
                     return subject.getMeetingType(day, period);
@@ -65,7 +68,7 @@ public class MainGUI extends javax.swing.JFrame {
     public void deleteSubject(SubjectPanelNormal subject) {
         int choice = JOptionPane.showConfirmDialog(null, "Are you sure wou want to delete the subject?", "Confirm deletion", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
         if (choice == 0) {
-            this.subjects.remove(subject);
+            this.subjectsNormal.remove(subject);
             this.subjectsTabbedPane.remove(subject);
         }
     }
@@ -102,7 +105,7 @@ public class MainGUI extends javax.swing.JFrame {
     private String generateInputString() throws Exception {
         StringBuilder sb = new StringBuilder();
         sb.append(this.subjectsTabbedPane.getTabCount()).append("\r\n\r\n");
-        for (SubjectPanelNormal s : subjects) {
+        for (SubjectPanelNormal s : subjectsNormal) {
             sb.append(s.generateSubjectString()).append("\r\n");
         }
         return sb.toString();
@@ -276,7 +279,16 @@ public class MainGUI extends javax.swing.JFrame {
         if (subjectNameTextField.getText() == null || subjectNameTextField.getText().equals("")) {
             JOptionPane.showMessageDialog(null, "Subject name can not be empty!", "Subject name error", JOptionPane.ERROR_MESSAGE);
         } else if (this.chaosMode) {
-            
+            SubjectPanelChaos subject = new SubjectPanelChaos(
+                    subjectNameTextField.getText(),
+                    secondaryLectureCheckBox.isSelected(),
+                    tutorialCheckBox.isSelected(),
+                    tutBiWeekCheckBox.isSelected(),
+                    labCheckBox.isSelected(),
+                    labBiWeekCheckBox.isSelected());
+            subjectsChaos.add(subject);
+            subjectsTabbedPane.addTab(subjectNameTextField.getText(), subject);
+            subjectNameTextField.setText("");
         } else {
             SubjectPanelNormal subject = new SubjectPanelNormal(this,
                     subjectNameTextField.getText(),
@@ -285,10 +297,9 @@ public class MainGUI extends javax.swing.JFrame {
                     tutBiWeekCheckBox.isSelected(),
                     labCheckBox.isSelected(),
                     labBiWeekCheckBox.isSelected());
-            subjects.add(subject);
+            subjectsNormal.add(subject);
             subjectsTabbedPane.addTab(subjectNameTextField.getText(), subject);
             subjectNameTextField.setText("");
-
         }
     }//GEN-LAST:event_addSubjectButtonActionPerformed
 
@@ -301,7 +312,7 @@ public class MainGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_labCheckBoxActionPerformed
 
     private void generateButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_generateButtonActionPerformed
-        if (this.subjects.isEmpty()) {
+        if (this.subjectsNormal.isEmpty()) {
             this.showErrorMessage("Must have at least one subject!", "Error");
         } else {
             try {
@@ -327,7 +338,7 @@ public class MainGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_loadFileButtonActionPerformed
 
     private void saveFileButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveFileButtonActionPerformed
-        if (this.subjects.isEmpty()) {
+        if (this.subjectsNormal.isEmpty()) {
             this.showErrorMessage("Must have at least one subject!", "Error");
         } else {
             try {
