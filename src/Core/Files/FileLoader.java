@@ -7,7 +7,7 @@ package Core.Files;
 
 import Core.InfoHelpers.GroupInfo;
 import GUI.MainGUI;
-import GUI.NormalMode.SubjectPanel;
+import GUI.NormalMode.SubjectPanelNormal;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
@@ -139,7 +139,7 @@ public class FileLoader {
                 groups.add(group);
 
             }
-            SubjectPanel subject = gui.addSubject(subjectName, secLecExists, tutExists, tutBiWeek, labExists, labBiWeek);
+            SubjectPanelNormal subject = gui.addSubject(subjectName, secLecExists, tutExists, tutBiWeek, labExists, labBiWeek);
             subject.setGroups(groups);
         }
     }

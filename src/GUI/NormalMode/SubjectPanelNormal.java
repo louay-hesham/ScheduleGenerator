@@ -8,7 +8,7 @@ package GUI.NormalMode;
 import Core.InfoHelpers.GroupInfo;
 import Core.InfoHelpers.SubjectInfo;
 import GUI.MainGUI;
-import GUI.NormalMode.GroupPanel.SecondLecturePossibility;
+import GUI.NormalMode.GroupPanelNormal.SecondLecturePossibility;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 
@@ -16,10 +16,10 @@ import javax.swing.JOptionPane;
  *
  * @author louay
  */
-public class SubjectPanel extends javax.swing.JPanel {
+public class SubjectPanelNormal extends javax.swing.JPanel {
 
     private final SubjectInfo subjectInfo;
-    private final ArrayList<GroupPanel> groups;
+    private final ArrayList<GroupPanelNormal> groups;
     private final String subjectName;
     private final MainGUI gui;
 
@@ -37,7 +37,7 @@ public class SubjectPanel extends javax.swing.JPanel {
      * @param labExists
      * @param labBiweek
      */
-    public SubjectPanel(MainGUI gui, String subjectName, boolean secLecExists, boolean tutExists, boolean tutBiWeek, boolean labExists, boolean labBiweek) {
+    public SubjectPanelNormal(MainGUI gui, String subjectName, boolean secLecExists, boolean tutExists, boolean tutBiWeek, boolean labExists, boolean labBiweek) {
         this.gui = gui;
         subjectInfo = new SubjectInfo(secLecExists, tutExists, tutBiWeek, labExists, labBiweek);
         groups = new ArrayList<>();
@@ -47,7 +47,7 @@ public class SubjectPanel extends javax.swing.JPanel {
 
     public void setGroups(ArrayList<GroupInfo> groupsInfo) {
         for (GroupInfo groupInfo : groupsInfo) {
-            GroupPanel newGroup = new GroupPanel(this, subjectInfo);
+            GroupPanelNormal newGroup = new GroupPanelNormal(this, subjectInfo);
             groups.add(newGroup);
             groupsTabbedPane.addTab("Group " + (groupsTabbedPane.getTabCount() + 1), newGroup);
             newGroup.setGroupInfo(groupInfo);
@@ -55,7 +55,7 @@ public class SubjectPanel extends javax.swing.JPanel {
     }
     
     public String getMeetingType(int day, int period) throws Exception{
-        for (GroupPanel group : groups){
+        for (GroupPanelNormal group : groups){
             try {
                 return group.getMeetingType(day, period);
             } catch (Exception ex) {
@@ -75,7 +75,7 @@ public class SubjectPanel extends javax.swing.JPanel {
 
         SecondLecturePossibility p = SecondLecturePossibility.NO_SEC_LEC;
         if (this.subjectInfo.secLecExists) {
-            for (GroupPanel g : this.groups) {
+            for (GroupPanelNormal g : this.groups) {
                 SecondLecturePossibility current = g.checkSecLecturePossibility();
                 if (current.ordinal() == 0) {
                     break;
@@ -86,7 +86,7 @@ public class SubjectPanel extends javax.swing.JPanel {
             if (p.equals(SecondLecturePossibility.NOT_POSSIBLE)) {
                 throw new Exception("Unhandled case: secondary lecture is far from main lecture AND lab and tutorial exist.");
             } else {
-                for (GroupPanel g : this.groups) {
+                for (GroupPanelNormal g : this.groups) {
                     g.setSecondLecturePlace(p);
                 }
             }
@@ -130,14 +130,14 @@ public class SubjectPanel extends javax.swing.JPanel {
             }
         }
 
-        for (GroupPanel g : this.groups) {
+        for (GroupPanelNormal g : this.groups) {
             sb.append(g.generateString()).append("\r\n");
         }
 
         return sb.toString();
     }
     
-    protected void deleteGroup(GroupPanel group){
+    protected void deleteGroup(GroupPanelNormal group){
         int choice = JOptionPane.showConfirmDialog(null, "Are you sure wou want to delete this group?", "Confirm deletion", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
         if (choice == 0){
             this.groups.remove(group);
@@ -205,7 +205,7 @@ public class SubjectPanel extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void newGroupButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_newGroupButtonActionPerformed
-        GroupPanel newGroup = new GroupPanel(this, subjectInfo);
+        GroupPanelNormal newGroup = new GroupPanelNormal(this, subjectInfo);
         groups.add(newGroup);
         groupsTabbedPane.addTab("Group " + (groupsTabbedPane.getTabCount() + 1), newGroup);
     }//GEN-LAST:event_newGroupButtonActionPerformed

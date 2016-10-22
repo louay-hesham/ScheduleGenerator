@@ -9,7 +9,7 @@ import Core.NormalGenerator.Differentiator;
 import Core.NormalGenerator.Generator;
 import GUI.PostGenerator.ResultMainGui;
 import Core.Files.FileLoader;
-import GUI.NormalMode.SubjectPanel;
+import GUI.NormalMode.SubjectPanelNormal;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
@@ -26,7 +26,7 @@ import javax.swing.JOptionPane;
  */
 public class MainGUI extends javax.swing.JFrame {
 
-    private final ArrayList<SubjectPanel> subjects;
+    private final ArrayList<SubjectPanelNormal> subjects;
     private boolean chaosMode;
 
     /**
@@ -39,6 +39,35 @@ public class MainGUI extends javax.swing.JFrame {
         labBiWeekCheckBox.setVisible(false);
         tutBiWeekCheckBox.setVisible(false);
         subjects = new ArrayList<>();
+    }
+
+    public SubjectPanelNormal addSubject(String subjectName, boolean secLecExists, boolean tutExists, boolean tutBiWeek, boolean labExists, boolean labBiweek) {
+        SubjectPanelNormal subject = new SubjectPanelNormal(this, subjectName, secLecExists, tutExists, tutBiWeek, labExists, labBiweek);
+        subjects.add(subject);
+        subjectsTabbedPane.addTab(subjectName, subject);
+        subjectNameTextField.setText("");
+        return subject;
+    }
+
+    public String getMeetingType(String subjectName, int day, int period) throws Exception {
+        for (SubjectPanelNormal subject : subjects) {
+            if (subjectName.equals(subject.getSubjectName())) {
+                try {
+                    return subject.getMeetingType(day, period);
+                } catch (Exception ex) {
+                    System.out.println(ex.getMessage());
+                }
+            }
+        }
+        throw new Exception("Meeting Not Found!\r\nSubject name is: " + subjectName + "\r\n at day " + day + " at period " + period);
+    }
+
+    public void deleteSubject(SubjectPanelNormal subject) {
+        int choice = JOptionPane.showConfirmDialog(null, "Are you sure wou want to delete the subject?", "Confirm deletion", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
+        if (choice == 0) {
+            this.subjects.remove(subject);
+            this.subjectsTabbedPane.remove(subject);
+        }
     }
 
     private void startScheduleGeneration(String str) {
@@ -73,43 +102,18 @@ public class MainGUI extends javax.swing.JFrame {
     private String generateInputString() throws Exception {
         StringBuilder sb = new StringBuilder();
         sb.append(this.subjectsTabbedPane.getTabCount()).append("\r\n\r\n");
-        for (SubjectPanel s : subjects) {
+        for (SubjectPanelNormal s : subjects) {
             sb.append(s.generateSubjectString()).append("\r\n");
         }
         return sb.toString();
     }
 
-    public SubjectPanel addSubject(String subjectName, boolean secLecExists, boolean tutExists, boolean tutBiWeek, boolean labExists, boolean labBiweek) {
-        SubjectPanel subject = new SubjectPanel(this, subjectName, secLecExists, tutExists, tutBiWeek, labExists, labBiweek);
-        subjects.add(subject);
-        subjectsTabbedPane.addTab(subjectName, subject);
-        subjectNameTextField.setText("");
-        return subject;
-    }
-
-    public String getMeetingType(String subjectName, int day, int period) throws Exception {
-        for (SubjectPanel subject : subjects) {
-            if (subjectName.equals(subject.getSubjectName())) {
-                try {
-                    return subject.getMeetingType(day, period);
-                } catch (Exception ex) {
-                    System.out.println(ex.getMessage());
-                }
-            }
-        }
-        throw new Exception("Meeting Not Found!\r\nSubject name is: " + subjectName + "\r\n at day " + day + " at period " + period);
-    }
-    
-    public void deleteSubject(SubjectPanel subject){
-        int choice = JOptionPane.showConfirmDialog(null, "Are you sure wou want to delete the subject?", "Confirm deletion", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
-        if (choice == 0){
-            this.subjects.remove(subject);
-            this.subjectsTabbedPane.remove(subject);
-        }
-    }
-
     private void showErrorMessage(String error, String title) {
         JOptionPane.showMessageDialog(null, error, title, JOptionPane.ERROR_MESSAGE);
+    }
+
+    private void flipMode() {
+
     }
 
     /**
@@ -271,8 +275,10 @@ public class MainGUI extends javax.swing.JFrame {
     private void addSubjectButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addSubjectButtonActionPerformed
         if (subjectNameTextField.getText() == null || subjectNameTextField.getText().equals("")) {
             JOptionPane.showMessageDialog(null, "Subject name can not be empty!", "Subject name error", JOptionPane.ERROR_MESSAGE);
+        } else if (this.chaosMode) {
+            
         } else {
-            SubjectPanel subject = new SubjectPanel(this,
+            SubjectPanelNormal subject = new SubjectPanelNormal(this,
                     subjectNameTextField.getText(),
                     secondaryLectureCheckBox.isSelected(),
                     tutorialCheckBox.isSelected(),
@@ -282,6 +288,7 @@ public class MainGUI extends javax.swing.JFrame {
             subjects.add(subject);
             subjectsTabbedPane.addTab(subjectNameTextField.getText(), subject);
             subjectNameTextField.setText("");
+
         }
     }//GEN-LAST:event_addSubjectButtonActionPerformed
 
@@ -332,7 +339,8 @@ public class MainGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_saveFileButtonActionPerformed
 
     private void chaosModeCheckboxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chaosModeCheckboxActionPerformed
-       this.chaosMode = this.chaosModeCheckbox.isSelected();
+        this.chaosMode = this.chaosModeCheckbox.isSelected();
+        this.flipMode();
     }//GEN-LAST:event_chaosModeCheckboxActionPerformed
 
     /**

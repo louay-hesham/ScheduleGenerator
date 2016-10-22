@@ -14,12 +14,12 @@ import java.util.ArrayList;
  *
  * @author louay
  */
-public class GroupPanel extends javax.swing.JPanel {
+public class GroupPanelNormal extends javax.swing.JPanel {
 
     private final SubjectInfo subjectInfo;
     private SecondLecturePossibility secondLecturePlace;
     private GroupInfo groupInfo = null;
-    private final SubjectPanel subject;
+    private final SubjectPanelNormal subject;
 
     public enum SecondLecturePossibility {
         NO_SEC_LEC, MAIN_LECTURE, TUTORIAL, LAB, NOT_POSSIBLE
@@ -31,7 +31,7 @@ public class GroupPanel extends javax.swing.JPanel {
      * @param subject
      * @param subjectInfo
      */
-    public GroupPanel(SubjectPanel subject, SubjectInfo subjectInfo) {
+    public GroupPanelNormal(SubjectPanelNormal subject, SubjectInfo subjectInfo) {
         this.subject = subject;
         this.secondLecturePlace = SecondLecturePossibility.NO_SEC_LEC;
         this.subjectInfo = subjectInfo;
