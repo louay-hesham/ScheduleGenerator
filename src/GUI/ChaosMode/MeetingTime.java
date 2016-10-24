@@ -10,12 +10,21 @@ package GUI.ChaosMode;
  * @author louay
  */
 public class MeetingTime extends javax.swing.JPanel {
+    
+    private final boolean secLec;
 
     /**
      * Creates new form MeetingTime
+     * @param secLec
      */
-    public MeetingTime() {
+    public MeetingTime(boolean secLec, String type, int n) {
         initComponents();
+        this.secLec = secLec;
+        this.secLecLabel.setVisible(secLec);
+        this.secLecDay.setVisible(secLec);
+        this.secLecPeriodLabel.setVisible(secLec);
+        this.secLecPeriodSpinner.setVisible(secLec);
+        this.meetingTypeLabel.setText(type + " " + n);
     }
 
     /**
@@ -109,6 +118,7 @@ public class MeetingTime extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void deleteMeetingButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteMeetingButtonActionPerformed
+        
     }//GEN-LAST:event_deleteMeetingButtonActionPerformed
 
 

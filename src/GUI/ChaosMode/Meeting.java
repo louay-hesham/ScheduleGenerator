@@ -28,8 +28,7 @@ public class Meeting extends javax.swing.JPanel {
         this.meetings = new ArrayList<>();
     }
 
-    private void addMeetingTime(){
-        MeetingTime meetingTime = new MeetingTime();
+    private void addMeetingTime(MeetingTime meetingTime){
         
         GroupLayout timesPanelLayout = (GroupLayout)timesPanel.getLayout();
         timesPanel.setLayout(timesPanelLayout);
@@ -49,7 +48,7 @@ public class Meeting extends javax.swing.JPanel {
         );
         
         meetingTime.setVisible(true);
-        meetings.add(meetingTime);
+        
     }
 
     /**
@@ -107,7 +106,29 @@ public class Meeting extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void newTimeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_newTimeButtonActionPerformed
-        this.addMeetingTime();
+        boolean secLec = this.meetingType == MeetingType.LECTURE_WITH_SEC;
+        String type;
+        switch (this.meetingType){
+            case LECTURE:
+            case LECTURE_WITH_SEC:
+                type = "Lecture";
+                break;
+                
+            case TUTORIAL:
+                type = "Tutorial";
+                break;
+                
+            case LAB:
+                type = "Lab";
+                break;
+                
+            default: 
+                type = "Unknown type";
+                break;
+        }
+        MeetingTime meetingTime = new MeetingTime(secLec, type, meetings.size()+1);
+        this.addMeetingTime(meetingTime);
+        meetings.add(meetingTime);
     }//GEN-LAST:event_newTimeButtonActionPerformed
 
 
