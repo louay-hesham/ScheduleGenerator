@@ -7,6 +7,7 @@ package GUI.NormalMode;
 
 import Core.InfoHelpers.GroupInfo;
 import Core.InfoHelpers.SubjectInfo;
+import GUI.ChaosMode.SubjectPanelChaos;
 import GUI.MainGUI;
 import GUI.NormalMode.GroupPanelNormal.SecondLecturePossibility;
 import java.util.ArrayList;
@@ -22,9 +23,14 @@ public class SubjectPanelNormal extends javax.swing.JPanel {
     private final ArrayList<GroupPanelNormal> groups;
     private final String subjectName;
     private final MainGUI gui;
+    private final SubjectPanelChaos chaosVersion;
 
     public String getSubjectName() {
         return subjectName;
+    }
+
+    public SubjectPanelChaos getChaosVersion() {
+        return chaosVersion;
     }
 
     /**
@@ -42,15 +48,24 @@ public class SubjectPanelNormal extends javax.swing.JPanel {
         subjectInfo = new SubjectInfo(secLecExists, tutExists, tutBiWeek, labExists, labBiweek);
         groups = new ArrayList<>();
         this.subjectName = subjectName;
+        chaosVersion = new SubjectPanelChaos(subjectName, secLecExists, tutExists, tutBiWeek, labExists, labBiweek);
         initComponents();
     }
 
+    public void resetChaosPanel(){
+        this.chaosVersion.reset();
+        for (GroupPanelNormal group : groups){
+            this.chaosVersion.addGroup(group.getGroupInfo());
+        }
+    }
+    
     public void setGroups(ArrayList<GroupInfo> groupsInfo) {
         for (GroupInfo groupInfo : groupsInfo) {
             GroupPanelNormal newGroup = new GroupPanelNormal(this, subjectInfo);
             groups.add(newGroup);
             groupsTabbedPane.addTab("Group " + (groupsTabbedPane.getTabCount() + 1), newGroup);
             newGroup.setGroupInfo(groupInfo);
+            this.chaosVersion.addGroup(groupInfo);
         }
     }
     

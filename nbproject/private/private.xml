@@ -3,10 +3,9 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/louay/OneDrive/Documents/SourceTree/ScheduleGenerator/src/GUI/ChaosMode/MeetingTime.java</file>
-            <file>file:/C:/Users/louay/OneDrive/Documents/SourceTree/ScheduleGenerator/src/GUI/ChaosMode/Meeting.java</file>
             <file>file:/C:/Users/louay/OneDrive/Documents/SourceTree/ScheduleGenerator/src/GUI/NormalMode/SubjectPanelNormal.java</file>
             <file>file:/C:/Users/louay/OneDrive/Documents/SourceTree/ScheduleGenerator/src/GUI/MainGUI.java</file>
+            <file>file:/C:/Users/louay/OneDrive/Documents/SourceTree/ScheduleGenerator/src/GUI/NormalMode/GroupPanelNormal.java</file>
             <file>file:/C:/Users/louay/OneDrive/Documents/SourceTree/ScheduleGenerator/src/GUI/ChaosMode/SubjectPanelChaos.java</file>
         </group>
     </open-files>

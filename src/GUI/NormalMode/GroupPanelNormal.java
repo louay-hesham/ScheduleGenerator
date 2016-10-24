@@ -25,6 +25,10 @@ public class GroupPanelNormal extends javax.swing.JPanel {
         NO_SEC_LEC, MAIN_LECTURE, TUTORIAL, LAB, NOT_POSSIBLE
     }
 
+    public GroupInfo getGroupInfo() {
+        return groupInfo;
+    }
+
     /**
      * Creates new form GroupPanel
      *
@@ -128,7 +132,7 @@ public class GroupPanelNormal extends javax.swing.JPanel {
     public String generateString() throws Exception {
         this.initGroupInfo();
         //if (this.isConflicting()){
-            //throw new Exception("There is a group that conflicts with itself in " + subject.getSubjectName());
+        //throw new Exception("There is a group that conflicts with itself in " + subject.getSubjectName());
         //}
         StringBuilder sb = new StringBuilder();
         String lecStrings = generateLectureString();
@@ -302,28 +306,30 @@ public class GroupPanelNormal extends javax.swing.JPanel {
                 groupInfo.lab2.period = (int) this.lab2PeriodSpinner.getValue();
             }
         }
+        this.subject.resetChaosPanel();
     }
 
-    private boolean isConflicting(){
+    private boolean isConflicting() {
         ArrayList<Time> times = new ArrayList<>();
         times.add(groupInfo.lecture);
-        if (subjectInfo.secLecExists){
+        if (subjectInfo.secLecExists) {
             times.add(groupInfo.secLecture);
         }
-        if (subjectInfo.tutExists){
+        if (subjectInfo.tutExists) {
             times.add(groupInfo.tutorial1);
-            if (!subjectInfo.tutBiWeek){
+            if (!subjectInfo.tutBiWeek) {
                 times.add(groupInfo.tutorial2);
             }
         }
-        if (subjectInfo.labExists){
+        if (subjectInfo.labExists) {
             times.add(groupInfo.lab1);
-            if (!subjectInfo.labBiWeek){
+            if (!subjectInfo.labBiWeek) {
                 times.add(groupInfo.lab2);
             }
         }
         return Time.checkConflict(times);
     }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -362,14 +368,34 @@ public class GroupPanelNormal extends javax.swing.JPanel {
         lectureLabel.setText("Main Lecture:");
 
         lectureDayComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Saturday", "Sunday", "Monday", "Tuesday", "Wednesday", "Thursday" }));
+        lectureDayComboBox.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                lectureDayComboBoxActionPerformed(evt);
+            }
+        });
 
         lecturePeriodSpinner.setModel(new javax.swing.SpinnerNumberModel(1, 1, 7, 1));
+        lecturePeriodSpinner.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                lecturePeriodSpinnerStateChanged(evt);
+            }
+        });
 
         lecturePeriodLabel.setText("Period");
 
         secLectureDayComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Saturday", "Sunday", "Monday", "Tuesday", "Wednesday", "Thursday" }));
+        secLectureDayComboBox.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                secLectureDayComboBoxActionPerformed(evt);
+            }
+        });
 
         secLecturePeriodSpinner.setModel(new javax.swing.SpinnerNumberModel(1, 1, 7, 1));
+        secLecturePeriodSpinner.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                secLecturePeriodSpinnerStateChanged(evt);
+            }
+        });
 
         secLecturePeriodLabel.setText("Period");
 
@@ -378,30 +404,70 @@ public class GroupPanelNormal extends javax.swing.JPanel {
         tut1Label.setText("jLabel1");
 
         tut1DayComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Saturday", "Sunday", "Monday", "Tuesday", "Wednesday", "Thursday" }));
+        tut1DayComboBox.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tut1DayComboBoxActionPerformed(evt);
+            }
+        });
 
         tut1PeriodLabel.setText("Period");
 
         tut1PeriodSpinner.setModel(new javax.swing.SpinnerNumberModel(1, 1, 7, 1));
+        tut1PeriodSpinner.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                tut1PeriodSpinnerStateChanged(evt);
+            }
+        });
 
         tut2DayComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Saturday", "Sunday", "Monday", "Tuesday", "Wednesday", "Thursday" }));
+        tut2DayComboBox.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tut2DayComboBoxActionPerformed(evt);
+            }
+        });
 
         tut2PeriodLabel.setText("Period");
 
         tut2PeriodSpinner.setModel(new javax.swing.SpinnerNumberModel(1, 1, 7, 1));
+        tut2PeriodSpinner.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                tut2PeriodSpinnerStateChanged(evt);
+            }
+        });
 
         tut2Label.setText("Tutorial 2");
 
         lab1DayComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Saturday", "Sunday", "Monday", "Tuesday", "Wednesday", "Thursday" }));
+        lab1DayComboBox.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                lab1DayComboBoxActionPerformed(evt);
+            }
+        });
 
         lab1PeriodLabel.setText("Period");
 
         lab1PeriodSpinner.setModel(new javax.swing.SpinnerNumberModel(1, 1, 7, 1));
+        lab1PeriodSpinner.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                lab1PeriodSpinnerStateChanged(evt);
+            }
+        });
 
         lab2DayComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Saturday", "Sunday", "Monday", "Tuesday", "Wednesday", "Thursday" }));
+        lab2DayComboBox.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                lab2DayComboBoxActionPerformed(evt);
+            }
+        });
 
         lab2PeriodLabel.setText("Period");
 
         lab2PeriodSpinner.setModel(new javax.swing.SpinnerNumberModel(1, 1, 7, 1));
+        lab2PeriodSpinner.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                lab2PeriodSpinnerStateChanged(evt);
+            }
+        });
 
         lab2Label.setText("Lab 2");
 
@@ -526,6 +592,54 @@ public class GroupPanelNormal extends javax.swing.JPanel {
     private void deleteGroupButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteGroupButtonActionPerformed
         this.subject.deleteGroup(this);
     }//GEN-LAST:event_deleteGroupButtonActionPerformed
+
+    private void lectureDayComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_lectureDayComboBoxActionPerformed
+        this.initGroupInfo();
+    }//GEN-LAST:event_lectureDayComboBoxActionPerformed
+
+    private void secLectureDayComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_secLectureDayComboBoxActionPerformed
+        this.initGroupInfo();
+    }//GEN-LAST:event_secLectureDayComboBoxActionPerformed
+
+    private void tut1DayComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tut1DayComboBoxActionPerformed
+        this.initGroupInfo();
+    }//GEN-LAST:event_tut1DayComboBoxActionPerformed
+
+    private void tut2DayComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tut2DayComboBoxActionPerformed
+        this.initGroupInfo();
+    }//GEN-LAST:event_tut2DayComboBoxActionPerformed
+
+    private void lab1DayComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_lab1DayComboBoxActionPerformed
+        this.initGroupInfo();
+    }//GEN-LAST:event_lab1DayComboBoxActionPerformed
+
+    private void lab2DayComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_lab2DayComboBoxActionPerformed
+        this.initGroupInfo();
+    }//GEN-LAST:event_lab2DayComboBoxActionPerformed
+
+    private void lecturePeriodSpinnerStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_lecturePeriodSpinnerStateChanged
+        this.initGroupInfo();
+    }//GEN-LAST:event_lecturePeriodSpinnerStateChanged
+
+    private void secLecturePeriodSpinnerStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_secLecturePeriodSpinnerStateChanged
+        this.initGroupInfo();
+    }//GEN-LAST:event_secLecturePeriodSpinnerStateChanged
+
+    private void tut1PeriodSpinnerStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_tut1PeriodSpinnerStateChanged
+        this.initGroupInfo();
+    }//GEN-LAST:event_tut1PeriodSpinnerStateChanged
+
+    private void tut2PeriodSpinnerStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_tut2PeriodSpinnerStateChanged
+        this.initGroupInfo();
+    }//GEN-LAST:event_tut2PeriodSpinnerStateChanged
+
+    private void lab1PeriodSpinnerStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_lab1PeriodSpinnerStateChanged
+        this.initGroupInfo();
+    }//GEN-LAST:event_lab1PeriodSpinnerStateChanged
+
+    private void lab2PeriodSpinnerStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_lab2PeriodSpinnerStateChanged
+        this.initGroupInfo();
+    }//GEN-LAST:event_lab2PeriodSpinnerStateChanged
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

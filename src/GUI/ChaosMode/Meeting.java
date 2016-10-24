@@ -7,15 +7,20 @@ package GUI.ChaosMode;
 
 import java.util.ArrayList;
 import javax.swing.GroupLayout;
+import javax.swing.JPanel;
 
 /**
  *
  * @author louay
  */
-public class Meeting extends javax.swing.JPanel {
+public class Meeting extends JPanel {
     
     public enum MeetingType{
         LECTURE, LECTURE_WITH_SEC, TUTORIAL, LAB
+    }
+    
+    public enum Day{
+        SATURDAY, SUNDAY, MONDAY, TUESDAY, WEDNESDAY, THURSDAY, FRIDAY
     }
     
     private final MeetingType meetingType;
@@ -26,6 +31,21 @@ public class Meeting extends javax.swing.JPanel {
         initComponents();
         this.meetingType = meetingType;
         this.meetings = new ArrayList<>();
+    }
+    
+    public void addMeeting(int day ,int period){
+        MeetingTime meetingTime = new MeetingTime(this.meetingType, meetings.size()+1);
+        meetingTime.setMeetingTime(day, period);
+        this.addMeetingTime(meetingTime);
+        meetings.add(meetingTime);
+    }
+    
+    public void addMeeting(int day ,int period, int secLecDay ,int secLecPeriod){
+        MeetingTime meetingTime = new MeetingTime(this.meetingType, meetings.size()+1);
+        meetingTime.setMeetingTime(day, period);
+        meetingTime.setSecLecTime(secLecDay, secLecPeriod);
+        this.addMeetingTime(meetingTime);
+        meetings.add(meetingTime);
     }
 
     private void addMeetingTime(MeetingTime meetingTime){
@@ -48,7 +68,6 @@ public class Meeting extends javax.swing.JPanel {
         );
         
         meetingTime.setVisible(true);
-        
     }
 
     /**
@@ -106,27 +125,7 @@ public class Meeting extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void newTimeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_newTimeButtonActionPerformed
-        boolean secLec = this.meetingType == MeetingType.LECTURE_WITH_SEC;
-        String type;
-        switch (this.meetingType){
-            case LECTURE:
-            case LECTURE_WITH_SEC:
-                type = "Lecture";
-                break;
-                
-            case TUTORIAL:
-                type = "Tutorial";
-                break;
-                
-            case LAB:
-                type = "Lab";
-                break;
-                
-            default: 
-                type = "Unknown type";
-                break;
-        }
-        MeetingTime meetingTime = new MeetingTime(secLec, type, meetings.size()+1);
+        MeetingTime meetingTime = new MeetingTime(this.meetingType, meetings.size()+1);
         this.addMeetingTime(meetingTime);
         meetings.add(meetingTime);
     }//GEN-LAST:event_newTimeButtonActionPerformed

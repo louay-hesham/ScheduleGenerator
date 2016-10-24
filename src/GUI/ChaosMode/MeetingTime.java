@@ -5,26 +5,67 @@
  */
 package GUI.ChaosMode;
 
+import GUI.ChaosMode.Meeting.Day;
+import GUI.ChaosMode.Meeting.MeetingType;
+import static GUI.ChaosMode.Meeting.MeetingType.LAB;
+import static GUI.ChaosMode.Meeting.MeetingType.LECTURE;
+import static GUI.ChaosMode.Meeting.MeetingType.LECTURE_WITH_SEC;
+import static GUI.ChaosMode.Meeting.MeetingType.TUTORIAL;
+
 /**
  *
  * @author louay
  */
 public class MeetingTime extends javax.swing.JPanel {
-    
+
     private final boolean secLec;
 
     /**
      * Creates new form MeetingTime
-     * @param secLec
+     *
+     * @param meetingType
+     * @param n
      */
-    public MeetingTime(boolean secLec, String type, int n) {
+    public MeetingTime(MeetingType meetingType, int n) {
         initComponents();
-        this.secLec = secLec;
+        
+        this.secLec = meetingType == Meeting.MeetingType.LECTURE_WITH_SEC;
+        String type;
+        switch (meetingType){
+            case LECTURE:
+            case LECTURE_WITH_SEC:
+                type = "Lecture";
+                break;
+                
+            case TUTORIAL:
+                type = "Tutorial";
+                break;
+                
+            case LAB:
+                type = "Lab";
+                break;
+                
+            default: 
+                type = "Unknown type";
+                break;
+        }
         this.secLecLabel.setVisible(secLec);
         this.secLecDay.setVisible(secLec);
         this.secLecPeriodLabel.setVisible(secLec);
         this.secLecPeriodSpinner.setVisible(secLec);
         this.meetingTypeLabel.setText(type + " " + n);
+    }
+
+    public void setMeetingTime(int day, int period) {
+        this.meetingDay.setSelectedIndex(day);
+        this.meetingPeriodSpinner.setValue(period);
+    }
+
+    public void setSecLecTime(int day, int period) {
+        if (this.secLec) {
+            this.secLecDay.setSelectedIndex(day);
+            this.secLecPeriodSpinner.setValue(period);
+        }
     }
 
     /**
@@ -118,7 +159,7 @@ public class MeetingTime extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void deleteMeetingButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteMeetingButtonActionPerformed
-        
+
     }//GEN-LAST:event_deleteMeetingButtonActionPerformed
 
 
