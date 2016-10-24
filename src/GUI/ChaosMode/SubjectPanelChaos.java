@@ -17,6 +17,7 @@ public class SubjectPanelChaos extends javax.swing.JPanel {
 
     private final SubjectInfo subjectInfo;
     private final String subjectName;
+    private final Meeting lectures, tutorials, labs;
     
     /**
      * Creates new form SubjectPanel
@@ -31,6 +32,12 @@ public class SubjectPanelChaos extends javax.swing.JPanel {
         subjectInfo = new SubjectInfo(secLecExists, tutExists, tutBiWeek, labExists, labBiweek);
         this.subjectName = subjectName;
         initComponents();
+        this.lectures = new Meeting(Meeting.MeetingType.LECTURE);
+        this.tutorials = new Meeting(Meeting.MeetingType.TUTORIAL);
+        this.labs = new Meeting(Meeting.MeetingType.LAB);
+        this.subjectTabbedPane.addTab("Lectures", lectures);
+        this.subjectTabbedPane.addTab("Tutorials", tutorials);
+        this.subjectTabbedPane.addTab("Labs", labs);
     }
 
     /**
@@ -43,48 +50,6 @@ public class SubjectPanelChaos extends javax.swing.JPanel {
     private void initComponents() {
 
         subjectTabbedPane = new javax.swing.JTabbedPane();
-        lecPanel = new javax.swing.JPanel();
-        tutPanel = new javax.swing.JPanel();
-        labPanel = new javax.swing.JPanel();
-
-        javax.swing.GroupLayout lecPanelLayout = new javax.swing.GroupLayout(lecPanel);
-        lecPanel.setLayout(lecPanelLayout);
-        lecPanelLayout.setHorizontalGroup(
-            lecPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 546, Short.MAX_VALUE)
-        );
-        lecPanelLayout.setVerticalGroup(
-            lecPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 361, Short.MAX_VALUE)
-        );
-
-        subjectTabbedPane.addTab("Lectures", lecPanel);
-
-        javax.swing.GroupLayout tutPanelLayout = new javax.swing.GroupLayout(tutPanel);
-        tutPanel.setLayout(tutPanelLayout);
-        tutPanelLayout.setHorizontalGroup(
-            tutPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 546, Short.MAX_VALUE)
-        );
-        tutPanelLayout.setVerticalGroup(
-            tutPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 361, Short.MAX_VALUE)
-        );
-
-        subjectTabbedPane.addTab("Tutorials", tutPanel);
-
-        javax.swing.GroupLayout labPanelLayout = new javax.swing.GroupLayout(labPanel);
-        labPanel.setLayout(labPanelLayout);
-        labPanelLayout.setHorizontalGroup(
-            labPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 546, Short.MAX_VALUE)
-        );
-        labPanelLayout.setVerticalGroup(
-            labPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 361, Short.MAX_VALUE)
-        );
-
-        subjectTabbedPane.addTab("Labs", labPanel);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -92,23 +57,20 @@ public class SubjectPanelChaos extends javax.swing.JPanel {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(subjectTabbedPane)
+                .addComponent(subjectTabbedPane, javax.swing.GroupLayout.DEFAULT_SIZE, 841, Short.MAX_VALUE)
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(53, Short.MAX_VALUE)
-                .addComponent(subjectTabbedPane, javax.swing.GroupLayout.PREFERRED_SIZE, 389, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap()
+                .addComponent(subjectTabbedPane, javax.swing.GroupLayout.DEFAULT_SIZE, 497, Short.MAX_VALUE)
                 .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JPanel labPanel;
-    private javax.swing.JPanel lecPanel;
     private javax.swing.JTabbedPane subjectTabbedPane;
-    private javax.swing.JPanel tutPanel;
     // End of variables declaration//GEN-END:variables
 }
