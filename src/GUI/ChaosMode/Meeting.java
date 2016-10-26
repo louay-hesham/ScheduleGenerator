@@ -7,6 +7,8 @@ package GUI.ChaosMode;
 
 import java.util.ArrayList;
 import javax.swing.GroupLayout;
+import javax.swing.GroupLayout.ParallelGroup;
+import javax.swing.GroupLayout.SequentialGroup;
 import javax.swing.JPanel;
 
 /**
@@ -14,15 +16,15 @@ import javax.swing.JPanel;
  * @author louay
  */
 public class Meeting extends JPanel {
-    
-    public enum MeetingType{
+
+    public enum MeetingType {
         LECTURE, LECTURE_WITH_SEC, TUTORIAL, LAB
     }
-    
-    public enum Day{
+
+    public enum Day {
         SATURDAY, SUNDAY, MONDAY, TUESDAY, WEDNESDAY, THURSDAY, FRIDAY
     }
-    
+
     private final MeetingType meetingType;
     private final ArrayList<MeetingTime> meetings;
 
@@ -32,42 +34,36 @@ public class Meeting extends JPanel {
         this.meetingType = meetingType;
         this.meetings = new ArrayList<>();
     }
-    
-    public void addMeeting(int day ,int period){
-        MeetingTime meetingTime = new MeetingTime(this.meetingType, meetings.size()+1);
+
+    public void addMeeting(int day, int period) {
+        MeetingTime meetingTime = new MeetingTime(this.meetingType, meetings.size() + 1);
         meetingTime.setMeetingTime(day, period);
-        this.addMeetingTime(meetingTime);
         meetings.add(meetingTime);
-    }
-    
-    public void addMeeting(int day ,int period, int secLecDay ,int secLecPeriod){
-        MeetingTime meetingTime = new MeetingTime(this.meetingType, meetings.size()+1);
-        meetingTime.setMeetingTime(day, period);
-        meetingTime.setSecLecTime(secLecDay, secLecPeriod);
-        this.addMeetingTime(meetingTime);
-        meetings.add(meetingTime);
+        this.addMeetingTime();
     }
 
-    private void addMeetingTime(MeetingTime meetingTime){
-        
-        GroupLayout timesPanelLayout = (GroupLayout)timesPanel.getLayout();
-        timesPanel.setLayout(timesPanelLayout);
-        timesPanelLayout.setHorizontalGroup(
-            timesPanelLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
-            .addGroup(timesPanelLayout.createSequentialGroup()
-                .addGap(10)
-                .addComponent(meetingTime, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-        timesPanelLayout.setVerticalGroup(
-            timesPanelLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
-            .addGroup(timesPanelLayout.createSequentialGroup()
-                .addGap(meetings.size() * (75) + 5)
-                .addComponent(meetingTime, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(261, Short.MAX_VALUE))
-        );
-        
-        meetingTime.setVisible(true);
+    public void addMeeting(int day, int period, int secLecDay, int secLecPeriod) {
+        MeetingTime meetingTime = new MeetingTime(this.meetingType, meetings.size() + 1);
+        meetingTime.setMeetingTime(day, period);
+        meetingTime.setSecLecTime(secLecDay, secLecPeriod);
+        meetings.add(meetingTime);
+        this.addMeetingTime();
+    }
+
+    private void addMeetingTime() {
+
+        GroupLayout timesPanelLayout = (GroupLayout) timesPanel.getLayout();
+
+        ParallelGroup h = timesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING);//timesPanelLayout.createSequentialGroup();
+        SequentialGroup v = timesPanelLayout.createSequentialGroup();
+
+        for (MeetingTime meeting : meetings) {
+            h.addComponent(meeting, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE);
+            v.addComponent(meeting, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(261, Short.MAX_VALUE);
+        }
+        timesPanelLayout.setHorizontalGroup(h);
+        timesPanelLayout.setVerticalGroup(v);
     }
 
     /**
@@ -111,7 +107,7 @@ public class Meeting extends JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addGap(395, 395, 395)
                 .addComponent(newTimeButton)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(436, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -125,9 +121,9 @@ public class Meeting extends JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void newTimeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_newTimeButtonActionPerformed
-        MeetingTime meetingTime = new MeetingTime(this.meetingType, meetings.size()+1);
-        this.addMeetingTime(meetingTime);
+        MeetingTime meetingTime = new MeetingTime(this.meetingType, meetings.size() + 1);
         meetings.add(meetingTime);
+        this.addMeetingTime();
     }//GEN-LAST:event_newTimeButtonActionPerformed
 
 
