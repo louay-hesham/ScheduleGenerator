@@ -76,7 +76,6 @@ public class GroupPanelNormal {
     }
 
     private void initComponents() {
-
         deleteGroupButton.addActionListener(e -> deleteGroupButtonActionPerformed());
         lectureDayComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[]{"Saturday", "Sunday", "Monday", "Tuesday", "Wednesday", "Thursday"}));
         lectureDayComboBox.addActionListener(e -> initGroupInfo());
