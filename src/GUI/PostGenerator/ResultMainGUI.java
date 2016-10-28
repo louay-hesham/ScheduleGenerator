@@ -23,6 +23,11 @@ public class ResultMainGUI {
             schedulesTabbedPane.addTab("Schedule " + i, schedule.getMainPanel());
             i++;
         }
+        JFrame frame = new JFrame("Generated Schedules");
+        frame.setContentPane(this.mainPanel);
+        frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        frame.pack();
+        frame.setVisible(true);
     }
 
     public JPanel getMainPanel() {

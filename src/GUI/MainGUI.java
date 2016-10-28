@@ -29,7 +29,7 @@ public class MainGUI {
     private boolean chaosMode;
 
     public static void main(String[] args) {
-        JFrame frame = new JFrame("MainGUI");
+        JFrame frame = new JFrame("Schedule Generator for Handasa SSP");
         frame.setContentPane(new MainGUI().mainPanel);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.pack();
