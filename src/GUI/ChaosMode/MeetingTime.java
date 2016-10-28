@@ -5,7 +5,6 @@
  */
 package GUI.ChaosMode;
 
-import GUI.ChaosMode.Meeting.Day;
 import GUI.ChaosMode.Meeting.MeetingType;
 import static GUI.ChaosMode.Meeting.MeetingType.LAB;
 import static GUI.ChaosMode.Meeting.MeetingType.LECTURE;
@@ -18,17 +17,23 @@ import static GUI.ChaosMode.Meeting.MeetingType.TUTORIAL;
  */
 public class MeetingTime extends javax.swing.JPanel {
 
+    private static int totalIDs = 0;
+    
     private final boolean secLec;
+    private final Meeting meeting;
+    private final int ID;
+    
 
     /**
      * Creates new form MeetingTime
      *
      * @param meetingType
      * @param n
+     * @param meeting
      */
-    public MeetingTime(MeetingType meetingType, int n) {
+    public MeetingTime(MeetingType meetingType, Meeting meeting) {
         initComponents();
-        
+        this.meeting = meeting;
         this.secLec = meetingType == Meeting.MeetingType.LECTURE_WITH_SEC;
         String type;
         switch (meetingType){
@@ -53,7 +58,9 @@ public class MeetingTime extends javax.swing.JPanel {
         this.secLecDay.setVisible(secLec);
         this.secLecPeriodLabel.setVisible(secLec);
         this.secLecPeriodSpinner.setVisible(secLec);
-        this.meetingTypeLabel.setText(type + " " + n);
+        this.meetingTypeLabel.setText(type);
+        this.ID = MeetingTime.totalIDs;
+        MeetingTime.totalIDs++;
     }
 
     public void setMeetingTime(int day, int period) {
@@ -67,6 +74,33 @@ public class MeetingTime extends javax.swing.JPanel {
             this.secLecPeriodSpinner.setValue(period);
         }
     }
+
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 29 * hash + this.ID;
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final MeetingTime other = (MeetingTime) obj;
+        if (this.ID != other.ID) {
+            return false;
+        }
+        return true;
+    }
+    
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -159,7 +193,7 @@ public class MeetingTime extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void deleteMeetingButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteMeetingButtonActionPerformed
-
+        meeting.deleteTime(this);
     }//GEN-LAST:event_deleteMeetingButtonActionPerformed
 
 
