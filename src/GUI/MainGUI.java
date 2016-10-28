@@ -7,7 +7,7 @@ package GUI;
 
 import Core.NormalGenerator.Differentiator;
 import Core.NormalGenerator.Generator;
-import GUI.PostGenerator.ResultMainGui;
+import GUI.PostGenerator.ResultMainGUI;
 import Core.Files.FileLoader;
 import GUI.ChaosMode.SubjectPanelChaos;
 import GUI.NormalMode.SubjectPanelNormal;
@@ -82,7 +82,7 @@ public class MainGUI extends javax.swing.JFrame {
             this.showErrorMessage(ex.getMessage(), "Error");
         } finally {
             generateButton.setText("Generate");
-            new ResultMainGui(results);
+            new ResultMainGUI(results);
         }
     }
 

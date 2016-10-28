@@ -11,7 +11,7 @@ import java.util.ArrayList;
  *
  * @author louay
  */
-public class ResultMainGui extends javax.swing.JFrame {
+public class ResultMainGUI extends javax.swing.JFrame {
     
     ArrayList<Schedule> schedules;
 
@@ -19,7 +19,7 @@ public class ResultMainGui extends javax.swing.JFrame {
      * Creates new form ResultMainGui
      * @param results
      */
-    public ResultMainGui(ArrayList<String[][]> results) {
+    public ResultMainGUI(ArrayList<String[][]> results) {
         super("Generated Schedules");
         initComponents();
         schedules = new ArrayList<>();
