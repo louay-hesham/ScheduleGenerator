@@ -36,6 +36,7 @@ public class Meeting {
                 newTimeButtonActionPerformed();
             }
         });
+        timesPanel.setLayout(new GroupLayout(timesPanel));
     }
 
     public JPanel getMainPanel() {
