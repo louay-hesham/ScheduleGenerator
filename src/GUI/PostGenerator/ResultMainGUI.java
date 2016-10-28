@@ -12,12 +12,13 @@ public class ResultMainGUI {
 
     /**
      * Creates new form ResultMainGui
+     *
      * @param results
      */
     public ResultMainGUI(ArrayList<String[][]> results) {
         schedules = new ArrayList<>();
         int i = 1;
-        for (String[][] result : results){
+        for (String[][] result : results) {
             Schedule schedule = new Schedule(result);
             schedules.add(schedule);
             schedulesTabbedPane.addTab("Schedule " + i, schedule.getMainPanel());

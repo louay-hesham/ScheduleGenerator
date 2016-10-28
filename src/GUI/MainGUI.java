@@ -9,8 +9,6 @@ import GUI.NormalMode.SubjectPanelNormal;
 import GUI.PostGenerator.ResultMainGUI;
 
 import javax.swing.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
@@ -19,7 +17,7 @@ import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-/**
+/*
  * Created by louay on 10/28/2016.
  */
 public class MainGUI {
@@ -28,10 +26,20 @@ public class MainGUI {
     private final ArrayList<SubjectPanelChaos> subjectsChaos;
     private boolean chaosMode;
 
+    private static void setUIFlavour() {
+        try {
+            UIManager.setLookAndFeel("javax.swing.plaf.nimbus.NimbusLookAndFeel");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+
     public static void main(String[] args) {
+        setUIFlavour();
         JFrame frame = new JFrame("Schedule Generator for Handasa SSP");
         frame.setContentPane(new MainGUI().mainPanel);
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         frame.pack();
         frame.setVisible(true);
     }
@@ -120,7 +128,7 @@ public class MainGUI {
         }
     }
 
-    public MainGUI() {
+    private MainGUI() {
         this.chaosMode = false;
         labBiWeekCheckBox.setVisible(false);
         tutBiWeekCheckBox.setVisible(false);
@@ -129,49 +137,14 @@ public class MainGUI {
         this.initComponents();
     }
 
-    private void initComponents(){
-        addSubjectButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                addSubjectButtonActionPerformed();
-            }
-        });
-        tutorialCheckBox.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                tutorialCheckBoxActionPerformed();
-            }
-        });
-        labCheckBox.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                labCheckBoxActionPerformed();
-            }
-        });
-        generateButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                generateButtonActionPerformed();
-            }
-        });
-        loadFileButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                loadFileButtonActionPerformed();
-            }
-        });
-        saveFileButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                saveFileButtonActionPerformed();
-            }
-        });
-        chaosModeButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                chaosModeButtonActionPerformed();
-            }
-        });
+    private void initComponents() {
+        addSubjectButton.addActionListener(e -> addSubjectButtonActionPerformed());
+        tutorialCheckBox.addActionListener(e -> tutorialCheckBoxActionPerformed());
+        labCheckBox.addActionListener(e -> labCheckBoxActionPerformed());
+        generateButton.addActionListener(e -> generateButtonActionPerformed());
+        loadFileButton.addActionListener(e -> loadFileButtonActionPerformed());
+        saveFileButton.addActionListener(e -> saveFileButtonActionPerformed());
+        chaosModeButton.addActionListener(e -> chaosModeButtonActionPerformed());
     }
 
     public SubjectPanelNormal addSubject(String subjectName, boolean secLecExists, boolean tutExists, boolean tutBiWeek, boolean labExists, boolean labBiweek) {
