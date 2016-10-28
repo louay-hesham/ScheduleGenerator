@@ -58,10 +58,10 @@ public class Meeting {
         this.resetMeetingsGUI();
     }
 
-    public void deleteTime(MeetingTime time){
+    public void deleteTime(MeetingTime time) {
         int i = 0;
-        for (int j = 0; j < meetings.size(); j++){
-            if (time.equals(meetings.get(j))){
+        for (int j = 0; j < meetings.size(); j++) {
+            if (time.equals(meetings.get(j))) {
                 i = j;
                 break;
             }

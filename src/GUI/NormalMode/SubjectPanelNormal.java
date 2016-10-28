@@ -12,7 +12,6 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
 
-
 /**
  * Created by louay on 10/28/2016.
  */
@@ -61,7 +60,7 @@ public class SubjectPanelNormal {
         this.initComponents();
     }
 
-    private void initComponents(){
+    private void initComponents() {
         newGroupButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -80,9 +79,9 @@ public class SubjectPanelNormal {
         return mainPanel;
     }
 
-    public void resetChaosPanel(){
+    public void resetChaosPanel() {
         this.chaosVersion.reset();
-        for (GroupPanelNormal group : groups){
+        for (GroupPanelNormal group : groups) {
             this.chaosVersion.addGroup(group.getGroupInfo());
         }
     }
@@ -97,19 +96,19 @@ public class SubjectPanelNormal {
         }
     }
 
-    public String getMeetingType(int day, int period) throws Exception{
-        for (GroupPanelNormal group : groups){
+    public String getMeetingType(int day, int period) throws Exception {
+        for (GroupPanelNormal group : groups) {
             try {
                 return group.getMeetingType(day, period);
             } catch (Exception ex) {
                 System.out.println(ex.getMessage());
             }
         }
-        throw new Exception ("Not found in this subject: " + this.subjectName);
+        throw new Exception("Not found in this subject: " + this.subjectName);
     }
 
     public String generateSubjectString() throws Exception {
-        if (this.groups == null || this.groups.isEmpty()){
+        if (this.groups == null || this.groups.isEmpty()) {
             throw new Exception(this.subjectName + " has no groups!");
         }
         StringBuilder sb = new StringBuilder();
@@ -180,15 +179,15 @@ public class SubjectPanelNormal {
         return sb.toString();
     }
 
-    protected void deleteGroup(GroupPanelNormal group){
+    protected void deleteGroup(GroupPanelNormal group) {
         int choice = JOptionPane.showConfirmDialog(null, "Are you sure wou want to delete this group?", "Confirm deletion", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
-        if (choice == 0){
+        if (choice == 0) {
             this.groups.remove(group);
             this.groupsTabbedPane.remove(group.getMainPanel());
         }
     }
 
-    private String removeSpaces(String str){
+    private String removeSpaces(String str) {
         return str.replaceAll(" ", "_");
     }
 

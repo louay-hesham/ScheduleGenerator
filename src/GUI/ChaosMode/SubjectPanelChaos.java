@@ -21,6 +21,7 @@ public class SubjectPanelChaos {
 
     /**
      * Creates new form SubjectPanel
+     *
      * @param subjectName
      * @param secLecExists
      * @param tutExists
@@ -31,7 +32,7 @@ public class SubjectPanelChaos {
     public SubjectPanelChaos(String subjectName, boolean secLecExists, boolean tutExists, boolean tutBiWeek, boolean labExists, boolean labBiweek) {
         subjectInfo = new SubjectInfo(secLecExists, tutExists, tutBiWeek, labExists, labBiweek);
         this.subjectName = subjectName;
-        if (secLecExists){
+        if (secLecExists) {
             this.lectures = new Meeting(MeetingType.LECTURE_WITH_SEC);
         } else {
             this.lectures = new Meeting(MeetingType.LECTURE);
@@ -47,33 +48,33 @@ public class SubjectPanelChaos {
         return mainPanel;
     }
 
-    public void addGroup(GroupInfo groupInfo){
-        if (this.subjectInfo.secLecExists){
+    public void addGroup(GroupInfo groupInfo) {
+        if (this.subjectInfo.secLecExists) {
             lectures.addMeeting(groupInfo.lecture.day, groupInfo.lecture.period, groupInfo.secLecture.day, groupInfo.secLecture.period);
         } else {
             lectures.addMeeting(groupInfo.lecture.day, groupInfo.lecture.period);
         }
 
-        if (this.subjectInfo.tutExists){
+        if (this.subjectInfo.tutExists) {
             tutorials.addMeeting(groupInfo.tutorial1.day, groupInfo.tutorial1.period);
-            if (!this.subjectInfo.tutBiWeek){
+            if (!this.subjectInfo.tutBiWeek) {
                 tutorials.addMeeting(groupInfo.tutorial2.day, groupInfo.tutorial2.period);
             }
         }
 
-        if (this.subjectInfo.labExists){
+        if (this.subjectInfo.labExists) {
             labs.addMeeting(groupInfo.lab1.day, groupInfo.lab1.period);
-            if (!this.subjectInfo.labBiWeek){
+            if (!this.subjectInfo.labBiWeek) {
                 labs.addMeeting(groupInfo.lab2.day, groupInfo.lab2.period);
             }
         }
     }
 
-    public void reset(){
+    public void reset() {
         this.subjectTabbedPane.removeTabAt(0);
         this.subjectTabbedPane.removeTabAt(0);
         this.subjectTabbedPane.removeTabAt(0);
-        if (this.subjectInfo.secLecExists){
+        if (this.subjectInfo.secLecExists) {
             this.lectures = new Meeting(MeetingType.LECTURE_WITH_SEC);
         } else {
             this.lectures = new Meeting(MeetingType.LECTURE);

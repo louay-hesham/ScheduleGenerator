@@ -5,14 +5,11 @@
  */
 package GUI.Extras;
 
-import java.awt.Component;
-import javax.swing.JList;
-import javax.swing.JTable;
-import javax.swing.UIManager;
+import javax.swing.*;
 import javax.swing.table.TableCellRenderer;
+import java.awt.*;
 
 /**
- *
  * @author louay
  */
 public class MultiLineTableCellRenderer extends JList<String> implements TableCellRenderer {
@@ -20,7 +17,7 @@ public class MultiLineTableCellRenderer extends JList<String> implements TableCe
     @Override
     public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
         if (value instanceof String) {
-            setListData(((String)value).split("!"));
+            setListData(((String) value).split("!"));
         }
 
         if (isSelected) {

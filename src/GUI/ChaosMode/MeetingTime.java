@@ -29,7 +29,7 @@ public class MeetingTime {
         this.meeting = meeting;
         this.secLec = meetingType == Meeting.MeetingType.LECTURE_WITH_SEC;
         String type;
-        switch (meetingType){
+        switch (meetingType) {
             case LECTURE:
             case LECTURE_WITH_SEC:
                 type = "Lecture";
