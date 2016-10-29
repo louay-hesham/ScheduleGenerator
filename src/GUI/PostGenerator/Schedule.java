@@ -47,7 +47,7 @@ public class Schedule {
         timetable.setModel(new javax.swing.table.DefaultTableModel(
                 model,
                 new String[]{
-                        "", "Saturday", "Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday"
+                        "Period", "Saturday", "Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday"
                 }
         ) {
             Class[] types = new Class[]{
