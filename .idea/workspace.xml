@@ -1,22 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="103866ec-783e-40aa-9a4f-721882396e41" name="Default" comment="Suppressing Warnings &amp; General Fixes">
+    <list default="true" id="103866ec-783e-40aa-9a4f-721882396e41" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Core/Files/FileLoader.java" afterPath="$PROJECT_DIR$/src/Core/Files/FileLoader.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Core/InfoHelpers/GroupInfo.java" afterPath="$PROJECT_DIR$/src/Core/InfoHelpers/GroupInfo.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Core/InfoHelpers/SubjectInfo.java" afterPath="$PROJECT_DIR$/src/Core/InfoHelpers/SubjectInfo.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Core/InfoHelpers/Time.java" afterPath="$PROJECT_DIR$/src/Core/InfoHelpers/Time.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Core/NormalGenerator/Differentiator.java" afterPath="$PROJECT_DIR$/src/Core/NormalGenerator/Differentiator.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Core/NormalGenerator/Generator.java" afterPath="$PROJECT_DIR$/src/Core/NormalGenerator/Generator.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/GUI/ChaosMode/Meeting.java" afterPath="$PROJECT_DIR$/src/GUI/ChaosMode/Meeting.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/GUI/ChaosMode/MeetingTime.java" afterPath="$PROJECT_DIR$/src/GUI/ChaosMode/MeetingTime.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/GUI/ChaosMode/SubjectPanelChaos.java" afterPath="$PROJECT_DIR$/src/GUI/ChaosMode/SubjectPanelChaos.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/GUI/MainGUI.java" afterPath="$PROJECT_DIR$/src/GUI/MainGUI.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/GUI/NormalMode/GroupPanelNormal.java" afterPath="$PROJECT_DIR$/src/GUI/NormalMode/GroupPanelNormal.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/GUI/NormalMode/SubjectPanelNormal.java" afterPath="$PROJECT_DIR$/src/GUI/NormalMode/SubjectPanelNormal.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/GUI/PostGenerator/ResultMainGUI.java" afterPath="$PROJECT_DIR$/src/GUI/PostGenerator/ResultMainGUI.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/GUI/PostGenerator/Schedule.java" afterPath="$PROJECT_DIR$/src/GUI/PostGenerator/Schedule.java" />
     </list>
     <ignored path="ScheduleGeneratorImproved.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -38,13 +25,14 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="MainGUI.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="MainGUI.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/GUI/MainGUI.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="494">
-              <caret line="39" column="23" selection-start-line="39" selection-start-column="23" selection-end-line="39" selection-end-column="23" />
+            <state relative-caret-position="-1104">
+              <caret line="150" column="54" selection-start-line="150" selection-start-column="54" selection-end-line="150" selection-end-column="54" />
               <folding>
                 <element signature="imports" expanded="true" />
+                <element signature="e#9781#9808#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -60,21 +48,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="MeetingTime.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/GUI/ChaosMode/MeetingTime.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="76">
-              <caret line="4" column="2" selection-start-line="4" selection-start-column="2" selection-end-line="4" selection-end-column="2" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="FileLoader.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="FileLoader.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Core/Files/FileLoader.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="57">
-              <caret line="16" column="32" selection-start-line="16" selection-start-column="32" selection-end-line="16" selection-end-column="32" />
+            <state relative-caret-position="1596">
+              <caret line="97" column="24" selection-start-line="97" selection-start-column="24" selection-end-line="97" selection-end-column="24" />
               <folding />
             </state>
           </provider>
@@ -176,7 +154,6 @@
         <option value="$PROJECT_DIR$/src/GUI/MainGUI.form" />
         <option value="$PROJECT_DIR$/src/GUI/NormalMode/SubjectPanelNormal.form" />
         <option value="$PROJECT_DIR$/src/GUI/Extras/MultiLineTableCellRenderer.java" />
-        <option value="$PROJECT_DIR$/src/GUI/MainGUI.java" />
         <option value="$PROJECT_DIR$/src/GUI/PostGenerator/Schedule.java" />
         <option value="$PROJECT_DIR$/src/GUI/PostGenerator/ResultMainGUI.java" />
         <option value="$PROJECT_DIR$/src/GUI/NormalMode/SubjectPanelNormal.java" />
@@ -190,6 +167,7 @@
         <option value="$PROJECT_DIR$/src/Core/Files/FileLoader.java" />
         <option value="$PROJECT_DIR$/src/Core/NormalGenerator/Differentiator.java" />
         <option value="$PROJECT_DIR$/src/Core/NormalGenerator/Generator.java" />
+        <option value="$PROJECT_DIR$/src/GUI/MainGUI.java" />
       </list>
     </option>
   </component>
@@ -261,6 +239,14 @@
               <option name="myItemId" value="src" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="GUI" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="MainGUI" />
+              <option name="myItemType" value="com.intellij.uiDesigner.projectView.FormNode" />
+            </PATH_ELEMENT>
           </PATH>
           <PATH>
             <PATH_ELEMENT>
@@ -276,7 +262,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="Core" />
+              <option name="myItemId" value="GUI" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -291,14 +277,6 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Core" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Files" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -778,7 +756,7 @@
       <workItem from="1477740323904" duration="185000" />
       <workItem from="1477740657271" duration="16000" />
       <workItem from="1477740729141" duration="635000" />
-      <workItem from="1477741628921" duration="113000" />
+      <workItem from="1477741628921" duration="244000" />
     </task>
     <task id="LOCAL-00001" summary="GUI And Overall Fixes">
       <created>1477695485833</created>
@@ -787,15 +765,22 @@
       <option name="project" value="LOCAL" />
       <updated>1477695485833</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="Suppressing Warnings &amp; General Fixes">
+      <created>1477741772504</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1477741772504</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="17410000" />
+    <option name="totallyTimeSpent" value="17541000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
-    <editor active="true" />
+    <editor active="false" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -808,7 +793,7 @@
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.1433902" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.1433902" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -872,14 +857,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/GUI/Extras/MultiLineTableCellRenderer.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="988">
-          <caret line="58" column="5" selection-start-line="58" selection-start-column="5" selection-end-line="58" selection-end-column="5" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/Core/Files/FileLoader.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="380">
@@ -894,6 +871,7 @@
           <caret line="19" column="0" selection-start-line="19" selection-start-column="0" selection-end-line="19" selection-end-column="0" />
           <folding>
             <element signature="imports" expanded="true" />
+            <element signature="e#9781#9808#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -984,6 +962,7 @@
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
             <element signature="imports" expanded="true" />
+            <element signature="e#9781#9808#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -1068,6 +1047,7 @@
           <caret line="35" column="31" selection-start-line="31" selection-start-column="8" selection-end-line="35" selection-end-column="31" />
           <folding>
             <element signature="imports" expanded="true" />
+            <element signature="e#9781#9808#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -1236,16 +1216,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/GUI/MainGUI.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="494">
-          <caret line="39" column="23" selection-start-line="39" selection-start-column="23" selection-end-line="39" selection-end-column="23" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/GUI/Extras/MultiLineTableCellRenderer.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="228">
@@ -1272,9 +1242,28 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Core/Files/FileLoader.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="57">
-          <caret line="16" column="32" selection-start-line="16" selection-start-column="32" selection-end-line="16" selection-end-column="32" />
+        <state relative-caret-position="1596">
+          <caret line="97" column="24" selection-start-line="97" selection-start-column="24" selection-end-line="97" selection-end-column="24" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://C:/Program Files/Java/jdk1.8.0_111/src.zip!/java/awt/event/ActionListener.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="494">
+          <caret line="49" column="16" selection-start-line="49" selection-start-column="16" selection-end-line="49" selection-end-column="16" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/GUI/MainGUI.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1104">
+          <caret line="150" column="54" selection-start-line="150" selection-start-column="54" selection-end-line="150" selection-end-column="54" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#9781#9808#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
