@@ -1,16 +1,14 @@
 package GUI.ChaosMode;
 
 import javax.swing.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
-/**
+/*
  * Created by louay on 10/28/2016.
  */
 public class Meeting {
 
-    public enum MeetingType {
+    enum MeetingType {
         LECTURE, LECTURE_WITH_SEC, TUTORIAL, LAB
     }
 
@@ -30,12 +28,7 @@ public class Meeting {
     public Meeting(MeetingType meetingType) {
         this.meetingType = meetingType;
         this.meetings = new ArrayList<>();
-        newTimeButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                newTimeButtonActionPerformed();
-            }
-        });
+        newTimeButton.addActionListener(e -> newTimeButtonActionPerformed());
         timesPanel.setLayout(new GroupLayout(timesPanel));
     }
 
@@ -43,14 +36,14 @@ public class Meeting {
         return mainPanel;
     }
 
-    public void addMeeting(int day, int period) {
+    void addMeeting(int day, int period) {
         MeetingTime meetingTime = new MeetingTime(this.meetingType, this);
         meetingTime.setMeetingTime(day, period);
         meetings.add(meetingTime);
         this.resetMeetingsGUI();
     }
 
-    public void addMeeting(int day, int period, int secLecDay, int secLecPeriod) {
+    void addMeeting(int day, int period, int secLecDay, int secLecPeriod) {
         MeetingTime meetingTime = new MeetingTime(this.meetingType, this);
         meetingTime.setMeetingTime(day, period);
         meetingTime.setSecLecTime(secLecDay, secLecPeriod);
@@ -58,7 +51,7 @@ public class Meeting {
         this.resetMeetingsGUI();
     }
 
-    public void deleteTime(MeetingTime time) {
+    void deleteTime(MeetingTime time) {
         int i = 0;
         for (int j = 0; j < meetings.size(); j++) {
             if (time.equals(meetings.get(j))) {

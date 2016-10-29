@@ -6,10 +6,10 @@
 package Core.NormalGenerator;
 
 import GUI.MainGUI;
+
 import java.util.ArrayList;
 
 /**
- *
  * @author louay
  */
 public class Differentiator {
@@ -33,7 +33,7 @@ public class Differentiator {
                         try {
                             schedule[i][j] += ("!" + gui.getMeetingType(schedule[i][j], j, (i / 2) + 1));
                         } catch (Exception ex) {
-                            if (ex.getMessage().startsWith("Meeting Not Found!")){
+                            if (ex.getMessage().startsWith("Meeting Not Found!")) {
                                 schedule[i][j] += ("!" + "Unknown meeting type");
                             } else {
                                 corrupted = true;

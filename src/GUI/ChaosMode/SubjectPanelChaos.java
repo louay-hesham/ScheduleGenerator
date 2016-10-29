@@ -6,7 +6,7 @@ import GUI.ChaosMode.Meeting.MeetingType;
 
 import javax.swing.*;
 
-/**
+/*
  * Created by louay on 10/28/2016.
  */
 public class SubjectPanelChaos {
@@ -22,12 +22,12 @@ public class SubjectPanelChaos {
     /**
      * Creates new form SubjectPanel
      *
-     * @param subjectName
-     * @param secLecExists
-     * @param tutExists
-     * @param tutBiWeek
-     * @param labExists
-     * @param labBiweek
+     * @param subjectName  /
+     * @param secLecExists /
+     * @param tutExists    /
+     * @param tutBiWeek    /
+     * @param labExists    /
+     * @param labBiweek    /
      */
     public SubjectPanelChaos(String subjectName, boolean secLecExists, boolean tutExists, boolean tutBiWeek, boolean labExists, boolean labBiweek) {
         subjectInfo = new SubjectInfo(secLecExists, tutExists, tutBiWeek, labExists, labBiweek);

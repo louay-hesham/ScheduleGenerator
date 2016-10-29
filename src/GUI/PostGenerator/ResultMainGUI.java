@@ -3,17 +3,17 @@ package GUI.PostGenerator;
 import javax.swing.*;
 import java.util.ArrayList;
 
-/**
+/*
  * Created by louay on 10/28/2016.
  */
 public class ResultMainGUI {
-
-    ArrayList<Schedule> schedules;
+    @SuppressWarnings("")
+    private ArrayList<Schedule> schedules;
 
     /**
      * Creates new form ResultMainGui
      *
-     * @param results
+     * @param results ArrayList
      */
     public ResultMainGUI(ArrayList<String[][]> results) {
         schedules = new ArrayList<>();

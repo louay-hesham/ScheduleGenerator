@@ -8,6 +8,7 @@ package Core.Files;
 import Core.InfoHelpers.GroupInfo;
 import GUI.MainGUI;
 import GUI.NormalMode.SubjectPanelNormal;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
@@ -16,7 +17,6 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
- *
  * @author louay
  */
 public class FileLoader {
@@ -40,7 +40,7 @@ public class FileLoader {
             String subjectName = null;
             do {
                 subjectName = scanner.nextLine().replaceAll("_", " ");
-            }while(subjectName == null || subjectName.equals(""));
+            } while (subjectName == null || subjectName.equals(""));
             int numberOfGroups = scanner.nextInt();
             int tut = scanner.nextInt();
             int lab = scanner.nextInt();

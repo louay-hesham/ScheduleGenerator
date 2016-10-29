@@ -32,8 +32,8 @@ public class GroupPanelNormal {
     /**
      * Creates new form GroupPanel
      *
-     * @param subject
-     * @param subjectInfo
+     * @param subject     /
+     * @param subjectInfo /
      */
     GroupPanelNormal(SubjectPanelNormal subject, SubjectInfo subjectInfo) {
         this.initComponents();
