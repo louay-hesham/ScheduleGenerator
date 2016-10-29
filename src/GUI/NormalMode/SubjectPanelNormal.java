@@ -32,7 +32,7 @@ public class SubjectPanelNormal {
     }
 
     private void newGroupButtonActionPerformed() {
-        GroupPanelNormal newGroup = new GroupPanelNormal(this, subjectInfo);
+        GroupPanelNormal newGroup = new GroupPanelNormal(this, subjectInfo, true);
         groups.add(newGroup);
         groupsTabbedPane.addTab("Group " + (groupsTabbedPane.getTabCount() + 1), newGroup.getMainPanel());
     }
@@ -88,7 +88,7 @@ public class SubjectPanelNormal {
 
     public void setGroups(ArrayList<GroupInfo> groupsInfo) {
         for (GroupInfo groupInfo : groupsInfo) {
-            GroupPanelNormal newGroup = new GroupPanelNormal(this, subjectInfo);
+            GroupPanelNormal newGroup = new GroupPanelNormal(this, subjectInfo, false);
             groups.add(newGroup);
             groupsTabbedPane.addTab("Group " + (groupsTabbedPane.getTabCount() + 1), newGroup.getMainPanel());
             newGroup.setGroupInfo(groupInfo);

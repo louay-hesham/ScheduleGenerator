@@ -2,3 +2,5 @@
 /build/
 OptimizedTimetables.out
 out/
+.idea/
+.idea/workspace.xml

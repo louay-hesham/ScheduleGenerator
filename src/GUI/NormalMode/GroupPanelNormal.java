@@ -2,10 +2,8 @@ package GUI.NormalMode;
 
 import Core.InfoHelpers.GroupInfo;
 import Core.InfoHelpers.SubjectInfo;
-import Core.InfoHelpers.Time;
 
 import javax.swing.*;
-import java.util.ArrayList;
 
 /*
  * Created by louay on 10/28/2016.
@@ -16,6 +14,7 @@ public class GroupPanelNormal {
     private SecondLecturePossibility secondLecturePlace;
     private GroupInfo groupInfo = null;
     private final SubjectPanelNormal subject;
+    private boolean useActionListener = true;
 
     enum SecondLecturePossibility {
         NO_SEC_LEC, MAIN_LECTURE, TUTORIAL, LAB, NOT_POSSIBLE
@@ -35,7 +34,7 @@ public class GroupPanelNormal {
      * @param subject
      * @param subjectInfo
      */
-    GroupPanelNormal(SubjectPanelNormal subject, SubjectInfo subjectInfo) {
+    GroupPanelNormal(SubjectPanelNormal subject, SubjectInfo subjectInfo, boolean addToChaos) {
         this.initComponents();
         this.subject = subject;
         this.secondLecturePlace = SecondLecturePossibility.NO_SEC_LEC;
@@ -73,34 +72,45 @@ public class GroupPanelNormal {
         lab1DayComboBox.setVisible(subjectInfo.labExists);
         lab1PeriodSpinner.setVisible(subjectInfo.labExists);
         lab1PeriodLabel.setVisible(subjectInfo.labExists);
+        this.initGroupInfo();
+        if (addToChaos){
+            this.subject.getChaosVersion().addGroup(this.groupInfo);
+        }
+    }
+
+    private void changeGroupPropertiesUserInteracted(){
+        if (this.useActionListener){
+            this.initGroupInfo();
+            this.subject.resetChaosPanel();
+        }
     }
 
     private void initComponents() {
         deleteGroupButton.addActionListener(e -> deleteGroupButtonActionPerformed());
         lectureDayComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[]{"Saturday", "Sunday", "Monday", "Tuesday", "Wednesday", "Thursday"}));
-        lectureDayComboBox.addActionListener(e -> initGroupInfo());
+        lectureDayComboBox.addActionListener(e -> changeGroupPropertiesUserInteracted());
         secLectureDayComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[]{"Saturday", "Sunday", "Monday", "Tuesday", "Wednesday", "Thursday"}));
-        secLectureDayComboBox.addActionListener(e -> initGroupInfo());
+        secLectureDayComboBox.addActionListener(e -> changeGroupPropertiesUserInteracted());
         tut1DayComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[]{"Saturday", "Sunday", "Monday", "Tuesday", "Wednesday", "Thursday"}));
-        tut1DayComboBox.addActionListener(e -> initGroupInfo());
+        tut1DayComboBox.addActionListener(e -> changeGroupPropertiesUserInteracted());
         tut2DayComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[]{"Saturday", "Sunday", "Monday", "Tuesday", "Wednesday", "Thursday"}));
-        tut2DayComboBox.addActionListener(e -> initGroupInfo());
+        tut2DayComboBox.addActionListener(e -> changeGroupPropertiesUserInteracted());
         lab1DayComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[]{"Saturday", "Sunday", "Monday", "Tuesday", "Wednesday", "Thursday"}));
-        lab1DayComboBox.addActionListener(e -> initGroupInfo());
+        lab1DayComboBox.addActionListener(e -> changeGroupPropertiesUserInteracted());
         lab2DayComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[]{"Saturday", "Sunday", "Monday", "Tuesday", "Wednesday", "Thursday"}));
-        lab2DayComboBox.addActionListener(e -> initGroupInfo());
+        lab2DayComboBox.addActionListener(e -> changeGroupPropertiesUserInteracted());
         lecturePeriodSpinner.setModel(new javax.swing.SpinnerNumberModel(1, 1, 7, 1));
-        lecturePeriodSpinner.addChangeListener(evt -> initGroupInfo());
+        lecturePeriodSpinner.addChangeListener(evt -> changeGroupPropertiesUserInteracted());
         secLecturePeriodSpinner.setModel(new javax.swing.SpinnerNumberModel(1, 1, 7, 1));
-        secLecturePeriodSpinner.addChangeListener(evt -> initGroupInfo());
+        secLecturePeriodSpinner.addChangeListener(evt -> changeGroupPropertiesUserInteracted());
         tut1PeriodSpinner.setModel(new javax.swing.SpinnerNumberModel(1, 1, 7, 1));
-        tut1PeriodSpinner.addChangeListener(evt -> initGroupInfo());
+        tut1PeriodSpinner.addChangeListener(evt -> changeGroupPropertiesUserInteracted());
         tut2PeriodSpinner.setModel(new javax.swing.SpinnerNumberModel(1, 1, 7, 1));
-        tut2PeriodSpinner.addChangeListener(evt -> initGroupInfo());
+        tut2PeriodSpinner.addChangeListener(evt -> changeGroupPropertiesUserInteracted());
         lab1PeriodSpinner.setModel(new javax.swing.SpinnerNumberModel(1, 1, 7, 1));
-        lab1PeriodSpinner.addChangeListener(evt -> initGroupInfo());
+        lab1PeriodSpinner.addChangeListener(evt -> changeGroupPropertiesUserInteracted());
         lab2PeriodSpinner.setModel(new javax.swing.SpinnerNumberModel(1, 1, 7, 1));
-        lab2PeriodSpinner.addChangeListener(evt -> initGroupInfo());
+        lab2PeriodSpinner.addChangeListener(evt -> changeGroupPropertiesUserInteracted());
     }
 
     public JPanel getMainPanel() {
@@ -108,6 +118,7 @@ public class GroupPanelNormal {
     }
 
     void setGroupInfo(GroupInfo groupInfo) {
+        this.useActionListener = false;
         this.groupInfo = groupInfo;
         this.lectureDayComboBox.setSelectedIndex(groupInfo.lecture.day);
         this.lecturePeriodSpinner.setValue(groupInfo.lecture.period);
@@ -133,6 +144,7 @@ public class GroupPanelNormal {
                 this.lab2PeriodSpinner.setValue(groupInfo.lab2.period);
             }
         }
+        this.useActionListener = true;
     }
 
     void setSecondLecturePlace(SecondLecturePossibility secondLecturePlace) {
@@ -335,28 +347,6 @@ public class GroupPanelNormal {
                 groupInfo.lab2.period = (int) this.lab2PeriodSpinner.getValue();
             }
         }
-        this.subject.resetChaosPanel();
-    }
-
-    private boolean isConflicting() {
-        ArrayList<Time> times = new ArrayList<>();
-        times.add(groupInfo.lecture);
-        if (subjectInfo.secLecExists) {
-            times.add(groupInfo.secLecture);
-        }
-        if (subjectInfo.tutExists) {
-            times.add(groupInfo.tutorial1);
-            if (!subjectInfo.tutBiWeek) {
-                times.add(groupInfo.tutorial2);
-            }
-        }
-        if (subjectInfo.labExists) {
-            times.add(groupInfo.lab1);
-            if (!subjectInfo.labBiWeek) {
-                times.add(groupInfo.lab2);
-            }
-        }
-        return Time.checkConflict(times);
     }
 
     private JComboBox<String> lectureDayComboBox;
