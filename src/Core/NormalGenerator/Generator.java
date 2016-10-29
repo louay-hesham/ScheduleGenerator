@@ -14,24 +14,23 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
- *
  * @author louay
  */
 public class Generator {
-    
-    public static ArrayList<String[][]> getGeneratedSchedules(String input){
+
+    public static ArrayList<String[][]> getGeneratedSchedules(String input) {
         String output = runExe(input);
         ArrayList<String[][]> schedules = new ArrayList<>();
         String[] timetables = output.split("#");
-        for (String timetable : timetables){
+        for (String timetable : timetables) {
             String[] periods = timetable.split("@");
             String[][] t = new String[14][];
             int i = 0;
-            for (String period : periods){
+            for (String period : periods) {
                 String[] days = period.split("!");
                 int j = 0;
                 t[i] = new String[6];
-                for (String day : days){
+                for (String day : days) {
                     t[i][j] = day;
                     j++;
                 }
@@ -41,7 +40,7 @@ public class Generator {
         }
         return schedules;
     }
-    
+
     private static String runExe(String input) {
         try {
             Runtime rt = Runtime.getRuntime();
@@ -50,11 +49,11 @@ public class Generator {
             InputStream in = p.getInputStream();
             OutputStream out = p.getOutputStream();
             //InputStream err = p.getErrorStream();
-            
+
             System.out.println(getStreamOutput(in));
             writeToStream(out, input);
-            while (true){
-                if (getStreamOutput(in).endsWith("*")){
+            while (true) {
+                if (getStreamOutput(in).endsWith("*")) {
                     writeToStream(out, "2\n");
 //                    int exit = waitForExit(p);
 //                    System.out.println("Exit code is: " + exit);
@@ -96,9 +95,10 @@ public class Generator {
             Logger.getLogger(Generator.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
-    private static int waitForExit(Process p){
-        while (p.isAlive()){}
+
+    private static int waitForExit(Process p) {
+        while (p.isAlive()) {
+        }
         return p.exitValue();
     }
 }

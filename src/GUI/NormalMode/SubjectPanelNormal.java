@@ -7,12 +7,10 @@ import GUI.MainGUI;
 import GUI.NormalMode.GroupPanelNormal.SecondLecturePossibility;
 
 import javax.swing.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
 
-/**
+/*
  * Created by louay on 10/28/2016.
  */
 public class SubjectPanelNormal {
@@ -44,12 +42,12 @@ public class SubjectPanelNormal {
     /**
      * Creates new form SubjectPanel
      *
-     * @param subjectName
-     * @param secLecExists
-     * @param tutExists
-     * @param tutBiWeek
-     * @param labExists
-     * @param labBiweek
+     * @param subjectName  /
+     * @param secLecExists /
+     * @param tutExists    /
+     * @param tutBiWeek    /
+     * @param labExists    /
+     * @param labBiweek    /
      */
     public SubjectPanelNormal(MainGUI gui, String subjectName, boolean secLecExists, boolean tutExists, boolean tutBiWeek, boolean labExists, boolean labBiweek) {
         this.gui = gui;
@@ -61,25 +59,15 @@ public class SubjectPanelNormal {
     }
 
     private void initComponents() {
-        newGroupButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                newGroupButtonActionPerformed();
-            }
-        });
-        deleteSubjectButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                deleteSubjectButtonActionPerformed();
-            }
-        });
+        newGroupButton.addActionListener(e -> newGroupButtonActionPerformed());
+        deleteSubjectButton.addActionListener(e -> deleteSubjectButtonActionPerformed());
     }
 
     public JPanel getMainPanel() {
         return mainPanel;
     }
 
-    public void resetChaosPanel() {
+    void resetChaosPanel() {
         this.chaosVersion.reset();
         for (GroupPanelNormal group : groups) {
             this.chaosVersion.addGroup(group.getGroupInfo());

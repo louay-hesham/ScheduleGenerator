@@ -6,7 +6,6 @@
 package Core.InfoHelpers;
 
 /**
- *
  * @author louay
  */
 public class SubjectInfo {

@@ -241,6 +241,7 @@ public class MainGUI {
     private JButton chaosModeButton;
     private JButton saveFileButton;
     private JButton loadFileButton;
+    @SuppressWarnings("unused")
     private JLabel subjectNameLabel;
     private JTabbedPane subjectsTabbedPane;
 }

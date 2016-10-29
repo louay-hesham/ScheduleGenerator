@@ -1,10 +1,8 @@
 package GUI.ChaosMode;
 
 import javax.swing.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
-/**
+/*
  * Created by louay on 10/28/2016.
  */
 public class MeetingTime {
@@ -22,10 +20,10 @@ public class MeetingTime {
     /**
      * Creates new form MeetingTime
      *
-     * @param meetingType
-     * @param meeting
+     * @param meetingType /
+     * @param meeting     /
      */
-    public MeetingTime(Meeting.MeetingType meetingType, Meeting meeting) {
+    MeetingTime(Meeting.MeetingType meetingType, Meeting meeting) {
         this.meeting = meeting;
         this.secLec = meetingType == Meeting.MeetingType.LECTURE_WITH_SEC;
         String type;
@@ -54,24 +52,19 @@ public class MeetingTime {
         this.meetingTypeLabel.setText(type);
         this.ID = MeetingTime.totalIDs;
         MeetingTime.totalIDs++;
-        deleteMeetingButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                deleteMeetingButtonActionPerformed();
-            }
-        });
+        deleteMeetingButton.addActionListener(e -> deleteMeetingButtonActionPerformed());
     }
 
     public JPanel getMainPanel() {
         return mainPanel;
     }
 
-    public void setMeetingTime(int day, int period) {
+    void setMeetingTime(int day, int period) {
         this.meetingDay.setSelectedIndex(day);
         this.meetingPeriodSpinner.setValue(period);
     }
 
-    public void setSecLecTime(int day, int period) {
+    void setSecLecTime(int day, int period) {
         if (this.secLec) {
             this.secLecDay.setSelectedIndex(day);
             this.secLecPeriodSpinner.setValue(period);
@@ -97,10 +90,7 @@ public class MeetingTime {
             return false;
         }
         final MeetingTime other = (MeetingTime) obj;
-        if (this.ID != other.ID) {
-            return false;
-        }
-        return true;
+        return this.ID == other.ID;
     }
 
     private JPanel mainPanel;
