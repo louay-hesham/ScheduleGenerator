@@ -12,17 +12,16 @@ public class Meeting {
         LECTURE, LECTURE_WITH_SEC, TUTORIAL, LAB
     }
 
-    public enum Day {
-        SATURDAY, SUNDAY, MONDAY, TUESDAY, WEDNESDAY, THURSDAY, FRIDAY
-    }
-
     private final MeetingType meetingType;
     private final ArrayList<MeetingTime> meetings;
+
+    private GroupLayout.ParallelGroup h;
+    private GroupLayout.SequentialGroup v;
 
     private void newTimeButtonActionPerformed() {
         MeetingTime meetingTime = new MeetingTime(this.meetingType, this);
         meetings.add(meetingTime);
-        this.resetMeetingsGUI();
+        this.addMeetingToGUI(meetingTime);
     }
 
     public Meeting(MeetingType meetingType) {
@@ -30,6 +29,9 @@ public class Meeting {
         this.meetings = new ArrayList<>();
         newTimeButton.addActionListener(e -> newTimeButtonActionPerformed());
         timesPanel.setLayout(new GroupLayout(timesPanel));
+        GroupLayout timesPanelLayout = (GroupLayout) timesPanel.getLayout();
+        this.h = timesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING);
+        this.v = timesPanelLayout.createSequentialGroup();
     }
 
     public JPanel getMainPanel() {
@@ -40,15 +42,15 @@ public class Meeting {
         MeetingTime meetingTime = new MeetingTime(this.meetingType, this);
         meetingTime.setMeetingTime(day, period);
         meetings.add(meetingTime);
-        this.resetMeetingsGUI();
+        this.addMeetingToGUI(meetingTime);
     }
 
     void addMeeting(int day, int period, int secLecDay, int secLecPeriod) {
         MeetingTime meetingTime = new MeetingTime(this.meetingType, this);
         meetingTime.setMeetingTime(day, period);
         meetingTime.setSecLecTime(secLecDay, secLecPeriod);
-        meetings.add(meetingTime);
-        this.resetMeetingsGUI();
+        this.meetings.add(meetingTime);
+        this.addMeetingToGUI(meetingTime);
     }
 
     void deleteTime(MeetingTime time) {
@@ -63,21 +65,31 @@ public class Meeting {
         this.resetMeetingsGUI();
     }
 
+    private void addMeetingToGUI(MeetingTime meetingTime){
+        GroupLayout timesPanelLayout = (GroupLayout) timesPanel.getLayout();
+
+        this.h.addComponent(meetingTime.getMainPanel());
+        this.v.addComponent(meetingTime.getMainPanel());
+
+        timesPanelLayout.setHorizontalGroup(this.h);
+        timesPanelLayout.setVerticalGroup(this.v);
+    }
+
     private void resetMeetingsGUI() {
 
         timesPanel.removeAll();
 
         GroupLayout timesPanelLayout = new GroupLayout(timesPanel);
 
-        GroupLayout.ParallelGroup h = timesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING);
-        GroupLayout.SequentialGroup v = timesPanelLayout.createSequentialGroup();
+        this.h = timesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING);
+        this.v = timesPanelLayout.createSequentialGroup();
 
         for (MeetingTime meeting : meetings) {
-            h.addComponent(meeting.getMainPanel());
-            v.addComponent(meeting.getMainPanel());
+            this.h.addComponent(meeting.getMainPanel());
+            this.v.addComponent(meeting.getMainPanel());
         }
-        timesPanelLayout.setHorizontalGroup(h);
-        timesPanelLayout.setVerticalGroup(v);
+        timesPanelLayout.setHorizontalGroup(this.h);
+        timesPanelLayout.setVerticalGroup(this.v);
 
         timesPanel.setLayout(timesPanelLayout);
         timesPanel.repaint();
