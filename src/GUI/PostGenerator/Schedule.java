@@ -7,14 +7,14 @@ import javax.swing.*;
 /*
  * Created by louay on 10/28/2016.
  */
-public class Schedule {
+class Schedule {
 
-    private String[][] schedule;
+    private final String[][] schedule;
 
     /**
      * Creates new form Schedule
      *
-     * @param schedule
+     * @param schedule /
      */
     Schedule(String[][] schedule) {
         this.schedule = schedule;
@@ -50,10 +50,10 @@ public class Schedule {
                         "", "Saturday", "Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday"
                 }
         ) {
-            Class[] types = new Class[]{
+            final Class[] types = new Class[]{
                     java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
             };
-            boolean[] canEdit = new boolean[]{
+            final boolean[] canEdit = new boolean[]{
                     false, false, false, false, false, false, false, false
             };
 

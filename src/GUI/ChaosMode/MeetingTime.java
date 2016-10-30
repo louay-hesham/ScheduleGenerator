@@ -5,7 +5,7 @@ import javax.swing.*;
 /*
  * Created by louay on 10/28/2016.
  */
-public class MeetingTime {
+class MeetingTime {
 
     private static int totalIDs = 0;
 

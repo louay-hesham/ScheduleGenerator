@@ -83,12 +83,12 @@ public class MainGUI {
 
     private void generateButtonActionPerformed() {
         if (this.subjectsNormal.isEmpty()) {
-            this.showErrorMessage("Must have at least one subject!", "Error");
+            this.showErrorMessage("Must have at least one subject!");
         } else {
             try {
                 this.startScheduleGeneration(generateInputString());
             } catch (Exception ex) {
-                this.showErrorMessage(ex.getMessage(), "Error");
+                this.showErrorMessage(ex.getMessage());
             }
         }
     }
@@ -109,12 +109,12 @@ public class MainGUI {
 
     private void saveFileButtonActionPerformed() {
         if (this.subjectsNormal.isEmpty()) {
-            this.showErrorMessage("Must have at least one subject!", "Error");
+            this.showErrorMessage("Must have at least one subject!");
         } else {
             try {
                 this.saveToFile(generateInputString());
             } catch (Exception ex) {
-                this.showErrorMessage(ex.getMessage(), "Error");
+                this.showErrorMessage(ex.getMessage());
             }
         }
     }
@@ -183,7 +183,7 @@ public class MainGUI {
             Differentiator.differentiate(this, results);
         } catch (Exception ex) {
             System.out.println(ex.getMessage());
-            this.showErrorMessage(ex.getMessage(), "Error");
+            this.showErrorMessage(ex.getMessage());
         } finally {
             generateButton.setText("Generate");
             new ResultMainGUI(results);
@@ -215,8 +215,8 @@ public class MainGUI {
         return sb.toString();
     }
 
-    private void showErrorMessage(String error, String title) {
-        JOptionPane.showMessageDialog(null, error, title, JOptionPane.ERROR_MESSAGE);
+    private void showErrorMessage(String error) {
+        JOptionPane.showMessageDialog(null, error, "Error", JOptionPane.ERROR_MESSAGE);
     }
 
     private void convertTo7ebyMode() {

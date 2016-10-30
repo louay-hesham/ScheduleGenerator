@@ -21,11 +21,9 @@ import java.util.logging.Logger;
  */
 public class FileLoader {
 
-    private File file;
     private Scanner scanner;
 
     public FileLoader(File file) {
-        this.file = file;
         try {
             this.scanner = new Scanner(file);
         } catch (FileNotFoundException ex) {
@@ -37,7 +35,7 @@ public class FileLoader {
         int numberOfSubjects = scanner.nextInt();
 
         for (int i = 0; i < numberOfSubjects; i++) {
-            String subjectName = null;
+            String subjectName;
             do {
                 subjectName = scanner.nextLine().replaceAll("_", " ");
             } while (subjectName == null || subjectName.equals(""));

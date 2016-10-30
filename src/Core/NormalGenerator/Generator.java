@@ -71,6 +71,7 @@ public class Generator {
     private static String getStreamOutput(InputStream in) {
         try {
             while (in.available() == 0) {
+                //
             }
             byte[] b;
             b = new byte[in.available()];
@@ -98,6 +99,7 @@ public class Generator {
 
     private static int waitForExit(Process p) {
         while (p.isAlive()) {
+            //
         }
         return p.exitValue();
     }

@@ -8,7 +8,7 @@ import java.util.ArrayList;
  */
 public class ResultMainGUI {
     @SuppressWarnings("")
-    private ArrayList<Schedule> schedules;
+    private final ArrayList<Schedule> schedules;
 
     /**
      * Creates new form ResultMainGui

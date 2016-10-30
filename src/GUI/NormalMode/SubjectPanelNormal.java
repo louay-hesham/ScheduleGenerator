@@ -167,7 +167,7 @@ public class SubjectPanelNormal {
         return sb.toString();
     }
 
-    protected void deleteGroup(GroupPanelNormal group) {
+    void deleteGroup(GroupPanelNormal group) {
         int choice = JOptionPane.showConfirmDialog(null, "Are you sure wou want to delete this group?", "Confirm deletion", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
         if (choice == 0) {
             this.groups.remove(group);
