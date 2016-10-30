@@ -73,13 +73,13 @@ public class GroupPanelNormal {
         lab1PeriodSpinner.setVisible(subjectInfo.labExists);
         lab1PeriodLabel.setVisible(subjectInfo.labExists);
         this.initGroupInfo();
-        if (addToChaos){
+        if (addToChaos) {
             this.subject.getChaosVersion().addGroup(this.groupInfo);
         }
     }
 
-    private void changeGroupPropertiesUserInteracted(){
-        if (this.useActionListener){
+    private void changeGroupPropertiesUserInteracted() {
+        if (this.useActionListener) {
             this.initGroupInfo();
             this.subject.resetChaosPanel();
         }
