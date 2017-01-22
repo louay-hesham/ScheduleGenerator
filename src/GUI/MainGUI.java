@@ -126,6 +126,7 @@ public class MainGUI {
             this.chaosMode = true;
             this.convertTo7ebyMode();
             this.chaosModeButton.setEnabled(false);
+            this.generateButton.setEnabled(false);
         }
     }
 
