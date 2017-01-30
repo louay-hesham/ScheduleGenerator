@@ -2,8 +2,8 @@ package GUI;
 
 
 import Core.Files.FileLoader;
-import Core.NormalGenerator.Differentiator;
-import Core.NormalGenerator.Generator;
+import Core.CPlusPlusGenerator.Differentiator;
+import Core.CPlusPlusGenerator.Generator;
 import GUI.ChaosMode.SubjectPanelChaos;
 import GUI.NormalMode.SubjectPanelNormal;
 import GUI.PostGenerator.ResultMainGUI;
