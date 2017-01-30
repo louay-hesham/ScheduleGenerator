@@ -37,11 +37,15 @@ public class SubjectPanelChaos {
         } else {
             this.lectures = new Meeting(MeetingType.LECTURE);
         }
-        this.tutorials = new Meeting(MeetingType.TUTORIAL);
-        this.labs = new Meeting(MeetingType.LAB);
         this.subjectTabbedPane.addTab("Lectures", lectures.getMainPanel());
-        this.subjectTabbedPane.addTab("Tutorials", tutorials.getMainPanel());
-        this.subjectTabbedPane.addTab("Labs", labs.getMainPanel());
+        if (tutExists){
+            this.tutorials = new Meeting(MeetingType.TUTORIAL);
+            this.subjectTabbedPane.addTab("Tutorials", tutorials.getMainPanel());
+        }
+        if (labExists){
+            this.labs = new Meeting(MeetingType.LAB);
+            this.subjectTabbedPane.addTab("Labs", labs.getMainPanel());
+        }
     }
 
     public JPanel getMainPanel() {
@@ -72,18 +76,26 @@ public class SubjectPanelChaos {
 
     public void reset() {
         this.subjectTabbedPane.removeTabAt(0);
-        this.subjectTabbedPane.removeTabAt(0);
-        this.subjectTabbedPane.removeTabAt(0);
+        if (subjectInfo.tutExists){
+            this.subjectTabbedPane.removeTabAt(0);
+        }
+        if (subjectInfo.labExists){
+            this.subjectTabbedPane.removeTabAt(0);
+        }
         if (this.subjectInfo.secLecExists) {
             this.lectures = new Meeting(MeetingType.LECTURE_WITH_SEC);
         } else {
             this.lectures = new Meeting(MeetingType.LECTURE);
         }
-        this.tutorials = new Meeting(MeetingType.TUTORIAL);
-        this.labs = new Meeting(MeetingType.LAB);
         this.subjectTabbedPane.addTab("Lectures", lectures.getMainPanel());
-        this.subjectTabbedPane.addTab("Tutorials", tutorials.getMainPanel());
-        this.subjectTabbedPane.addTab("Labs", labs.getMainPanel());
+        if (subjectInfo.tutExists){
+            this.tutorials = new Meeting(MeetingType.TUTORIAL);
+            this.subjectTabbedPane.addTab("Tutorials", tutorials.getMainPanel());
+        }
+        if (subjectInfo.labExists){
+            this.labs = new Meeting(MeetingType.LAB);
+            this.subjectTabbedPane.addTab("Labs", labs.getMainPanel());
+        }
     }
 
     private JTabbedPane subjectTabbedPane;
