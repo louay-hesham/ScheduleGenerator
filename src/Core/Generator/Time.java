@@ -6,18 +6,18 @@ package Core.Generator;
 
 public class Time {
 
-    public enum Type{
+    public enum MeetingType{
         LECTURE, SEC_LECTURE, TUT_FULL, TUT_HALF, LAB_FULL, LAB_HALF
     }
 
     public final int day, from, to;
-    public final Type type;
+    public final MeetingType type;
 
-    Time() {
+    public Time() {
         this.day = 0;
         this.from = 0;
         this.to = 0;
-        type = Type.LECTURE;
+        type = MeetingType.LECTURE;
     }
 
     @Override
@@ -25,9 +25,9 @@ public class Time {
         return obj instanceof Time && ((Time) obj).day == this.day && ((Time) obj).from == this.from && ((Time) obj).to == this.to;
     }
 
-    Time(int day, int period, int to, Type type) {
+    public Time(int day, int from, int to, MeetingType type) {
         this.day = day;
-        this.from = period;
+        this.from = from;
         this.to = to;
         this.type = type;
     }

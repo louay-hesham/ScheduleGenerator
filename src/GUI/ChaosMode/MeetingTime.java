@@ -1,5 +1,8 @@
 package GUI.ChaosMode;
 
+import Core.Generator.Time;
+import Core.Generator.Time.MeetingType;
+
 import javax.swing.*;
 
 /*
@@ -12,6 +15,7 @@ class MeetingTime {
     private final boolean secLec;
     private final Meeting meeting;
     private final int ID;
+    private final MeetingType type;
 
     private void deleteMeetingButtonActionPerformed() {
         meeting.deleteTime(this);
@@ -23,21 +27,24 @@ class MeetingTime {
      * @param meetingType /
      * @param meeting     /
      */
-    MeetingTime(Meeting.MeetingType meetingType, Meeting meeting) {
+    MeetingTime(MeetingType meetingType, Meeting meeting) {
+        this.type = meetingType;
         this.meeting = meeting;
-        this.secLec = meetingType == Meeting.MeetingType.LECTURE_WITH_SEC;
+        this.secLec = meetingType == MeetingType.SEC_LECTURE;
         String type;
         switch (meetingType) {
             case LECTURE:
-            case LECTURE_WITH_SEC:
+            case SEC_LECTURE:
                 type = "Lecture";
                 break;
 
-            case TUTORIAL:
+            case TUT_FULL:
+            case TUT_HALF:
                 type = "Tutorial";
                 break;
 
-            case LAB:
+            case LAB_FULL:
+            case LAB_HALF:
                 type = "Lab";
                 break;
 
@@ -52,11 +59,17 @@ class MeetingTime {
         this.meetingTypeLabel.setText(type);
         this.ID = MeetingTime.totalIDs;
         MeetingTime.totalIDs++;
-        deleteMeetingButton.addActionListener(e -> deleteMeetingButtonActionPerformed());
+        this.initComponents();
     }
 
     public JPanel getMainPanel() {
         return mainPanel;
+    }
+
+    private void initComponents(){
+        deleteMeetingButton.addActionListener(e -> deleteMeetingButtonActionPerformed());
+        meetingPeriodSpinner.setModel(new javax.swing.SpinnerNumberModel(1, 1, 7, 1));
+        secLecPeriodSpinner.setModel(new javax.swing.SpinnerNumberModel(1, 1, 7, 1));
     }
 
     void setMeetingTime(int day, int period) {
@@ -91,6 +104,14 @@ class MeetingTime {
         }
         final MeetingTime other = (MeetingTime) obj;
         return this.ID == other.ID;
+    }
+
+    public Time getMeetingTime(){
+        return new Time(this.meetingDay.getSelectedIndex(),
+                        (int)this.meetingPeriodSpinner.getValue(),
+                        (int)this.meetingPeriodSpinner.getValue(),
+                        this.type
+                        );
     }
 
     private JPanel mainPanel;

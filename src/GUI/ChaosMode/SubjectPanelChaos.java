@@ -2,7 +2,7 @@ package GUI.ChaosMode;
 
 import Core.InfoHelpers.GroupInfo;
 import Core.InfoHelpers.SubjectInfo;
-import GUI.ChaosMode.Meeting.MeetingType;
+import Core.Generator.Time.MeetingType;
 
 import javax.swing.*;
 
@@ -33,17 +33,26 @@ public class SubjectPanelChaos {
         subjectInfo = new SubjectInfo(secLecExists, tutExists, tutBiWeek, labExists, labBiweek);
         this.subjectName = subjectName;
         if (secLecExists) {
-            this.lectures = new Meeting(MeetingType.LECTURE_WITH_SEC);
+            this.lectures = new Meeting(MeetingType.SEC_LECTURE);
         } else {
             this.lectures = new Meeting(MeetingType.LECTURE);
         }
         this.subjectTabbedPane.addTab("Lectures", lectures.getMainPanel());
         if (tutExists){
-            this.tutorials = new Meeting(MeetingType.TUTORIAL);
+            if (tutBiWeek){
+                this.tutorials = new Meeting(MeetingType.TUT_HALF);
+            } else {
+                this.tutorials = new Meeting(MeetingType.TUT_FULL);
+            }
+
             this.subjectTabbedPane.addTab("Tutorials", tutorials.getMainPanel());
         }
         if (labExists){
-            this.labs = new Meeting(MeetingType.LAB);
+            if (tutBiWeek){
+                this.labs = new Meeting(MeetingType.LAB_HALF);
+            } else {
+                this.labs = new Meeting(MeetingType.LAB_FULL);
+            }
             this.subjectTabbedPane.addTab("Labs", labs.getMainPanel());
         }
     }
@@ -83,17 +92,26 @@ public class SubjectPanelChaos {
             this.subjectTabbedPane.removeTabAt(0);
         }
         if (this.subjectInfo.secLecExists) {
-            this.lectures = new Meeting(MeetingType.LECTURE_WITH_SEC);
+            this.lectures = new Meeting(MeetingType.SEC_LECTURE);
         } else {
             this.lectures = new Meeting(MeetingType.LECTURE);
         }
         this.subjectTabbedPane.addTab("Lectures", lectures.getMainPanel());
         if (subjectInfo.tutExists){
-            this.tutorials = new Meeting(MeetingType.TUTORIAL);
+            if (subjectInfo.tutBiWeek){
+                this.tutorials = new Meeting(MeetingType.TUT_HALF);
+            } else {
+                this.tutorials = new Meeting(MeetingType.TUT_FULL);
+            }
+
             this.subjectTabbedPane.addTab("Tutorials", tutorials.getMainPanel());
         }
         if (subjectInfo.labExists){
-            this.labs = new Meeting(MeetingType.LAB);
+            if (subjectInfo.tutBiWeek){
+                this.labs = new Meeting(MeetingType.LAB_HALF);
+            } else {
+                this.labs = new Meeting(MeetingType.LAB_FULL);
+            }
             this.subjectTabbedPane.addTab("Labs", labs.getMainPanel());
         }
     }

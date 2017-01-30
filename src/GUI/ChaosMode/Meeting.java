@@ -2,15 +2,12 @@ package GUI.ChaosMode;
 
 import javax.swing.*;
 import java.util.ArrayList;
+import Core.Generator.Time.MeetingType;
 
 /*
  * Created by louay on 10/28/2016.
  */
 public class Meeting {
-
-    enum MeetingType {
-        LECTURE, LECTURE_WITH_SEC, TUTORIAL, LAB
-    }
 
     private final MeetingType meetingType;
     private final ArrayList<MeetingTime> meetings;
