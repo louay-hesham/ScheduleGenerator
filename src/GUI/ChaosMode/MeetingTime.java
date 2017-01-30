@@ -107,11 +107,23 @@ class MeetingTime {
     }
 
     public Time getMeetingTime(){
+        MeetingType type = this.type;
+        if (this.type == MeetingType.SEC_LECTURE){
+            type = MeetingType.LECTURE;
+        }
         return new Time(this.meetingDay.getSelectedIndex(),
                         (int)this.meetingPeriodSpinner.getValue(),
                         (int)this.meetingPeriodSpinner.getValue(),
-                        this.type
+                        type
                         );
+    }
+
+    public Time getSecLecTime(){
+        return new Time(this.secLecDay.getSelectedIndex(),
+                (int)this.secLecPeriodSpinner.getValue(),
+                (int)this.secLecPeriodSpinner.getValue(),
+                MeetingType.SEC_LECTURE
+        );
     }
 
     private JPanel mainPanel;

@@ -6,12 +6,13 @@ import java.util.ArrayList;
  * Created by louay on 1/30/2017.
  */
 public abstract class Subject {
+    protected final ArrayList<Time> timesInPermutation = new ArrayList<>();
 
-    public ArrayList<Time> getTimesInPermutation() {
-        return timesInPermutation;
-    }
+    public abstract ArrayList<Time> getTimesInPermutation();
 
-    private ArrayList<Time> timesInPermutation = new ArrayList<>();
+    public abstract void nextPermutation() throws Exception;
+
+
 
 
 }

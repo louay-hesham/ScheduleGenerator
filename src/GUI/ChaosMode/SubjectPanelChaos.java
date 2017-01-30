@@ -1,10 +1,13 @@
 package GUI.ChaosMode;
 
+import Core.Generator.ChaosMode.SubjectChaos;
+import Core.Generator.Time;
+import Core.Generator.Time.MeetingType;
 import Core.InfoHelpers.GroupInfo;
 import Core.InfoHelpers.SubjectInfo;
-import Core.Generator.Time.MeetingType;
 
 import javax.swing.*;
+import java.util.ArrayList;
 
 /*
  * Created by louay on 10/28/2016.
@@ -114,6 +117,30 @@ public class SubjectPanelChaos {
             }
             this.subjectTabbedPane.addTab("Labs", labs.getMainPanel());
         }
+    }
+
+    public SubjectChaos getSubject(){
+        return new SubjectChaos(this.subjectName,
+                this.getLectureTimes(),
+                this.getSecLectureTimes(),
+                this.getTutorialTimes(),
+                this.getLabsTimes());
+    }
+
+    private ArrayList<Time> getLectureTimes(){
+        return lectures.getMeetingTimes();
+    }
+
+    private ArrayList<Time> getSecLectureTimes(){
+        return lectures.getSecLecTimes();
+    }
+
+    private ArrayList<Time> getTutorialTimes(){
+        return tutorials == null? null : tutorials.getMeetingTimes();
+    }
+
+    private ArrayList<Time> getLabsTimes(){
+        return labs == null? null :labs.getMeetingTimes();
     }
 
     private JTabbedPane subjectTabbedPane;

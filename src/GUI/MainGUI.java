@@ -1,9 +1,10 @@
 package GUI;
 
 
-import Core.Files.FileLoader;
 import Core.CPlusPlusGenerator.Differentiator;
 import Core.CPlusPlusGenerator.Generator;
+import Core.Files.FileLoader;
+import Core.Generator.Subject;
 import GUI.ChaosMode.SubjectPanelChaos;
 import GUI.NormalMode.SubjectPanelNormal;
 import GUI.PostGenerator.ResultMainGUI;
@@ -84,6 +85,12 @@ public class MainGUI {
     private void generateButtonActionPerformed() {
         if (this.subjectsNormal.isEmpty()) {
             this.showErrorMessage("Must have at least one subject!");
+        } else if (this.chaosMode){
+            ArrayList<Subject> subjects = new ArrayList<>();
+            for (SubjectPanelChaos s : subjectsChaos){
+                subjects.add(s.getSubject());
+            }
+            Core.Generator.Generator g = new Core.Generator.Generator(subjects);
         } else {
             try {
                 this.startScheduleGeneration(generateInputString());
@@ -126,7 +133,6 @@ public class MainGUI {
             this.chaosMode = true;
             this.convertTo7ebyMode();
             this.chaosModeButton.setEnabled(false);
-            this.generateButton.setEnabled(false);
         }
     }
 

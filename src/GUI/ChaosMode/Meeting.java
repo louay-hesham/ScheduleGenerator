@@ -1,8 +1,10 @@
 package GUI.ChaosMode;
 
+import Core.Generator.Time;
+import Core.Generator.Time.MeetingType;
+
 import javax.swing.*;
 import java.util.ArrayList;
-import Core.Generator.Time.MeetingType;
 
 /*
  * Created by louay on 10/28/2016.
@@ -33,6 +35,25 @@ public class Meeting {
 
     public JPanel getMainPanel() {
         return mainPanel;
+    }
+
+    public ArrayList<Time> getMeetingTimes(){
+        ArrayList<Time> times = new ArrayList<>();
+        for (MeetingTime m : meetings){
+            times.add(m.getMeetingTime());
+        }
+        return times;
+    }
+
+    public ArrayList<Time> getSecLecTimes(){
+        if (this.meetingType != MeetingType.SEC_LECTURE){
+            return null;
+        }
+        ArrayList<Time> times = new ArrayList<>();
+        for (MeetingTime m : meetings){
+            times.add(m.getSecLecTime());
+        }
+        return times;
     }
 
     void addMeeting(int day, int period) {
