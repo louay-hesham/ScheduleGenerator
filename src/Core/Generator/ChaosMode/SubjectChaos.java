@@ -34,7 +34,9 @@ public class SubjectChaos extends Subject {
                     iTut = 0;
                     iLec++;
                     if (iLec == lectures.size()) {
-                        iLec = 0;
+                        iLec = -1;
+                        iTut = -1;
+                        iLab = -1;
                         throw new Exception("All permutations done");
                     }
                 }
