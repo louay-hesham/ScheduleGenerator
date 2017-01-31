@@ -125,7 +125,7 @@ public class Generator {
         for (int i=0; i<14; i++){
             newSchedule[i] = new String[7];
             for (int j=0; j<7; j++){
-                newSchedule[i][j] = this.emptyPeriod;
+                newSchedule[i][j] = "___";
             }
         }
         return newSchedule;
