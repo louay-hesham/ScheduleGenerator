@@ -32,6 +32,25 @@ public class Time {
         this.type = type;
     }
 
+    public String getTypeString(){
+        switch(this.type){
+            case LECTURE:
+                return "Lecture";
+            case SEC_LECTURE:
+                return "Secondary Lecture";
+            case TUT_HALF:
+            case TUT_FULL:
+                return "Tutorial";
+            case LAB_HALF:
+            case LAB_FULL:
+                return "Lab";
+            default:
+                return "Unknown";
+        }
+    }
 
+    public MeetingType getType() {
+        return type;
+    }
 }
 
