@@ -112,7 +112,7 @@ class MeetingTime {
             type = MeetingType.LECTURE;
         }
         int from, to;
-        to = (int)this.meetingPeriodSpinner.getValue() * 2;
+        to = ((int)this.meetingPeriodSpinner.getValue() * 2) - 1;
         switch(this.type){
             case LECTURE:
             case SEC_LECTURE:
@@ -137,10 +137,10 @@ class MeetingTime {
         }
         int from, to;
         if ((int)this.secLecPeriodSpinner.getValue() + 1 == (int)this.meetingPeriodSpinner.getValue()){
-            from = ((int)this.secLecPeriodSpinner.getValue() * 2);
+            from = ((int)this.secLecPeriodSpinner.getValue() * 2) - 1;
             to = from;
         } else {
-            from = ((int)this.secLecPeriodSpinner.getValue() * 2) - 1;
+            from = ((int)this.secLecPeriodSpinner.getValue() * 2) - 2;
             to = from;
         }
         return new Time(this.secLecDay.getSelectedIndex(), from, to, MeetingType.SEC_LECTURE);
