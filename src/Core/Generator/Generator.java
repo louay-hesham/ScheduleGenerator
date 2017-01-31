@@ -59,6 +59,7 @@ public class Generator {
 
     private boolean push(Subject s){
         boolean success = true;
+        boolean[][] visited = new boolean[14][7];
         for (Time t : s.getTimesInPermutation()){
             switch (t.getType()){
                 case LECTURE:
@@ -67,19 +68,26 @@ public class Generator {
                 case TUT_FULL:
                 {
                     for (int i = t.from; i <= t.to; i++){
-                        success = success && (this.currentSchedule[i][t.day].equals(this.emptyPeriod));
+                        success = success && (this.currentSchedule[i][t.day].equals(this.emptyPeriod)) && (!visited[i][t.day]);
+                        visited[i][t.day] = true;
                     }
                     break;
                 }
                 case LAB_HALF:
                 case TUT_HALF:
                 {
-                    success = success && ((this.currentSchedule[t.to][t.day].equals(this.emptyPeriod) || (this.currentSchedule[t.to - 1][t.day].equals(this.emptyPeriod))));
+                    success = success && ((this.currentSchedule[t.to][t.day].equals(this.emptyPeriod) && (!visited[t.to][t.day])) || (this.currentSchedule[t.to - 1][t.day].equals(this.emptyPeriod) && (!visited[t.to - 1][t.day])));
+                    if (this.currentSchedule[t.to][t.day].equals(this.emptyPeriod)){
+                        visited[t.to][t.day] = true;
+                    } else if (this.currentSchedule[t.to - 1][t.day].equals(this.emptyPeriod)){
+                        visited[t.to - 1][t.day] = true;
+                    }
                     break;
                 }
             }
         }
         if (success){
+            this.generationScheduleStack.push(this.deepCopy(this.currentSchedule));
             this.stack.push(this.subjects.get(iSub));
             for (Time t : s.getTimesInPermutation()){
                 switch (t.getType()){
@@ -105,7 +113,6 @@ public class Generator {
                     }
                 }
             }
-            this.generationScheduleStack.push(this.deepCopy(this.currentSchedule));
             iSub++;
         }
         return success;
