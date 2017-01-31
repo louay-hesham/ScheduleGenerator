@@ -30,10 +30,10 @@ public class SubjectPanelChaos {
      * @param tutExists    /
      * @param tutBiWeek    /
      * @param labExists    /
-     * @param labBiweek    /
+     * @param labBiWeek    /
      */
-    public SubjectPanelChaos(String subjectName, boolean secLecExists, boolean tutExists, boolean tutBiWeek, boolean labExists, boolean labBiweek) {
-        subjectInfo = new SubjectInfo(secLecExists, tutExists, tutBiWeek, labExists, labBiweek);
+    public SubjectPanelChaos(String subjectName, boolean secLecExists, boolean tutExists, boolean tutBiWeek, boolean labExists, boolean labBiWeek) {
+        subjectInfo = new SubjectInfo(secLecExists, tutExists, tutBiWeek, labExists, labBiWeek);
         this.subjectName = subjectName;
         if (secLecExists) {
             this.lectures = new Meeting(MeetingType.SEC_LECTURE);
@@ -51,7 +51,7 @@ public class SubjectPanelChaos {
             this.subjectTabbedPane.addTab("Tutorials", tutorials.getMainPanel());
         }
         if (labExists){
-            if (tutBiWeek){
+            if (labBiWeek){
                 this.labs = new Meeting(MeetingType.LAB_HALF);
             } else {
                 this.labs = new Meeting(MeetingType.LAB_FULL);
