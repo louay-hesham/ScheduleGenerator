@@ -91,6 +91,7 @@ public class MainGUI {
                 subjects.add(s.getSubject());
             }
             Core.Generator.Generator g = new Core.Generator.Generator(subjects);
+            new ResultMainGUI(g.getSchedules());
         } else {
             try {
                 this.startScheduleGeneration(generateInputString());
