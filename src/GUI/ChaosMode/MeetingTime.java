@@ -111,19 +111,39 @@ class MeetingTime {
         if (this.type == MeetingType.SEC_LECTURE){
             type = MeetingType.LECTURE;
         }
-        return new Time(this.meetingDay.getSelectedIndex(),
-                        (int)this.meetingPeriodSpinner.getValue(),
-                        (int)this.meetingPeriodSpinner.getValue(),
-                        type
-                        );
+        int from, to;
+        to = (int)this.meetingPeriodSpinner.getValue() * 2;
+        switch(this.type){
+            case LECTURE:
+            case SEC_LECTURE:
+            case LAB_FULL:
+            case TUT_FULL:
+                from = to - 1;
+                break;
+            case TUT_HALF:
+            case LAB_HALF:
+                from = to;
+                break;
+            default:
+                from = to;
+        }
+
+        return new Time(this.meetingDay.getSelectedIndex(), from, to, type);
     }
 
     public Time getSecLecTime(){
-        return new Time(this.secLecDay.getSelectedIndex(),
-                (int)this.secLecPeriodSpinner.getValue(),
-                (int)this.secLecPeriodSpinner.getValue(),
-                MeetingType.SEC_LECTURE
-        );
+        if (this.type != MeetingType.SEC_LECTURE){
+            return null;
+        }
+        int from, to;
+        if ((int)this.secLecPeriodSpinner.getValue() + 1 == (int)this.meetingPeriodSpinner.getValue()){
+            from = ((int)this.secLecPeriodSpinner.getValue() * 2);
+            to = from;
+        } else {
+            from = ((int)this.secLecPeriodSpinner.getValue() * 2) - 1;
+            to = from;
+        }
+        return new Time(this.secLecDay.getSelectedIndex(), from, to, MeetingType.SEC_LECTURE);
     }
 
     private JPanel mainPanel;
