@@ -6,41 +6,37 @@ import java.util.ArrayList;
  * Created by louay on 2/1/2017.
  */
 public class Optimizer {
-    private final ArrayList<String[][]> partiallyOptimizedSchedules;
-    private final ArrayList<String[][]> fullyOptimizedSchedules;
+    private final ArrayList<String[][]> optimizedSchedules;
     private int maxOffDays;
     private int minGaps;
 
     public Optimizer(){
-        this.partiallyOptimizedSchedules = new ArrayList<>();
+        this.optimizedSchedules = new ArrayList<>();
         this.maxOffDays = 0;
         this.minGaps = Integer.MAX_VALUE;
-        this.fullyOptimizedSchedules = new ArrayList<>();
     }
 
     public void insertSchedule(String[][] schedule){
         int days = this.getDaysOff(schedule);
         if (days > this.maxOffDays){
-            this.partiallyOptimizedSchedules.clear();
-            this.partiallyOptimizedSchedules.add(schedule);
+            this.optimizedSchedules.clear();
+            this.optimizedSchedules.add(schedule);
             this.maxOffDays = days;
+            this.minGaps = this.getGaps(schedule);
         } else if (days == this.maxOffDays){
-            this.partiallyOptimizedSchedules.add(schedule);
+            int gaps = this.getGaps(schedule);
+            if (gaps < minGaps){
+                this.optimizedSchedules.clear();
+                this.optimizedSchedules.add(schedule);
+                this.minGaps = gaps;
+            } else if (gaps == minGaps){
+                this.optimizedSchedules.add(schedule);
+            }
         }
     }
 
     public ArrayList<String[][]> getOptimizedSchedules(){
-        for (String[][] schedule : this.partiallyOptimizedSchedules){
-            int gaps = this.getGaps(schedule);
-            if (gaps < minGaps){
-                this.fullyOptimizedSchedules.clear();
-                this.fullyOptimizedSchedules.add(schedule);
-                this.minGaps = gaps;
-            } else if (gaps == minGaps){
-                this.fullyOptimizedSchedules.add(schedule);
-            }
-        }
-        return this.fullyOptimizedSchedules;
+        return this.optimizedSchedules;
     }
 
     private int getDaysOff(String[][] schedule){
