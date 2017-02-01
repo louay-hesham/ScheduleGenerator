@@ -28,15 +28,6 @@ public class MainGUI {
     private final ArrayList<SubjectPanelChaos> subjectsChaos;
     private boolean chaosMode;
 
-    private static void setUIFlavour() {
-        try {
-            UIManager.setLookAndFeel("javax.swing.plaf.nimbus.NimbusLookAndFeel");
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
-
     public static void main(String[] args) {
         setUIFlavour();
         JFrame frame = new JFrame("Schedule Generator for Handasa SSP");
@@ -44,6 +35,14 @@ public class MainGUI {
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         frame.pack();
         frame.setVisible(true);
+    }
+
+    private static void setUIFlavour() {
+        try {
+            UIManager.setLookAndFeel("javax.swing.plaf.nimbus.NimbusLookAndFeel");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     private void addSubjectButtonActionPerformed() {

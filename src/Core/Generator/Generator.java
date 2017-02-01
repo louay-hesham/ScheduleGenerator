@@ -11,7 +11,6 @@ public class Generator {
     private final Stack<Subject> stack;
     private final ArrayList<Subject> subjects;
     private int iSub, nSub;
-    //private final Stack<String[][]> generationScheduleStack;
     private final String[][] currentSchedule;
     private final String emptyPeriod;
     private final Optimizer optimizer;
