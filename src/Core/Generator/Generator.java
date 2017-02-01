@@ -33,32 +33,6 @@ public class Generator {
         return this.optimizer.getSchedules();
     }
 
-    //recursive function, obselete (for now)
-    private void generate(Subject s){
-        try {
-            s.nextPermutation();
-            boolean pushed = this.push(s);
-            if (pushed){
-                if (iSub == nSub){
-                    this.optimizer.insertSchedule(this.currentSchedule);
-                    this.pop();
-                    this.generate(s);
-                } else {
-                    this.generate(this.subjects.get(iSub));
-                }
-            } else {
-                this.generate(s);
-            }
-        } catch (Exception e) {
-            try {
-                this.pop();
-                this.generate(this.subjects.get(this.iSub));
-            } catch (Exception e1) {
-                return;
-            }
-        }
-    }
-
     private void generate(){
         while (true){
             Subject s = this.subjects.get(iSub);
