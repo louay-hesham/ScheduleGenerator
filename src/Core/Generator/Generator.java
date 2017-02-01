@@ -30,7 +30,7 @@ public class Generator {
 
     public ArrayList<String[][]> getSchedules(){
         this.generate();
-        return this.optimizer.getSchedules();
+        return this.optimizer.getOptimizedSchedules();
     }
 
     private void generate(){
