@@ -10,26 +10,27 @@ import java.util.Stack;
 public class Generator {
     private final Stack<Subject> stack;
     private final ArrayList<Subject> subjects;
-    private final ArrayList<String[][]> schedules;
     private int iSub, nSub;
     //private final Stack<String[][]> generationScheduleStack;
     private final String[][] currentSchedule;
     private final String emptyPeriod;
+    private final Optimizer optimizer;
 
     public Generator(ArrayList<Subject> subject) {
         this.subjects = subject;
         this.stack = new Stack<>();
-        this.schedules = new ArrayList<>();
+        //this.schedules = new ArrayList<>();
         this.nSub = this.subjects.size();
         this.iSub = 0;
         //this.generationScheduleStack = new Stack<>();
         this.currentSchedule = this.getNewSchedule();
         this.emptyPeriod = new String("___");
+        this.optimizer = new Optimizer();
     }
 
     public ArrayList<String[][]> getSchedules(){
         this.generate();
-        return this.schedules;
+        return this.optimizer.getSchedules();
     }
 
     //recursive function, obselete (for now)
@@ -39,7 +40,7 @@ public class Generator {
             boolean pushed = this.push(s);
             if (pushed){
                 if (iSub == nSub){
-                    this.schedules.add(this.currentSchedule);
+                    this.optimizer.insertSchedule(this.currentSchedule);
                     this.pop();
                     this.generate(s);
                 } else {
@@ -66,7 +67,7 @@ public class Generator {
                 boolean pushed = this.push(s);
                 if (pushed){
                     if (iSub == nSub){
-                        this.schedules.add(this.deepCopy(this.currentSchedule));
+                        this.optimizer.insertSchedule(this.deepCopy(this.currentSchedule));
                         this.pop();
                         continue;
                     } else {
