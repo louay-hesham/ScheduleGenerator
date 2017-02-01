@@ -12,8 +12,8 @@ public class Generator {
     private final ArrayList<Subject> subjects;
     private final ArrayList<String[][]> schedules;
     private int iSub, nSub;
-    private final Stack<String[][]> generationScheduleStack;
-    private String[][] currentSchedule;
+    //private final Stack<String[][]> generationScheduleStack;
+    private final String[][] currentSchedule;
     private final String emptyPeriod;
 
     public Generator(ArrayList<Subject> subject) {
@@ -22,7 +22,7 @@ public class Generator {
         this.schedules = new ArrayList<>();
         this.nSub = this.subjects.size();
         this.iSub = 0;
-        this.generationScheduleStack = new Stack<>();
+        //this.generationScheduleStack = new Stack<>();
         this.currentSchedule = this.getNewSchedule();
         this.emptyPeriod = new String("___");
     }
@@ -66,7 +66,7 @@ public class Generator {
                 boolean pushed = this.push(s);
                 if (pushed){
                     if (iSub == nSub){
-                        this.schedules.add(this.currentSchedule);
+                        this.schedules.add(this.deepCopy(this.currentSchedule));
                         this.pop();
                         continue;
                     } else {
@@ -116,7 +116,7 @@ public class Generator {
             }
         }
         if (success){
-            this.generationScheduleStack.push(this.deepCopy(this.currentSchedule));
+            //this.generationScheduleStack.push(this.deepCopy(this.currentSchedule));
             this.stack.push(this.subjects.get(iSub));
             for (Time t : s.getTimesInPermutation()){
                 switch (t.getType()){
@@ -151,8 +151,33 @@ public class Generator {
         if (this.stack.isEmpty()){
             throw new Exception("Done");
         }
-        this.stack.pop();
-        this.currentSchedule = this.generationScheduleStack.pop();
+        Subject s = this.stack.pop();
+        //this.currentSchedule = this.generationScheduleStack.pop();
+        for (Time t : s.getTimesInPermutation()){
+            switch (t.getType()){
+                case LECTURE:
+                case SEC_LECTURE:
+                case LAB_FULL:
+                case TUT_FULL:
+                {
+                    for (int i = t.from; i <= t.to; i++){
+                        this.currentSchedule[i][t.day] = "___";
+                    }
+                    break;
+                }
+                case LAB_HALF:
+                case TUT_HALF:
+                {
+                    String toSubjectName = this.currentSchedule[t.to][t.day].split("!")[0];
+                    if (s.getSubjectName().equals(toSubjectName)){
+                        this.currentSchedule[t.to][t.day] = "___";
+                    } else {
+                        this.currentSchedule[t.to - 1][t.day] = "___";
+                    }
+                    break;
+                }
+            }
+        }
         iSub--;
     }
 
@@ -178,4 +203,5 @@ public class Generator {
         }
         return result;
     }
+
 }
