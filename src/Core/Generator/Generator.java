@@ -28,10 +28,11 @@ public class Generator {
     }
 
     public ArrayList<String[][]> getSchedules(){
-        this.generate(this.subjects.get(this.iSub));
+        this.generate();
         return this.schedules;
     }
 
+    //recursive function, obselete (for now)
     private void generate(Subject s){
         try {
             s.nextPermutation();
@@ -53,6 +54,34 @@ public class Generator {
                 this.generate(this.subjects.get(this.iSub));
             } catch (Exception e1) {
                 return;
+            }
+        }
+    }
+
+    private void generate(){
+        while (true){
+            Subject s = this.subjects.get(iSub);
+            try {
+                s.nextPermutation();
+                boolean pushed = this.push(s);
+                if (pushed){
+                    if (iSub == nSub){
+                        this.schedules.add(this.currentSchedule);
+                        this.pop();
+                        continue;
+                    } else {
+                        continue;
+                    }
+                } else {
+                    continue;
+                }
+            } catch (Exception e) {
+                try {
+                    this.pop();
+                    continue;
+                } catch (Exception e1) {
+                    return;
+                }
             }
         }
     }
