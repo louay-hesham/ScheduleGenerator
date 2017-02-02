@@ -32,6 +32,25 @@ public class Time {
         this.type = type;
     }
 
+    public Time (int day, int period, MeetingType type){
+        this.day = day;
+        this.type = type;
+        this.from = (period * 2) - 2;
+        switch (type){
+            case LAB_HALF:
+            case TUT_HALF:
+            case SEC_LECTURE:
+                this.to = this.from;
+                break;
+            case LAB_FULL:
+            case TUT_FULL:
+            case LECTURE:
+            default:
+                this.to = this.from + 1;
+                break;
+        }
+    }
+
     public String getTypeString(){
         switch(this.type){
             case LECTURE:
