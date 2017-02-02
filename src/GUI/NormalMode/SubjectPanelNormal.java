@@ -1,10 +1,12 @@
 package GUI.NormalMode;
 
+import Core.Generator.ChaosMode.SubjectChaos;
 import Core.Generator.NormalMode.GroupNormal;
 import Core.Generator.NormalMode.SubjectNormal;
 import Core.Generator.Subject;
 import GUI.ChaosMode.SubjectPanelChaos;
 import GUI.MainGUI;
+import GUI.SubjectInfo;
 import GUI.SubjectPanel;
 
 import javax.swing.*;
@@ -18,14 +20,9 @@ public class SubjectPanelNormal extends SubjectPanel{
 
     private final ArrayList<GroupPanelNormal> groups;
     private final MainGUI gui;
-    private final SubjectPanelChaos chaosVersion;
 
     public String getSubjectName() {
         return subjectName;
-    }
-
-    public SubjectPanelChaos getChaosVersion() {
-        return chaosVersion;
     }
 
     private void newGroupButtonActionPerformed() {
@@ -52,8 +49,14 @@ public class SubjectPanelNormal extends SubjectPanel{
         super(subjectName, secLecExists, tutExists, tutBiWeek, labExists, labBiweek);
         this.gui = gui;
         groups = new ArrayList<>();
-        chaosVersion = new SubjectPanelChaos(subjectName, secLecExists, tutExists, tutBiWeek, labExists, labBiweek);
         this.initComponents();
+    }
+
+    //WIP for file loader
+    public SubjectPanelNormal(MainGUI gui, String subjectName, SubjectInfo info, Subject sub){
+        super (subjectName, info, sub);
+        this.gui = gui;
+        groups = new ArrayList<>();
     }
 
     protected void initComponents() {
@@ -78,7 +81,12 @@ public class SubjectPanelNormal extends SubjectPanel{
         for (GroupPanelNormal g : this.groups){
             grps.add(g.getGroup());
         }
-        return new SubjectNormal(this.subjectName, grps);
+        return new SubjectNormal(this.subjectName, grps, this.subjectInfo);
+    }
+
+    public SubjectPanelChaos getChaos(){
+        SubjectChaos chaos = ((SubjectNormal)this.getSubject()).getChaos();
+        return new SubjectPanelChaos(this.subjectName, this.subjectInfo,chaos);
     }
 
     private JPanel mainPanel;

@@ -4,6 +4,7 @@ import Core.Generator.ChaosMode.SubjectChaos;
 import Core.Generator.Subject;
 import Core.Generator.Time;
 import Core.Generator.Time.MeetingType;
+import GUI.SubjectInfo;
 import GUI.SubjectPanel;
 
 import javax.swing.*;
@@ -33,6 +34,22 @@ public class SubjectPanelChaos extends SubjectPanel{
     public SubjectPanelChaos(String subjectName, boolean secLecExists, boolean tutExists, boolean tutBiWeek, boolean labExists, boolean labBiWeek) {
         super(subjectName, secLecExists, tutExists, tutBiWeek, labExists, labBiWeek);
         this.initComponents();
+    }
+
+    public SubjectPanelChaos(String subjectName, SubjectInfo info, SubjectChaos sub){
+        super (subjectName, info, sub);
+        this.initComponents();
+        if (info.secLecExists){
+            this.lectures.addMeetings(sub.getLectures(), sub.getSecLectures());
+        } else {
+            this.lectures.addMeetings(sub.getLectures());
+        }
+        if (info.tutExists){
+            this.tutorials.addMeetings(sub.getTutorials());
+        }
+        if (info.labExists){
+            this.labs.addMeetings(sub.getLabs());
+        }
     }
 
     public JPanel getMainPanel() {

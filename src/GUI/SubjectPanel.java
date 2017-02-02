@@ -15,6 +15,10 @@ public abstract class SubjectPanel {
         this.subjectInfo = new SubjectInfo(secLecExists, tutExists, tutBiWeek, labExists, labBiweek);
         this.subjectName = subjectName;
     }
+    public SubjectPanel(String subjectName, SubjectInfo info, Subject sub){
+        this.subjectInfo = info;
+        this.subjectName = subjectName;
+    }
 
     protected abstract void initComponents();
 
