@@ -21,11 +21,16 @@ public class SubjectNormal extends Subject {
     public void nextPermutation() throws Exception {
         if (this.iGroup == -1){
             this.iGroup = 0;
+            this.groups.get(0).nextPermutation();
         } else {
-            this.iGroup++;
-            if (this.iGroup == this.groups.size()){
-                this.iGroup = -1;
-                throw new Exception("All permutations done");
+            try {
+                this.groups.get(this.iGroup).nextPermutation();
+            } catch (Exception e) {
+                this.iGroup++;
+                if (this.iGroup == this.groups.size()){
+                    this.iGroup = -1;
+                    throw new Exception("All permutations done");
+                }
             }
         }
     }
