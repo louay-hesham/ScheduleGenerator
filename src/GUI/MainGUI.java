@@ -129,6 +129,8 @@ public class MainGUI {
             this.chaosMode = true;
             this.convertTo7ebyMode();
             this.chaosModeButton.setEnabled(false);
+            this.saveFileButton.setEnabled(false);
+            this.loadFileButton.setEnabled(false);
         }
     }
 
