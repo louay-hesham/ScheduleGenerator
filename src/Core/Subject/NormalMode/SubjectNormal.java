@@ -83,4 +83,11 @@ public class SubjectNormal extends Subject {
         return sb.toString();
     }
 
+    public SubjectInfo getInfo() {
+        return info;
+    }
+
+    public ArrayList<GroupNormal> getGroups() {
+        return groups;
+    }
 }

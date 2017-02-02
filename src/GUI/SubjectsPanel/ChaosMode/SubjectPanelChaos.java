@@ -35,7 +35,7 @@ public class SubjectPanelChaos extends SubjectPanel {
     }
 
     public SubjectPanelChaos(String subjectName, SubjectInfo info, SubjectChaos sub) {
-        super(subjectName, info, sub);
+        super(subjectName, info);
         this.initComponents();
         if (info.secLecExists) {
             this.lectures.addMeetings(sub.getLectures(), sub.getSecLectures());
