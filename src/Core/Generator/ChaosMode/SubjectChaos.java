@@ -21,7 +21,7 @@ public class SubjectChaos extends Subject {
     }
 
     public void nextPermutation() throws Exception {
-        if (this.iLec == -1){
+        if (this.iLec == -1) {
             this.iLec = 0;
             this.iTut = 0;
             this.iLab = 0;
@@ -44,16 +44,16 @@ public class SubjectChaos extends Subject {
         }
     }
 
-    public ArrayList<Time> getTimesInPermutation(){
+    public ArrayList<Time> getTimesInPermutation() {
         this.timesInPermutation.clear();
         this.timesInPermutation.add(this.lectures.get(iLec));
-        if (this.secLectures != null){
+        if (this.secLectures != null) {
             this.timesInPermutation.add(this.secLectures.get(iLec));
         }
-        if (this.tutorials != null){
+        if (this.tutorials != null) {
             this.timesInPermutation.add(this.tutorials.get(iTut));
         }
-        if (this.labs != null){
+        if (this.labs != null) {
             this.timesInPermutation.add(this.labs.get(iLab));
         }
         return this.timesInPermutation;

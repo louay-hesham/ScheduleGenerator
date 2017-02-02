@@ -15,10 +15,32 @@ public class GroupPanelNormal {
 
     private final SubjectInfo subjectInfo;
     private final SubjectPanelNormal subject;
-
-    private void deleteGroupButtonActionPerformed() {
-        this.subject.deleteGroup(this);
-    }
+    private JComboBox<String> lectureDayComboBox;
+    private JSpinner lecturePeriodSpinner;
+    private JButton deleteGroupButton;
+    private JLabel lectureLabel;
+    private JLabel secLecLabel;
+    private JLabel tut1Label;
+    private JLabel tut2Label;
+    private JLabel lab1Label;
+    private JLabel lab2Label;
+    private JComboBox<String> secLectureDayComboBox;
+    private JComboBox<String> tut1DayComboBox;
+    private JComboBox<String> tut2DayComboBox;
+    private JComboBox<String> lab1DayComboBox;
+    private JComboBox<String> lab2DayComboBox;
+    private JLabel lecturePeriodLabel;
+    private JLabel secLecturePeriodLabel;
+    private JLabel tut1PeriodLabel;
+    private JLabel tut2PeriodLabel;
+    private JLabel lab1PeriodLabel;
+    private JLabel lab2PeriodLabel;
+    private JSpinner secLecturePeriodSpinner;
+    private JSpinner tut1PeriodSpinner;
+    private JSpinner tut2PeriodSpinner;
+    private JSpinner lab1PeriodSpinner;
+    private JSpinner lab2PeriodSpinner;
+    private JPanel mainPanel;
 
     /**
      * Creates new form GroupPanel
@@ -65,6 +87,10 @@ public class GroupPanelNormal {
         lab1PeriodLabel.setVisible(subjectInfo.labExists);
     }
 
+    private void deleteGroupButtonActionPerformed() {
+        this.subject.deleteGroup(this);
+    }
+
     private void initComponents() {
         deleteGroupButton.addActionListener(e -> deleteGroupButtonActionPerformed());
         lectureDayComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[]{"Saturday", "Sunday", "Monday", "Tuesday", "Wednesday", "Thursday"}));
@@ -81,47 +107,43 @@ public class GroupPanelNormal {
         lab2PeriodSpinner.setModel(new javax.swing.SpinnerNumberModel(1, 1, 7, 1));
     }
 
-    public JPanel getMainPanel() {
-        return mainPanel;
-    }
-
-    protected GroupNormal getGroup(){
+    protected GroupNormal getGroup() {
         Time lecture = new Time(this.lectureDayComboBox.getSelectedIndex(),
-                (int)this.lecturePeriodSpinner.getValue(),
+                (int) this.lecturePeriodSpinner.getValue(),
                 MeetingType.LECTURE);
         Time secLecture = null;
-        if (this.subjectInfo.secLecExists){
+        if (this.subjectInfo.secLecExists) {
             int from, to;
-            if ((int)this.secLecturePeriodSpinner.getValue() + 1 == (int)this.lecturePeriodSpinner.getValue()){
-                from = ((int)this.secLecturePeriodSpinner.getValue() * 2) - 1;
+            if ((int) this.secLecturePeriodSpinner.getValue() + 1 == (int) this.lecturePeriodSpinner.getValue()) {
+                from = ((int) this.secLecturePeriodSpinner.getValue() * 2) - 1;
                 to = from;
             } else {
-                from = ((int)this.secLecturePeriodSpinner.getValue() * 2) - 2;
+                from = ((int) this.secLecturePeriodSpinner.getValue() * 2) - 2;
                 to = from;
             }
             secLecture = new Time(this.secLectureDayComboBox.getSelectedIndex(), from, to, MeetingType.SEC_LECTURE);
         }
         ArrayList<Time> tutorials = null, labs = null;
-        if (this.subjectInfo.tutExists){
+        if (this.subjectInfo.tutExists) {
             tutorials = new ArrayList<>();
-            if (this.subjectInfo.tutBiWeek){
-                Time tut = new Time(this.tut1DayComboBox.getSelectedIndex(),(int)this.tut1PeriodSpinner.getValue(), MeetingType.TUT_HALF);
+            if (this.subjectInfo.tutBiWeek) {
+                Time tut = new Time(this.tut1DayComboBox.getSelectedIndex(), (int) this.tut1PeriodSpinner.getValue(), MeetingType.TUT_HALF);
                 tutorials.add(tut);
             } else {
-                Time tut1 = new Time(this.tut1DayComboBox.getSelectedIndex(),(int)this.tut1PeriodSpinner.getValue(), MeetingType.TUT_FULL);
-                Time tut2 = new Time(this.tut2DayComboBox.getSelectedIndex(),(int)this.tut2PeriodSpinner.getValue(), MeetingType.TUT_FULL);
+                Time tut1 = new Time(this.tut1DayComboBox.getSelectedIndex(), (int) this.tut1PeriodSpinner.getValue(), MeetingType.TUT_FULL);
+                Time tut2 = new Time(this.tut2DayComboBox.getSelectedIndex(), (int) this.tut2PeriodSpinner.getValue(), MeetingType.TUT_FULL);
                 tutorials.add(tut1);
                 tutorials.add(tut2);
             }
         }
-        if (this.subjectInfo.labExists){
+        if (this.subjectInfo.labExists) {
             labs = new ArrayList<>();
-            if (this.subjectInfo.labBiWeek){
-                Time lab = new Time(this.lab1DayComboBox.getSelectedIndex(),(int)this.lab1PeriodSpinner.getValue(), MeetingType.LAB_HALF);
+            if (this.subjectInfo.labBiWeek) {
+                Time lab = new Time(this.lab1DayComboBox.getSelectedIndex(), (int) this.lab1PeriodSpinner.getValue(), MeetingType.LAB_HALF);
                 labs.add(lab);
             } else {
-                Time lab1 = new Time(this.lab1DayComboBox.getSelectedIndex(),(int)this.lab1PeriodSpinner.getValue(), MeetingType.LAB_FULL);
-                Time lab2 = new Time(this.lab2DayComboBox.getSelectedIndex(),(int)this.lab2PeriodSpinner.getValue(), MeetingType.LAB_FULL);
+                Time lab1 = new Time(this.lab1DayComboBox.getSelectedIndex(), (int) this.lab1PeriodSpinner.getValue(), MeetingType.LAB_FULL);
+                Time lab2 = new Time(this.lab2DayComboBox.getSelectedIndex(), (int) this.lab2PeriodSpinner.getValue(), MeetingType.LAB_FULL);
                 labs.add(lab1);
                 labs.add(lab2);
             }
@@ -129,30 +151,7 @@ public class GroupPanelNormal {
         return new GroupNormal(lecture, secLecture, tutorials, labs);
     }
 
-    private JComboBox<String> lectureDayComboBox;
-    private JSpinner lecturePeriodSpinner;
-    private JButton deleteGroupButton;
-    private JLabel lectureLabel;
-    private JLabel secLecLabel;
-    private JLabel tut1Label;
-    private JLabel tut2Label;
-    private JLabel lab1Label;
-    private JLabel lab2Label;
-    private JComboBox<String> secLectureDayComboBox;
-    private JComboBox<String> tut1DayComboBox;
-    private JComboBox<String> tut2DayComboBox;
-    private JComboBox<String> lab1DayComboBox;
-    private JComboBox<String> lab2DayComboBox;
-    private JLabel lecturePeriodLabel;
-    private JLabel secLecturePeriodLabel;
-    private JLabel tut1PeriodLabel;
-    private JLabel tut2PeriodLabel;
-    private JLabel lab1PeriodLabel;
-    private JLabel lab2PeriodLabel;
-    private JSpinner secLecturePeriodSpinner;
-    private JSpinner tut1PeriodSpinner;
-    private JSpinner tut2PeriodSpinner;
-    private JSpinner lab1PeriodSpinner;
-    private JSpinner lab2PeriodSpinner;
-    private JPanel mainPanel;
+    public JPanel getMainPanel() {
+        return mainPanel;
+    }
 }

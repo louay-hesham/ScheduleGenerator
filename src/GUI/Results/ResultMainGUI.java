@@ -9,6 +9,8 @@ import java.util.ArrayList;
 public class ResultMainGUI {
     @SuppressWarnings("")
     private final ArrayList<Schedule> schedules;
+    private JPanel mainPanel;
+    private JTabbedPane schedulesTabbedPane;
 
     /**
      * Creates new form ResultMainGui
@@ -34,7 +36,4 @@ public class ResultMainGUI {
     public JPanel getMainPanel() {
         return mainPanel;
     }
-
-    private JPanel mainPanel;
-    private JTabbedPane schedulesTabbedPane;
 }

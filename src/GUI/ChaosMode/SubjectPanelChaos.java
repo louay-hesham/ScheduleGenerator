@@ -13,13 +13,11 @@ import java.util.ArrayList;
 /*
  * Created by louay on 10/28/2016.
  */
-public class SubjectPanelChaos extends SubjectPanel{
+public class SubjectPanelChaos extends SubjectPanel {
 
     private Meeting lectures, tutorials, labs;
-
-    public String getSubjectName() {
-        return subjectName;
-    }
+    private JTabbedPane subjectTabbedPane;
+    private JPanel mainPanel;
 
     /**
      * Creates new form SubjectPanel
@@ -36,43 +34,47 @@ public class SubjectPanelChaos extends SubjectPanel{
         this.initComponents();
     }
 
-    public SubjectPanelChaos(String subjectName, SubjectInfo info, SubjectChaos sub){
-        super (subjectName, info, sub);
+    public SubjectPanelChaos(String subjectName, SubjectInfo info, SubjectChaos sub) {
+        super(subjectName, info, sub);
         this.initComponents();
-        if (info.secLecExists){
+        if (info.secLecExists) {
             this.lectures.addMeetings(sub.getLectures(), sub.getSecLectures());
         } else {
             this.lectures.addMeetings(sub.getLectures());
         }
-        if (info.tutExists){
+        if (info.tutExists) {
             this.tutorials.addMeetings(sub.getTutorials());
         }
-        if (info.labExists){
+        if (info.labExists) {
             this.labs.addMeetings(sub.getLabs());
         }
     }
 
-    public JPanel getMainPanel() {
-        return mainPanel;
+    private ArrayList<Time> getLectureTimes() {
+        return lectures.getMeetingTimes();
     }
 
-    public Subject getSubject(){
-        return new SubjectChaos(this.subjectName,
-                this.getLectureTimes(),
-                this.getSecLectureTimes(),
-                this.getTutorialTimes(),
-                this.getLabsTimes());
+    private ArrayList<Time> getSecLectureTimes() {
+        return lectures.getSecLecTimes();
     }
 
-    protected void initComponents(){
+    private ArrayList<Time> getTutorialTimes() {
+        return tutorials == null ? null : tutorials.getMeetingTimes();
+    }
+
+    private ArrayList<Time> getLabsTimes() {
+        return labs == null ? null : labs.getMeetingTimes();
+    }
+
+    protected void initComponents() {
         if (this.subjectInfo.secLecExists) {
             this.lectures = new Meeting(MeetingType.SEC_LECTURE);
         } else {
             this.lectures = new Meeting(MeetingType.LECTURE);
         }
         this.subjectTabbedPane.addTab("Lectures", lectures.getMainPanel());
-        if (this.subjectInfo.tutExists){
-            if (this.subjectInfo.tutBiWeek){
+        if (this.subjectInfo.tutExists) {
+            if (this.subjectInfo.tutBiWeek) {
                 this.tutorials = new Meeting(MeetingType.TUT_HALF);
             } else {
                 this.tutorials = new Meeting(MeetingType.TUT_FULL);
@@ -80,8 +82,8 @@ public class SubjectPanelChaos extends SubjectPanel{
 
             this.subjectTabbedPane.addTab("Tutorials", tutorials.getMainPanel());
         }
-        if (this.subjectInfo.labExists){
-            if (this.subjectInfo.labBiWeek){
+        if (this.subjectInfo.labExists) {
+            if (this.subjectInfo.labBiWeek) {
                 this.labs = new Meeting(MeetingType.LAB_HALF);
             } else {
                 this.labs = new Meeting(MeetingType.LAB_FULL);
@@ -90,22 +92,19 @@ public class SubjectPanelChaos extends SubjectPanel{
         }
     }
 
-    private ArrayList<Time> getLectureTimes(){
-        return lectures.getMeetingTimes();
+    public String getSubjectName() {
+        return subjectName;
     }
 
-    private ArrayList<Time> getSecLectureTimes(){
-        return lectures.getSecLecTimes();
+    public JPanel getMainPanel() {
+        return mainPanel;
     }
 
-    private ArrayList<Time> getTutorialTimes(){
-        return tutorials == null? null : tutorials.getMeetingTimes();
+    public Subject getSubject() {
+        return new SubjectChaos(this.subjectName,
+                this.getLectureTimes(),
+                this.getSecLectureTimes(),
+                this.getTutorialTimes(),
+                this.getLabsTimes());
     }
-
-    private ArrayList<Time> getLabsTimes(){
-        return labs == null? null :labs.getMeetingTimes();
-    }
-
-    private JTabbedPane subjectTabbedPane;
-    private JPanel mainPanel;
 }

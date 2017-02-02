@@ -15,7 +15,8 @@ public abstract class SubjectPanel {
         this.subjectInfo = new SubjectInfo(secLecExists, tutExists, tutBiWeek, labExists, labBiweek);
         this.subjectName = subjectName;
     }
-    public SubjectPanel(String subjectName, SubjectInfo info, Subject sub){
+
+    public SubjectPanel(String subjectName, SubjectInfo info, Subject sub) {
         this.subjectInfo = info;
         this.subjectName = subjectName;
     }
@@ -24,9 +25,9 @@ public abstract class SubjectPanel {
 
     public abstract JPanel getMainPanel();
 
+    public abstract Subject getSubject();
+
     public String getSubjectName() {
         return subjectName;
     }
-
-    public abstract Subject getSubject();
 }

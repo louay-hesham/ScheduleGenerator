@@ -13,8 +13,8 @@ import java.util.ArrayList;
 public class SubjectNormal extends Subject {
 
     private final ArrayList<GroupNormal> groups;
-    private int iGroup = -1;
     private final SubjectInfo info;
+    private int iGroup = -1;
 
     public SubjectNormal(String subjectName, ArrayList<GroupNormal> groups, SubjectInfo info) {
         super(subjectName);
@@ -23,7 +23,7 @@ public class SubjectNormal extends Subject {
     }
 
     public void nextPermutation() throws Exception {
-        if (this.iGroup == -1){
+        if (this.iGroup == -1) {
             this.iGroup = 0;
             this.groups.get(0).nextPermutation();
         } else {
@@ -31,7 +31,7 @@ public class SubjectNormal extends Subject {
                 this.groups.get(this.iGroup).nextPermutation();
             } catch (Exception e) {
                 this.iGroup++;
-                if (this.iGroup == this.groups.size()){
+                if (this.iGroup == this.groups.size()) {
                     this.iGroup = -1;
                     throw new Exception("All permutations done");
                 } else {
@@ -41,16 +41,16 @@ public class SubjectNormal extends Subject {
         }
     }
 
-    public ArrayList<Time> getTimesInPermutation(){
+    public ArrayList<Time> getTimesInPermutation() {
         this.timesInPermutation.clear();
         this.timesInPermutation.addAll(this.groups.get(this.iGroup).getTimesInPermutation());
         return this.timesInPermutation;
     }
 
-    public SubjectChaos getChaos(){
+    public SubjectChaos getChaos() {
         ArrayList<Time> lectures = new ArrayList<>();
         ArrayList<Time> secLectures = null, tutorials = null, labs = null;
-        if (this.info.secLecExists){
+        if (this.info.secLecExists) {
             secLectures = new ArrayList<>();
         }
         if (this.info.tutExists) {
@@ -59,9 +59,9 @@ public class SubjectNormal extends Subject {
         if (this.info.labExists) {
             labs = new ArrayList<>();
         }
-        for (GroupNormal g : this.groups){
+        for (GroupNormal g : this.groups) {
             lectures.add(g.getLecture());
-            if (this.info.secLecExists){
+            if (this.info.secLecExists) {
                 secLectures.add(g.getSecLecture());
             }
             if (this.info.tutExists) {

@@ -19,6 +19,29 @@ public class MainGUI {
 
     private final ArrayList<SubjectPanel> subjects;
     private boolean chaosMode;
+    private JPanel mainPanel;
+    private JTextField subjectNameTextField;
+    private JCheckBox secondaryLectureCheckBox;
+    private JCheckBox tutorialCheckBox;
+    private JCheckBox tutBiWeekCheckBox;
+    private JCheckBox labCheckBox;
+    private JCheckBox labBiWeekCheckBox;
+    private JButton addSubjectButton;
+    private JButton generateButton;
+    private JButton chaosModeButton;
+    private JButton saveFileButton;
+    private JButton loadFileButton;
+    @SuppressWarnings("unused")
+    private JLabel subjectNameLabel;
+    private JTabbedPane subjectsTabbedPane;
+
+    private MainGUI() {
+        this.chaosMode = false;
+        labBiWeekCheckBox.setVisible(false);
+        tutBiWeekCheckBox.setVisible(false);
+        subjects = new ArrayList<>();
+        this.initComponents();
+    }
 
     public static void main(String[] args) {
         setUIFlavour();
@@ -78,7 +101,7 @@ public class MainGUI {
             this.showErrorMessage("Must have at least one subject!");
         } else {
             ArrayList<Subject> subjects = new ArrayList<>();
-            for (SubjectPanel s : this.subjects){
+            for (SubjectPanel s : this.subjects) {
                 subjects.add(s.getSubject());
             }
             Generator g = new Generator(subjects);
@@ -122,14 +145,6 @@ public class MainGUI {
         }
     }
 
-    private MainGUI() {
-        this.chaosMode = false;
-        labBiWeekCheckBox.setVisible(false);
-        tutBiWeekCheckBox.setVisible(false);
-        subjects = new ArrayList<>();
-        this.initComponents();
-    }
-
     private void initComponents() {
         addSubjectButton.addActionListener(e -> addSubjectButtonActionPerformed());
         tutorialCheckBox.addActionListener(e -> tutorialCheckBoxActionPerformed());
@@ -161,32 +176,15 @@ public class MainGUI {
         JOptionPane.showMessageDialog(null, error, "Error", JOptionPane.ERROR_MESSAGE);
     }
 
-    //WIP for conversion
     private void convertTo7ebyMode() {
         ArrayList<SubjectPanel> subjectsChaos = new ArrayList<>();
-        for (SubjectPanel s : this.subjects){
+        for (SubjectPanel s : this.subjects) {
             this.subjectsTabbedPane.removeTabAt(0);
-            SubjectPanel chaos = ((SubjectPanelNormal)s).getChaos();
+            SubjectPanel chaos = ((SubjectPanelNormal) s).getChaos();
             subjectsChaos.add(chaos);
             this.subjectsTabbedPane.addTab(s.getSubjectName(), chaos.getMainPanel());
         }
         this.subjects.clear();
         this.subjects.addAll(subjectsChaos);
     }
-
-    private JPanel mainPanel;
-    private JTextField subjectNameTextField;
-    private JCheckBox secondaryLectureCheckBox;
-    private JCheckBox tutorialCheckBox;
-    private JCheckBox tutBiWeekCheckBox;
-    private JCheckBox labCheckBox;
-    private JCheckBox labBiWeekCheckBox;
-    private JButton addSubjectButton;
-    private JButton generateButton;
-    private JButton chaosModeButton;
-    private JButton saveFileButton;
-    private JButton loadFileButton;
-    @SuppressWarnings("unused")
-    private JLabel subjectNameLabel;
-    private JTabbedPane subjectsTabbedPane;
 }

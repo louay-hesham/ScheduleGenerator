@@ -16,24 +16,14 @@ import java.util.ArrayList;
 /*
  * Created by louay on 10/28/2016.
  */
-public class SubjectPanelNormal extends SubjectPanel{
+public class SubjectPanelNormal extends SubjectPanel {
 
     private final ArrayList<GroupPanelNormal> groups;
     private final MainGUI gui;
-
-    public String getSubjectName() {
-        return subjectName;
-    }
-
-    private void newGroupButtonActionPerformed() {
-        GroupPanelNormal newGroup = new GroupPanelNormal(this, subjectInfo);
-        groups.add(newGroup);
-        groupsTabbedPane.addTab("Group " + (groupsTabbedPane.getTabCount() + 1), newGroup.getMainPanel());
-    }
-
-    private void deleteSubjectButtonActionPerformed() {
-        this.gui.deleteSubject(this);
-    }
+    private JPanel mainPanel;
+    private JButton newGroupButton;
+    private JButton deleteSubjectButton;
+    private JTabbedPane groupsTabbedPane;
 
     /**
      * Creates new form SubjectPanel
@@ -53,19 +43,25 @@ public class SubjectPanelNormal extends SubjectPanel{
     }
 
     //WIP for file loader
-    public SubjectPanelNormal(MainGUI gui, String subjectName, SubjectInfo info, Subject sub){
-        super (subjectName, info, sub);
+    public SubjectPanelNormal(MainGUI gui, String subjectName, SubjectInfo info, Subject sub) {
+        super(subjectName, info, sub);
         this.gui = gui;
         groups = new ArrayList<>();
+    }
+
+    private void newGroupButtonActionPerformed() {
+        GroupPanelNormal newGroup = new GroupPanelNormal(this, subjectInfo);
+        groups.add(newGroup);
+        groupsTabbedPane.addTab("Group " + (groupsTabbedPane.getTabCount() + 1), newGroup.getMainPanel());
+    }
+
+    private void deleteSubjectButtonActionPerformed() {
+        this.gui.deleteSubject(this);
     }
 
     protected void initComponents() {
         newGroupButton.addActionListener(e -> newGroupButtonActionPerformed());
         deleteSubjectButton.addActionListener(e -> deleteSubjectButtonActionPerformed());
-    }
-
-    public JPanel getMainPanel() {
-        return mainPanel;
     }
 
     void deleteGroup(GroupPanelNormal group) {
@@ -76,21 +72,24 @@ public class SubjectPanelNormal extends SubjectPanel{
         }
     }
 
-    public Subject getSubject(){
+    public JPanel getMainPanel() {
+        return mainPanel;
+    }
+
+    public String getSubjectName() {
+        return subjectName;
+    }
+
+    public Subject getSubject() {
         ArrayList<GroupNormal> grps = new ArrayList<>();
-        for (GroupPanelNormal g : this.groups){
+        for (GroupPanelNormal g : this.groups) {
             grps.add(g.getGroup());
         }
         return new SubjectNormal(this.subjectName, grps, this.subjectInfo);
     }
 
-    public SubjectPanelChaos getChaos(){
-        SubjectChaos chaos = ((SubjectNormal)this.getSubject()).getChaos();
-        return new SubjectPanelChaos(this.subjectName, this.subjectInfo,chaos);
+    public SubjectPanelChaos getChaos() {
+        SubjectChaos chaos = ((SubjectNormal) this.getSubject()).getChaos();
+        return new SubjectPanelChaos(this.subjectName, this.subjectInfo, chaos);
     }
-
-    private JPanel mainPanel;
-    private JButton newGroupButton;
-    private JButton deleteSubjectButton;
-    private JTabbedPane groupsTabbedPane;
 }

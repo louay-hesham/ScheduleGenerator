@@ -10,7 +10,7 @@ import java.util.ArrayList;
 public class GroupNormal {
 
     private final ArrayList<Time> timesInPermutation = new ArrayList<>();
-    private final ArrayList<Time>  tutorials, labs;
+    private final ArrayList<Time> tutorials, labs;
     private final Time lecture, secLecture;
     private int iTut = -1, iLab = -1;
 
@@ -22,7 +22,7 @@ public class GroupNormal {
     }
 
     public void nextPermutation() throws Exception {
-        if (this.iTut == -1){
+        if (this.iTut == -1) {
             this.iTut = 0;
             this.iLab = 0;
         } else {
@@ -39,16 +39,16 @@ public class GroupNormal {
         }
     }
 
-    public ArrayList<Time> getTimesInPermutation(){
+    public ArrayList<Time> getTimesInPermutation() {
         this.timesInPermutation.clear();
         this.timesInPermutation.add(this.lecture);
-        if (this.secLecture != null){
+        if (this.secLecture != null) {
             this.timesInPermutation.add(this.secLecture);
         }
-        if (this.tutorials != null){
+        if (this.tutorials != null) {
             this.timesInPermutation.add(this.tutorials.get(iTut));
         }
-        if (this.labs != null){
+        if (this.labs != null) {
             this.timesInPermutation.add(this.labs.get(iLab));
         }
         return this.timesInPermutation;
