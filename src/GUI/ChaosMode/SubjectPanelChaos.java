@@ -3,7 +3,7 @@ package GUI.ChaosMode;
 import Core.Generator.ChaosMode.SubjectChaos;
 import Core.Generator.Subject;
 import Core.Generator.Time;
-import Core.Generator.Time.MeetingType;
+import Core.Generator.MeetingType;
 import GUI.SubjectInfo;
 import GUI.SubjectPanel;
 

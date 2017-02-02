@@ -1,7 +1,7 @@
 package GUI.ChaosMode;
 
 import Core.Generator.Time;
-import Core.Generator.Time.MeetingType;
+import Core.Generator.MeetingType;
 
 import javax.swing.*;
 

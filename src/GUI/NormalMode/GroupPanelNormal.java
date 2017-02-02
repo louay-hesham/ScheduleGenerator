@@ -2,7 +2,7 @@ package GUI.NormalMode;
 
 import Core.Generator.NormalMode.GroupNormal;
 import Core.Generator.Time;
-import Core.Generator.Time.MeetingType;
+import Core.Generator.MeetingType;
 import GUI.SubjectInfo;
 
 import javax.swing.*;
