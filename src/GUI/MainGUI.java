@@ -1,7 +1,6 @@
 package GUI;
 
 
-import Core.Files.FileLoader;
 import Core.Generator.Generator;
 import Core.Generator.Subject;
 import GUI.ChaosMode.SubjectPanelChaos;
@@ -10,12 +9,7 @@ import GUI.Results.ResultMainGUI;
 
 import javax.swing.*;
 import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.PrintWriter;
-import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 
 /*
@@ -23,8 +17,7 @@ import java.util.logging.Logger;
  */
 public class MainGUI {
 
-    private final ArrayList<SubjectPanelNormal> subjectsNormal;
-    private final ArrayList<SubjectPanelChaos> subjectsChaos;
+    private final ArrayList<SubjectPanel> subjects;
     private boolean chaosMode;
 
     public static void main(String[] args) {
@@ -48,25 +41,25 @@ public class MainGUI {
         if (subjectNameTextField.getText() == null || subjectNameTextField.getText().equals("")) {
             JOptionPane.showMessageDialog(null, "Subject name can not be empty!", "Subject name error", JOptionPane.ERROR_MESSAGE);
         } else if (this.chaosMode) {
-            SubjectPanelChaos subject = new SubjectPanelChaos(
+            SubjectPanel subject = new SubjectPanelChaos(
                     subjectNameTextField.getText(),
                     secondaryLectureCheckBox.isSelected(),
                     tutorialCheckBox.isSelected(),
                     tutBiWeekCheckBox.isSelected(),
                     labCheckBox.isSelected(),
                     labBiWeekCheckBox.isSelected());
-            subjectsChaos.add(subject);
+            subjects.add(subject);
             subjectsTabbedPane.addTab(subjectNameTextField.getText(), subject.getMainPanel());
             subjectNameTextField.setText("");
         } else {
-            SubjectPanelNormal subject = new SubjectPanelNormal(this,
+            SubjectPanel subject = new SubjectPanelNormal(this,
                     subjectNameTextField.getText(),
                     secondaryLectureCheckBox.isSelected(),
                     tutorialCheckBox.isSelected(),
                     tutBiWeekCheckBox.isSelected(),
                     labCheckBox.isSelected(),
                     labBiWeekCheckBox.isSelected());
-            subjectsNormal.add(subject);
+            subjects.add(subject);
             subjectsTabbedPane.addTab(subjectNameTextField.getText(), subject.getMainPanel());
             subjectNameTextField.setText("");
         }
@@ -80,22 +73,20 @@ public class MainGUI {
         labBiWeekCheckBox.setVisible(labCheckBox.isSelected());
     }
 
-    //Modify for normal mode.
     private void generateButtonActionPerformed() {
-        if (this.subjectsNormal.isEmpty()) {
+        if (this.subjects.isEmpty()) {
             this.showErrorMessage("Must have at least one subject!");
-        } else if (this.chaosMode){
+        } else {
             ArrayList<Subject> subjects = new ArrayList<>();
-            for (SubjectPanelChaos s : subjectsChaos){
+            for (SubjectPanel s : this.subjects){
                 subjects.add(s.getSubject());
             }
             Generator g = new Generator(subjects);
             new ResultMainGUI(g.getSchedules());
-        } else {
-
         }
     }
 
+    //WIP for file loader
     private void loadFileButtonActionPerformed() {
         JFileChooser fileChooser = new JFileChooser();
         int returnVal = fileChooser.showOpenDialog(null);
@@ -105,20 +96,17 @@ public class MainGUI {
             path = file.getAbsolutePath();
             System.out.println("\nYou chose to open this file: " + file.getName());
             System.out.println("In this location: " + path);
-            FileLoader fileLoader = new FileLoader(file);
-            fileLoader.loadFile(this);
+            /*FileLoader fileLoader = new FileLoader(file);
+            fileLoader.loadFile(this);*/
         }
     }
 
+    //WIP for file saver
     private void saveFileButtonActionPerformed() {
-        if (this.subjectsNormal.isEmpty()) {
+        if (this.subjects.isEmpty()) {
             this.showErrorMessage("Must have at least one subject!");
         } else {
-            try {
-                this.saveToFile(generateInputString());
-            } catch (Exception ex) {
-                this.showErrorMessage(ex.getMessage());
-            }
+
         }
     }
 
@@ -138,8 +126,7 @@ public class MainGUI {
         this.chaosMode = false;
         labBiWeekCheckBox.setVisible(false);
         tutBiWeekCheckBox.setVisible(false);
-        subjectsNormal = new ArrayList<>();
-        subjectsChaos = new ArrayList<>();
+        subjects = new ArrayList<>();
         this.initComponents();
     }
 
@@ -153,9 +140,10 @@ public class MainGUI {
         chaosModeButton.addActionListener(e -> chaosModeButtonActionPerformed());
     }
 
+    //WIP for file loader
     public SubjectPanelNormal addSubject(String subjectName, boolean secLecExists, boolean tutExists, boolean tutBiWeek, boolean labExists, boolean labBiweek) {
         SubjectPanelNormal subject = new SubjectPanelNormal(this, subjectName, secLecExists, tutExists, tutBiWeek, labExists, labBiweek);
-        subjectsNormal.add(subject);
+        subjects.add(subject);
         subjectsTabbedPane.addTab(subjectName, subject.getMainPanel());
         subjectNameTextField.setText("");
         return subject;
@@ -164,48 +152,18 @@ public class MainGUI {
     public void deleteSubject(SubjectPanelNormal subject) {
         int choice = JOptionPane.showConfirmDialog(null, "Are you sure wou want to delete the subject?", "Confirm deletion", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
         if (choice == 0) {
-            this.subjectsNormal.remove(subject);
+            this.subjects.remove(subject);
             this.subjectsTabbedPane.remove(subject.getMainPanel());
         }
-    }
-
-    private void saveToFile(String str) {
-        String path = MainGUI.class.getProtectionDomain().getCodeSource().getLocation().getPath();
-        path = (new File(path)).getParentFile().getPath();
-        String fileName = JOptionPane.showInputDialog(null, "Enter file name", "Save file", JOptionPane.INFORMATION_MESSAGE) + ".SGEN";
-        path += (File.separator + fileName);
-        try {
-            PrintWriter writer = new PrintWriter(path, "UTF-8");
-            writer.println(str);
-            writer.println("بتعمل إيه عندك يا خلبوص؟");
-            writer.println("e5la3 yad men hena");
-            writer.close();
-        } catch (FileNotFoundException | UnsupportedEncodingException ex) {
-            Logger.getLogger(MainGUI.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
-
-    private String generateInputString() throws Exception {
-        StringBuilder sb = new StringBuilder();
-        sb.append(this.subjectsTabbedPane.getTabCount()).append("\r\n\r\n");
-        for (SubjectPanelNormal s : subjectsNormal) {
-            sb.append(s.generateSubjectString()).append("\r\n");
-        }
-        return sb.toString();
     }
 
     private void showErrorMessage(String error) {
         JOptionPane.showMessageDialog(null, error, "Error", JOptionPane.ERROR_MESSAGE);
     }
 
+    //WIP for conversion
     private void convertTo7ebyMode() {
-        if (this.chaosMode) {
-            for (int i = 0; i < subjectsNormal.size(); i++) {
-                this.subjectsTabbedPane.removeTabAt(0);
-                subjectsChaos.add(subjectsNormal.get(i).getChaosVersion());
-                this.subjectsTabbedPane.addTab(subjectsChaos.get(i).getSubjectName(), subjectsChaos.get(i).getMainPanel());
-            }
-        }
+
     }
 
     private JPanel mainPanel;
