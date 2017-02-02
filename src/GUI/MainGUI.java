@@ -163,7 +163,15 @@ public class MainGUI {
 
     //WIP for conversion
     private void convertTo7ebyMode() {
-
+        ArrayList<SubjectPanel> subjectsChaos = new ArrayList<>();
+        for (SubjectPanel s : this.subjects){
+            this.subjectsTabbedPane.removeTabAt(0);
+            SubjectPanel chaos = ((SubjectPanelNormal)s).getChaos();
+            subjectsChaos.add(chaos);
+            this.subjectsTabbedPane.addTab(s.getSubjectName(), chaos.getMainPanel());
+        }
+        this.subjects.clear();
+        this.subjects.addAll(subjectsChaos);
     }
 
     private JPanel mainPanel;
