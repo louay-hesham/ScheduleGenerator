@@ -56,17 +56,32 @@ public class Meeting {
         return times;
     }
 
-    void addMeeting(int day, int period) {
+    public void addMeetings(ArrayList<Time> times){
+        if (times == null){
+            return;
+        }
+        for (Time t : times){
+            this.addMeeting(t);
+        }
+    }
+
+    public void addMeetings(ArrayList<Time> lecTimes, ArrayList<Time> secLecTimes){
+        for (int i = 0; i < lecTimes.size(); i++){
+            this.addMeeting(lecTimes.get(i), secLecTimes.get(i));
+        }
+    }
+
+    private void addMeeting(Time t) {
         MeetingTime meetingTime = new MeetingTime(this.meetingType, this);
-        meetingTime.setMeetingTime(day, period);
+        meetingTime.setMeetingTime(t.day, t.period);
         meetings.add(meetingTime);
         this.addMeetingToGUI(meetingTime);
     }
 
-    void addMeeting(int day, int period, int secLecDay, int secLecPeriod) {
+    private void addMeeting(Time lec, Time secLec) {
         MeetingTime meetingTime = new MeetingTime(this.meetingType, this);
-        meetingTime.setMeetingTime(day, period);
-        meetingTime.setSecLecTime(secLecDay, secLecPeriod);
+        meetingTime.setMeetingTime(lec.day, lec.period);
+        meetingTime.setSecLecTime(secLec.day, secLec.period);
         this.meetings.add(meetingTime);
         this.addMeetingToGUI(meetingTime);
     }
