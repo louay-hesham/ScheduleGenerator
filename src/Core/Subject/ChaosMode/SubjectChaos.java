@@ -1,7 +1,7 @@
-package Core.Generator.ChaosMode;
+package Core.Subject.ChaosMode;
 
-import Core.Generator.Subject;
-import Core.Generator.Time;
+import Core.Subject.Subject;
+import Core.Subject.Time;
 
 import java.util.ArrayList;
 

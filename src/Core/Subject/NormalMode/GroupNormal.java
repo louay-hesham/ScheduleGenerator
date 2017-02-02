@@ -1,6 +1,6 @@
-package Core.Generator.NormalMode;
+package Core.Subject.NormalMode;
 
-import Core.Generator.Time;
+import Core.Subject.Time;
 
 import java.util.ArrayList;
 

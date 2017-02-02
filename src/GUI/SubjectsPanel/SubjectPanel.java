@@ -1,6 +1,6 @@
-package GUI;
+package GUI.SubjectsPanel;
 
-import Core.Generator.Subject;
+import Core.Subject.Subject;
 
 import javax.swing.*;
 

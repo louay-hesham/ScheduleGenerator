@@ -1,4 +1,4 @@
-package GUI.Results;
+package GUI.ResultsWindow;
 
 import javax.swing.*;
 import java.util.ArrayList;

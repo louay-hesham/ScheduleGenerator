@@ -1,9 +1,9 @@
-package Core.Generator.NormalMode;
+package Core.Subject.NormalMode;
 
-import Core.Generator.ChaosMode.SubjectChaos;
-import Core.Generator.Subject;
-import Core.Generator.Time;
-import GUI.SubjectInfo;
+import Core.Subject.ChaosMode.SubjectChaos;
+import Core.Subject.Subject;
+import Core.Subject.Time;
+import GUI.SubjectsPanel.SubjectInfo;
 
 import java.util.ArrayList;
 

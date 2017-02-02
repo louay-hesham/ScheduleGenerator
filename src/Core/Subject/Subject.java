@@ -1,4 +1,4 @@
-package Core.Generator;
+package Core.Subject;
 
 import java.util.ArrayList;
 

@@ -1,6 +1,6 @@
 package Core.FileIO.Saver;
 
-import GUI.SubjectPanel;
+import GUI.SubjectsPanel.SubjectPanel;
 
 import javax.swing.*;
 import java.io.File;

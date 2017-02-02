@@ -1,4 +1,4 @@
-package Core.Generator;
+package Core.Subject;
 
 /**
  * Created by louay on 2/2/2017.
