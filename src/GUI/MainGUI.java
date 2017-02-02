@@ -1,6 +1,7 @@
 package GUI;
 
 
+import Core.FileIO.Saver.FileSaver;
 import Core.Generator.Generator;
 import Core.Generator.Subject;
 import GUI.ChaosMode.SubjectPanelChaos;
@@ -42,8 +43,8 @@ public class MainGUI {
         subjects = new ArrayList<>();
         this.initComponents();
         //till files are implemented
-        this.saveFileButton.setEnabled(false);
-        this.loadFileButton.setEnabled(false);
+        //this.saveFileButton.setEnabled(false);
+        //this.loadFileButton.setEnabled(false);
     }
 
     public static void main(String[] args) {
@@ -132,7 +133,8 @@ public class MainGUI {
         if (this.subjects.isEmpty()) {
             this.showErrorMessage("Must have at least one subject!");
         } else {
-
+            FileSaver fs = new FileSaver(this.subjects);
+            fs.saveFile();
         }
     }
 
