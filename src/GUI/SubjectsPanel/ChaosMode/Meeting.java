@@ -1,7 +1,7 @@
-package GUI.ChaosMode;
+package GUI.SubjectsPanel.ChaosMode;
 
-import Core.Generator.Time;
-import Core.Generator.Time.MeetingType;
+import Core.Subject.Time;
+import Core.Subject.MeetingType;
 
 import javax.swing.*;
 import java.util.ArrayList;

@@ -1,9 +1,9 @@
-package Core.Generator.NormalMode;
+package Core.Subject.NormalMode;
 
-import Core.Generator.ChaosMode.SubjectChaos;
-import Core.Generator.Subject;
-import Core.Generator.Time;
-import GUI.SubjectInfo;
+import Core.Subject.ChaosMode.SubjectChaos;
+import Core.Subject.Subject;
+import Core.Subject.Time;
+import GUI.SubjectsPanel.SubjectInfo;
 
 import java.util.ArrayList;
 
@@ -72,6 +72,15 @@ public class SubjectNormal extends Subject {
             }
         }
         return new SubjectChaos(this.subjectName, lectures, secLectures, tutorials, labs);
+    }
+
+    public String toString(){
+        StringBuilder sb = new StringBuilder();
+        for (GroupNormal g : this.groups){
+            sb.append(g.toString());
+        }
+        sb.append("\r\n");
+        return sb.toString();
     }
 
 }

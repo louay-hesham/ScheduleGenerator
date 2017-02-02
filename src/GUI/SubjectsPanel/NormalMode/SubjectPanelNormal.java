@@ -1,13 +1,13 @@
-package GUI.NormalMode;
+package GUI.SubjectsPanel.NormalMode;
 
-import Core.Generator.ChaosMode.SubjectChaos;
-import Core.Generator.NormalMode.GroupNormal;
-import Core.Generator.NormalMode.SubjectNormal;
-import Core.Generator.Subject;
-import GUI.ChaosMode.SubjectPanelChaos;
+import Core.Subject.ChaosMode.SubjectChaos;
+import Core.Subject.NormalMode.GroupNormal;
+import Core.Subject.NormalMode.SubjectNormal;
+import Core.Subject.Subject;
+import GUI.SubjectsPanel.ChaosMode.SubjectPanelChaos;
 import GUI.MainGUI;
-import GUI.SubjectInfo;
-import GUI.SubjectPanel;
+import GUI.SubjectsPanel.SubjectInfo;
+import GUI.SubjectsPanel.SubjectPanel;
 
 import javax.swing.*;
 import java.util.ArrayList;
@@ -91,5 +91,14 @@ public class SubjectPanelNormal extends SubjectPanel {
     public SubjectPanelChaos getChaos() {
         SubjectChaos chaos = ((SubjectNormal) this.getSubject()).getChaos();
         return new SubjectPanelChaos(this.subjectName, this.subjectInfo, chaos);
+    }
+
+    public String toString(){
+        StringBuilder sb = new StringBuilder();
+        sb.append(this.subjectName + "\r\n");
+        sb.append(this.groups.size() + " ");
+        sb.append(this.subjectInfo.toString());
+        sb.append(this.getSubject().toString());
+        return sb.toString();
     }
 }

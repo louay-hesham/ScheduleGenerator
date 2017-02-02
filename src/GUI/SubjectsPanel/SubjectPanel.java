@@ -1,6 +1,6 @@
-package GUI;
+package GUI.SubjectsPanel;
 
-import Core.Generator.Subject;
+import Core.Subject.Subject;
 
 import javax.swing.*;
 
@@ -26,6 +26,8 @@ public abstract class SubjectPanel {
     public abstract JPanel getMainPanel();
 
     public abstract Subject getSubject();
+
+    public abstract String toString();
 
     public String getSubjectName() {
         return subjectName;

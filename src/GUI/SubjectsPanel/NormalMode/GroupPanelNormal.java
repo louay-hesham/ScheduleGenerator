@@ -1,9 +1,9 @@
-package GUI.NormalMode;
+package GUI.SubjectsPanel.NormalMode;
 
-import Core.Generator.NormalMode.GroupNormal;
-import Core.Generator.Time;
-import Core.Generator.Time.MeetingType;
-import GUI.SubjectInfo;
+import Core.Subject.NormalMode.GroupNormal;
+import Core.Subject.Time;
+import Core.Subject.MeetingType;
+import GUI.SubjectsPanel.SubjectInfo;
 
 import javax.swing.*;
 import java.util.ArrayList;

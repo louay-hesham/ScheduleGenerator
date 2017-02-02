@@ -1,4 +1,4 @@
-package Core.Generator;
+package Core.Subject;
 
 import java.util.ArrayList;
 
@@ -16,6 +16,8 @@ public abstract class Subject {
     public abstract ArrayList<Time> getTimesInPermutation();
 
     public abstract void nextPermutation() throws Exception;
+
+    public abstract String toString();
 
     public String getSubjectName() {
         return subjectName;

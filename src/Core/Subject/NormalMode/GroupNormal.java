@@ -1,6 +1,6 @@
-package Core.Generator.NormalMode;
+package Core.Subject.NormalMode;
 
-import Core.Generator.Time;
+import Core.Subject.Time;
 
 import java.util.ArrayList;
 
@@ -52,6 +52,26 @@ public class GroupNormal {
             this.timesInPermutation.add(this.labs.get(iLab));
         }
         return this.timesInPermutation;
+    }
+
+    public String toString(){
+        StringBuilder sb = new StringBuilder();
+        sb.append(this.lecture.toString());
+        if (this.secLecture != null){
+            sb.append(this.secLecture.toString());
+        }
+        if (this.tutorials != null && this.tutorials.size() != 0 ){
+            for (Time t : this.tutorials){
+                sb.append(t.toString());
+            }
+        }
+        if (this.labs != null && this.labs.size() != 0 ){
+            for (Time t : this.labs){
+                sb.append(t.toString());
+            }
+        }
+        sb.append("\r\n");
+        return sb.toString();
     }
 
     public ArrayList<Time> getTutorials() {

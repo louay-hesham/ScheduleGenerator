@@ -1,4 +1,4 @@
-package Core.Generator;
+package Core.Subject;
 
 /**
  * Created by louay on 1/30/2017.
@@ -63,8 +63,11 @@ public class Time {
         return type;
     }
 
-    public enum MeetingType {
-        LECTURE, SEC_LECTURE, TUT_FULL, TUT_HALF, LAB_FULL, LAB_HALF
+    public String toString(){
+        StringBuilder sb = new StringBuilder();
+        sb.append(this.day + " " + this.from + " " + this.to + "\r\n");
+        return sb.toString();
     }
+
 }
 

@@ -1,11 +1,13 @@
 package GUI;
 
 
+import Core.FileIO.Saver.FileSaver;
 import Core.Generator.Generator;
-import Core.Generator.Subject;
-import GUI.ChaosMode.SubjectPanelChaos;
-import GUI.NormalMode.SubjectPanelNormal;
-import GUI.Results.ResultMainGUI;
+import Core.Subject.Subject;
+import GUI.SubjectsPanel.ChaosMode.SubjectPanelChaos;
+import GUI.SubjectsPanel.NormalMode.SubjectPanelNormal;
+import GUI.ResultsWindow.ResultMainGUI;
+import GUI.SubjectsPanel.SubjectPanel;
 
 import javax.swing.*;
 import java.io.File;
@@ -41,8 +43,7 @@ public class MainGUI {
         tutBiWeekCheckBox.setVisible(false);
         subjects = new ArrayList<>();
         this.initComponents();
-        //till files are implemented
-        this.saveFileButton.setEnabled(false);
+        //till file loader is implemented
         this.loadFileButton.setEnabled(false);
     }
 
@@ -132,7 +133,8 @@ public class MainGUI {
         if (this.subjects.isEmpty()) {
             this.showErrorMessage("Must have at least one subject!");
         } else {
-
+            FileSaver fs = new FileSaver(this.subjects, this.chaosMode? "7eby" : "Normal");
+            fs.saveFile();
         }
     }
 
@@ -143,8 +145,6 @@ public class MainGUI {
             this.chaosMode = true;
             this.convertTo7ebyMode();
             this.chaosModeButton.setEnabled(false);
-            this.saveFileButton.setEnabled(false);
-            this.loadFileButton.setEnabled(false);
         }
     }
 

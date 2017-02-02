@@ -1,11 +1,11 @@
-package GUI.ChaosMode;
+package GUI.SubjectsPanel.ChaosMode;
 
-import Core.Generator.ChaosMode.SubjectChaos;
-import Core.Generator.Subject;
-import Core.Generator.Time;
-import Core.Generator.Time.MeetingType;
-import GUI.SubjectInfo;
-import GUI.SubjectPanel;
+import Core.Subject.ChaosMode.SubjectChaos;
+import Core.Subject.Subject;
+import Core.Subject.Time;
+import Core.Subject.MeetingType;
+import GUI.SubjectsPanel.SubjectInfo;
+import GUI.SubjectsPanel.SubjectPanel;
 
 import javax.swing.*;
 import java.util.ArrayList;
@@ -106,5 +106,9 @@ public class SubjectPanelChaos extends SubjectPanel {
                 this.getSecLectureTimes(),
                 this.getTutorialTimes(),
                 this.getLabsTimes());
+    }
+
+    public String toString(){
+        return this.getSubject().toString();
     }
 }
