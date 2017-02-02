@@ -39,7 +39,6 @@ public class GroupNormal {
         }
     }
 
-
     public ArrayList<Time> getTimesInPermutation(){
         this.timesInPermutation.clear();
         this.timesInPermutation.add(this.lecture);
@@ -53,5 +52,21 @@ public class GroupNormal {
             this.timesInPermutation.add(this.labs.get(iLab));
         }
         return this.timesInPermutation;
+    }
+
+    public ArrayList<Time> getTutorials() {
+        return tutorials;
+    }
+
+    public ArrayList<Time> getLabs() {
+        return labs;
+    }
+
+    public Time getLecture() {
+        return lecture;
+    }
+
+    public Time getSecLecture() {
+        return secLecture;
     }
 }
