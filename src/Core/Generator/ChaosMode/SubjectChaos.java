@@ -58,4 +58,20 @@ public class SubjectChaos extends Subject {
         }
         return this.timesInPermutation;
     }
+
+    public ArrayList<Time> getLectures() {
+        return lectures;
+    }
+
+    public ArrayList<Time> getSecLectures() {
+        return secLectures;
+    }
+
+    public ArrayList<Time> getTutorials() {
+        return tutorials;
+    }
+
+    public ArrayList<Time> getLabs() {
+        return labs;
+    }
 }
