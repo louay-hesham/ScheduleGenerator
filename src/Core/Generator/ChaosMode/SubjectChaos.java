@@ -74,4 +74,10 @@ public class SubjectChaos extends Subject {
     public ArrayList<Time> getLabs() {
         return labs;
     }
+
+    public String toString(){
+        StringBuilder sb = new StringBuilder();
+
+        return sb.toString();
+    }
 }

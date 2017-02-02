@@ -20,4 +20,34 @@ public class SubjectInfo {
         this.labBiWeek = labExists && labBiweek;
     }
 
+    public String toString(){
+        StringBuilder sb = new StringBuilder();
+        if (this.secLecExists){
+            sb.append("SEC_LEC ");
+        } else {
+            sb.append("LEC ");
+        }
+
+        if (this.tutExists){
+            if (this.tutBiWeek){
+                sb.append("TUT_HALF ");
+            } else {
+                sb.append("TUT_FULL ");
+            }
+        } else {
+            sb.append("NO_TUT ");
+        }
+
+        if (this.labExists){
+            if (this.labBiWeek){
+                sb.append("LAB_HALF");
+            } else {
+                sb.append("LAB_FULL");
+            }
+        } else {
+            sb.append("NO_LAB");
+        }
+        sb.append("\r\n\r\n");
+        return sb.toString();
+    }
 }

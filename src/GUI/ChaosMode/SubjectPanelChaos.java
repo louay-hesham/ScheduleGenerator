@@ -107,4 +107,10 @@ public class SubjectPanelChaos extends SubjectPanel {
                 this.getTutorialTimes(),
                 this.getLabsTimes());
     }
+
+    public String toString(){
+        StringBuilder sb = new StringBuilder();
+
+        return sb.toString();
+    }
 }

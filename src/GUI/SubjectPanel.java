@@ -27,6 +27,8 @@ public abstract class SubjectPanel {
 
     public abstract Subject getSubject();
 
+    public abstract String toString();
+
     public String getSubjectName() {
         return subjectName;
     }

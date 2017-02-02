@@ -63,5 +63,11 @@ public class Time {
         return type;
     }
 
+    public String toString(){
+        StringBuilder sb = new StringBuilder();
+        sb.append(this.day + " " + this.from + " " + this.to + "\r\n");
+        return sb.toString();
+    }
+
 }
 

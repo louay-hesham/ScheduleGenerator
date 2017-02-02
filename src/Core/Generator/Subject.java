@@ -17,6 +17,8 @@ public abstract class Subject {
 
     public abstract void nextPermutation() throws Exception;
 
+    public abstract String toString();
+
     public String getSubjectName() {
         return subjectName;
     }
