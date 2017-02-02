@@ -14,8 +14,7 @@ public class GroupNormal {
     private final Time lecture, secLecture;
     private int iTut = -1, iLab = -1;
 
-    public GroupNormal(String subjectName, Time lecture,Time secLecture, ArrayList<Time> tutorials, ArrayList<Time> labs) {
-        //super(subjectName);
+    public GroupNormal(Time lecture, Time secLecture, ArrayList<Time> tutorials, ArrayList<Time> labs) {
         this.lecture = lecture;
         this.secLecture = secLecture;
         this.tutorials = tutorials;
