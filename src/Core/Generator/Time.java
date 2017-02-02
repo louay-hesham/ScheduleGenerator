@@ -10,13 +10,14 @@ public class Time {
         LECTURE, SEC_LECTURE, TUT_FULL, TUT_HALF, LAB_FULL, LAB_HALF
     }
 
-    public final int day, from, to;
+    public final int day, from, to, period;
     public final MeetingType type;
 
     public Time() {
         this.day = 0;
         this.from = 0;
         this.to = 0;
+        this.period = 0;
         type = MeetingType.LECTURE;
     }
 
@@ -30,23 +31,25 @@ public class Time {
         this.from = from;
         this.to = to;
         this.type = type;
+        this.period = (this.to / 2) + 1;
     }
 
     public Time (int day, int period, MeetingType type){
+        this.period = period;
         this.day = day;
         this.type = type;
-        this.from = (period * 2) - 2;
+        this.to = (period * 2) - 1;
         switch (type){
             case LAB_HALF:
             case TUT_HALF:
             case SEC_LECTURE:
-                this.to = this.from;
+                this.from = this.to;
                 break;
             case LAB_FULL:
             case TUT_FULL:
             case LECTURE:
             default:
-                this.to = this.from + 1;
+                this.from = this.to - 1;
                 break;
         }
     }

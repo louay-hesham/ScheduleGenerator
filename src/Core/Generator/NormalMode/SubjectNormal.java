@@ -30,6 +30,8 @@ public class SubjectNormal extends Subject {
                 if (this.iGroup == this.groups.size()){
                     this.iGroup = -1;
                     throw new Exception("All permutations done");
+                } else {
+                    this.groups.get(this.iGroup).nextPermutation();
                 }
             }
         }
