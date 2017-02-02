@@ -1,7 +1,5 @@
 package GUI.Results;
 
-import GUI.Extras.MultiLineTableCellRenderer;
-
 import javax.swing.*;
 
 /*
