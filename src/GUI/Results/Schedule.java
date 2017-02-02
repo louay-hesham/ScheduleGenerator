@@ -1,4 +1,4 @@
-package GUI.PostGenerator;
+package GUI.Results;
 
 import GUI.Extras.MultiLineTableCellRenderer;
 

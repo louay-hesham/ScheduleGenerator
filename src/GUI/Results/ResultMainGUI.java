@@ -1,4 +1,4 @@
-package GUI.PostGenerator;
+package GUI.Results;
 
 import javax.swing.*;
 import java.util.ArrayList;
