@@ -41,6 +41,9 @@ public class MainGUI {
         tutBiWeekCheckBox.setVisible(false);
         subjects = new ArrayList<>();
         this.initComponents();
+        //till files are implemented
+        this.saveFileButton.setEnabled(false);
+        this.loadFileButton.setEnabled(false);
     }
 
     public static void main(String[] args) {
