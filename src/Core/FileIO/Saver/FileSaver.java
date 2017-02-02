@@ -15,10 +15,10 @@ public class FileSaver {
 
     protected final StringBuilder sb;
 
-    public FileSaver(ArrayList<SubjectPanel> subjects){
+    public FileSaver(ArrayList<SubjectPanel> subjects, String type){
         this.sb = new StringBuilder();
-        this.sb.append("Normal\r\n");
-        this.sb.append(subjects.size() + "\r\n");
+        this.sb.append(type + "\r\n");
+        this.sb.append(subjects.size() + "\r\n\r\n");
         for (SubjectPanel s : subjects){
             this.sb.append(s.toString());
         }
