@@ -1,13 +1,12 @@
 package GUI;
 
 
-import Core.CPlusPlusGenerator.Differentiator;
-import Core.CPlusPlusGenerator.Generator;
 import Core.Files.FileLoader;
+import Core.Generator.Generator;
 import Core.Generator.Subject;
 import GUI.ChaosMode.SubjectPanelChaos;
 import GUI.NormalMode.SubjectPanelNormal;
-import GUI.PostGenerator.ResultMainGUI;
+import GUI.Results.ResultMainGUI;
 
 import javax.swing.*;
 import java.io.File;
@@ -81,6 +80,7 @@ public class MainGUI {
         labBiWeekCheckBox.setVisible(labCheckBox.isSelected());
     }
 
+    //Modify for normal mode.
     private void generateButtonActionPerformed() {
         if (this.subjectsNormal.isEmpty()) {
             this.showErrorMessage("Must have at least one subject!");
@@ -89,14 +89,10 @@ public class MainGUI {
             for (SubjectPanelChaos s : subjectsChaos){
                 subjects.add(s.getSubject());
             }
-            Core.Generator.Generator g = new Core.Generator.Generator(subjects);
+            Generator g = new Generator(subjects);
             new ResultMainGUI(g.getSchedules());
         } else {
-            try {
-                this.startScheduleGeneration(generateInputString());
-            } catch (Exception ex) {
-                this.showErrorMessage(ex.getMessage());
-            }
+
         }
     }
 
@@ -163,37 +159,11 @@ public class MainGUI {
         return subject;
     }
 
-    public String getMeetingType(String subjectName, int day, int period) throws Exception {
-        for (SubjectPanelNormal subject : subjectsNormal) {
-            if (subjectName.equals(subject.getSubjectName())) {
-                try {
-                    return subject.getMeetingType(day, period);
-                } catch (Exception ex) {
-                    System.out.println(ex.getMessage());
-                }
-            }
-        }
-        throw new Exception("Meeting Not Found!\r\nSubject name is: " + subjectName + "\r\n at day " + day + " at period " + period);
-    }
-
     public void deleteSubject(SubjectPanelNormal subject) {
         int choice = JOptionPane.showConfirmDialog(null, "Are you sure wou want to delete the subject?", "Confirm deletion", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
         if (choice == 0) {
             this.subjectsNormal.remove(subject);
             this.subjectsTabbedPane.remove(subject.getMainPanel());
-        }
-    }
-
-    private void startScheduleGeneration(String str) {
-        ArrayList<String[][]> results = Generator.getGeneratedSchedules(str);
-        try {
-            Differentiator.differentiate(this, results);
-        } catch (Exception ex) {
-            System.out.println(ex.getMessage());
-            this.showErrorMessage(ex.getMessage());
-        } finally {
-            generateButton.setText("Generate");
-            new ResultMainGUI(results);
         }
     }
 
