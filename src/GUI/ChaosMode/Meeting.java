@@ -16,12 +16,9 @@ public class Meeting {
 
     private GroupLayout.ParallelGroup h;
     private GroupLayout.SequentialGroup v;
-
-    private void newTimeButtonActionPerformed() {
-        MeetingTime meetingTime = new MeetingTime(this.meetingType, this);
-        meetings.add(meetingTime);
-        this.addMeetingToGUI(meetingTime);
-    }
+    private JButton newTimeButton;
+    private JPanel timesPanel;
+    private JPanel mainPanel;
 
     public Meeting(MeetingType meetingType) {
         this.meetingType = meetingType;
@@ -33,40 +30,61 @@ public class Meeting {
         this.v = timesPanelLayout.createSequentialGroup();
     }
 
+    private void newTimeButtonActionPerformed() {
+        MeetingTime meetingTime = new MeetingTime(this.meetingType, this);
+        meetings.add(meetingTime);
+        this.addMeetingToGUI(meetingTime);
+    }
+
     public JPanel getMainPanel() {
         return mainPanel;
     }
 
-    public ArrayList<Time> getMeetingTimes(){
+    public ArrayList<Time> getMeetingTimes() {
         ArrayList<Time> times = new ArrayList<>();
-        for (MeetingTime m : meetings){
+        for (MeetingTime m : meetings) {
             times.add(m.getMeetingTime());
         }
         return times;
     }
 
-    public ArrayList<Time> getSecLecTimes(){
-        if (this.meetingType != MeetingType.SEC_LECTURE){
+    public ArrayList<Time> getSecLecTimes() {
+        if (this.meetingType != MeetingType.SEC_LECTURE) {
             return null;
         }
         ArrayList<Time> times = new ArrayList<>();
-        for (MeetingTime m : meetings){
+        for (MeetingTime m : meetings) {
             times.add(m.getSecLecTime());
         }
         return times;
     }
 
-    void addMeeting(int day, int period) {
+    public void addMeetings(ArrayList<Time> times) {
+        if (times == null) {
+            return;
+        }
+        for (Time t : times) {
+            this.addMeeting(t);
+        }
+    }
+
+    public void addMeetings(ArrayList<Time> lecTimes, ArrayList<Time> secLecTimes) {
+        for (int i = 0; i < lecTimes.size(); i++) {
+            this.addMeeting(lecTimes.get(i), secLecTimes.get(i));
+        }
+    }
+
+    private void addMeeting(Time t) {
         MeetingTime meetingTime = new MeetingTime(this.meetingType, this);
-        meetingTime.setMeetingTime(day, period);
+        meetingTime.setMeetingTime(t.day, t.period);
         meetings.add(meetingTime);
         this.addMeetingToGUI(meetingTime);
     }
 
-    void addMeeting(int day, int period, int secLecDay, int secLecPeriod) {
+    private void addMeeting(Time lec, Time secLec) {
         MeetingTime meetingTime = new MeetingTime(this.meetingType, this);
-        meetingTime.setMeetingTime(day, period);
-        meetingTime.setSecLecTime(secLecDay, secLecPeriod);
+        meetingTime.setMeetingTime(lec.day, lec.period);
+        meetingTime.setSecLecTime(secLec.day, secLec.period);
         this.meetings.add(meetingTime);
         this.addMeetingToGUI(meetingTime);
     }
@@ -83,7 +101,7 @@ public class Meeting {
         this.resetMeetingsGUI();
     }
 
-    private void addMeetingToGUI(MeetingTime meetingTime){
+    private void addMeetingToGUI(MeetingTime meetingTime) {
         GroupLayout timesPanelLayout = (GroupLayout) timesPanel.getLayout();
 
         this.h.addComponent(meetingTime.getMainPanel());
@@ -112,8 +130,4 @@ public class Meeting {
         timesPanel.setLayout(timesPanelLayout);
         timesPanel.repaint();
     }
-
-    private JButton newTimeButton;
-    private JPanel timesPanel;
-    private JPanel mainPanel;
 }

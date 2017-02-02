@@ -16,10 +16,16 @@ class MeetingTime {
     private final Meeting meeting;
     private final int ID;
     private final MeetingType type;
-
-    private void deleteMeetingButtonActionPerformed() {
-        meeting.deleteTime(this);
-    }
+    private JPanel mainPanel;
+    private JComboBox meetingDay;
+    private JComboBox secLecDay;
+    private JSpinner meetingPeriodSpinner;
+    private JSpinner secLecPeriodSpinner;
+    private JButton deleteMeetingButton;
+    private JLabel meetingTypeLabel;
+    private JLabel secLecLabel;
+    private JLabel meetingPeriodLabel;
+    private JLabel secLecPeriodLabel;
 
     /**
      * Creates new form MeetingTime
@@ -62,11 +68,11 @@ class MeetingTime {
         this.initComponents();
     }
 
-    public JPanel getMainPanel() {
-        return mainPanel;
+    private void deleteMeetingButtonActionPerformed() {
+        meeting.deleteTime(this);
     }
 
-    private void initComponents(){
+    private void initComponents() {
         deleteMeetingButton.addActionListener(e -> deleteMeetingButtonActionPerformed());
         meetingPeriodSpinner.setModel(new javax.swing.SpinnerNumberModel(1, 1, 7, 1));
         secLecPeriodSpinner.setModel(new javax.swing.SpinnerNumberModel(1, 1, 7, 1));
@@ -106,14 +112,14 @@ class MeetingTime {
         return this.ID == other.ID;
     }
 
-    public Time getMeetingTime(){
+    public Time getMeetingTime() {
         MeetingType type = this.type;
-        if (this.type == MeetingType.SEC_LECTURE){
+        if (this.type == MeetingType.SEC_LECTURE) {
             type = MeetingType.LECTURE;
         }
         int from, to;
-        to = ((int)this.meetingPeriodSpinner.getValue() * 2) - 1;
-        switch(this.type){
+        to = ((int) this.meetingPeriodSpinner.getValue() * 2) - 1;
+        switch (this.type) {
             case LECTURE:
             case SEC_LECTURE:
             case LAB_FULL:
@@ -131,29 +137,22 @@ class MeetingTime {
         return new Time(this.meetingDay.getSelectedIndex(), from, to, type);
     }
 
-    public Time getSecLecTime(){
-        if (this.type != MeetingType.SEC_LECTURE){
+    public Time getSecLecTime() {
+        if (this.type != MeetingType.SEC_LECTURE) {
             return null;
         }
         int from, to;
-        if ((int)this.secLecPeriodSpinner.getValue() + 1 == (int)this.meetingPeriodSpinner.getValue()){
-            from = ((int)this.secLecPeriodSpinner.getValue() * 2) - 1;
+        if ((int) this.secLecPeriodSpinner.getValue() + 1 == (int) this.meetingPeriodSpinner.getValue()) {
+            from = ((int) this.secLecPeriodSpinner.getValue() * 2) - 1;
             to = from;
         } else {
-            from = ((int)this.secLecPeriodSpinner.getValue() * 2) - 2;
+            from = ((int) this.secLecPeriodSpinner.getValue() * 2) - 2;
             to = from;
         }
         return new Time(this.secLecDay.getSelectedIndex(), from, to, MeetingType.SEC_LECTURE);
     }
 
-    private JPanel mainPanel;
-    private JComboBox meetingDay;
-    private JComboBox secLecDay;
-    private JSpinner meetingPeriodSpinner;
-    private JSpinner secLecPeriodSpinner;
-    private JButton deleteMeetingButton;
-    private JLabel meetingTypeLabel;
-    private JLabel secLecLabel;
-    private JLabel meetingPeriodLabel;
-    private JLabel secLecPeriodLabel;
+    public JPanel getMainPanel() {
+        return mainPanel;
+    }
 }

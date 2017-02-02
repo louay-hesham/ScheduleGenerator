@@ -1,6 +1,4 @@
-package GUI.PostGenerator;
-
-import GUI.Extras.MultiLineTableCellRenderer;
+package GUI.Results;
 
 import javax.swing.*;
 
@@ -10,6 +8,8 @@ import javax.swing.*;
 class Schedule {
 
     private final String[][] schedule;
+    private JPanel mainPanel;
+    private JTable timetable;
 
     /**
      * Creates new form Schedule
@@ -66,7 +66,4 @@ class Schedule {
             }
         });
     }
-
-    private JPanel mainPanel;
-    private JTable timetable;
 }

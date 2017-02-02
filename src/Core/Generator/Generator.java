@@ -10,36 +10,34 @@ import java.util.Stack;
 public class Generator {
     private final Stack<Subject> stack;
     private final ArrayList<Subject> subjects;
-    private int iSub, nSub;
     private final String[][] currentSchedule;
     private final String emptyPeriod;
     private final Optimizer optimizer;
+    private int iSub, nSub;
 
     public Generator(ArrayList<Subject> subject) {
         this.subjects = subject;
         this.stack = new Stack<>();
-        //this.schedules = new ArrayList<>();
         this.nSub = this.subjects.size();
         this.iSub = 0;
-        //this.generationScheduleStack = new Stack<>();
         this.currentSchedule = this.getNewSchedule();
         this.emptyPeriod = new String("___");
         this.optimizer = new Optimizer();
     }
 
-    public ArrayList<String[][]> getSchedules(){
+    public ArrayList<String[][]> getSchedules() {
         this.generate();
         return this.optimizer.getOptimizedSchedules();
     }
 
-    private void generate(){
-        while (true){
+    private void generate() {
+        while (true) {
             Subject s = this.subjects.get(iSub);
             try {
                 s.nextPermutation();
                 boolean pushed = this.push(s);
-                if (pushed){
-                    if (iSub == nSub){
+                if (pushed) {
+                    if (iSub == nSub) {
                         this.optimizer.insertSchedule(this.deepCopy(this.currentSchedule));
                         this.pop();
                         continue;
@@ -60,54 +58,49 @@ public class Generator {
         }
     }
 
-    private boolean push(Subject s){
+    private boolean push(Subject s) {
         boolean success = true;
         boolean[][] visited = new boolean[14][7];
-        for (Time t : s.getTimesInPermutation()){
-            switch (t.getType()){
+        for (Time t : s.getTimesInPermutation()) {
+            switch (t.getType()) {
                 case LECTURE:
                 case SEC_LECTURE:
                 case LAB_FULL:
-                case TUT_FULL:
-                {
-                    for (int i = t.from; i <= t.to; i++){
+                case TUT_FULL: {
+                    for (int i = t.from; i <= t.to; i++) {
                         success = success && (this.currentSchedule[i][t.day].equals(this.emptyPeriod)) && (!visited[i][t.day]);
                         visited[i][t.day] = true;
                     }
                     break;
                 }
                 case LAB_HALF:
-                case TUT_HALF:
-                {
+                case TUT_HALF: {
                     success = success && ((this.currentSchedule[t.to][t.day].equals(this.emptyPeriod) && (!visited[t.to][t.day])) || (this.currentSchedule[t.to - 1][t.day].equals(this.emptyPeriod) && (!visited[t.to - 1][t.day])));
-                    if (this.currentSchedule[t.to][t.day].equals(this.emptyPeriod)){
+                    if (this.currentSchedule[t.to][t.day].equals(this.emptyPeriod)) {
                         visited[t.to][t.day] = true;
-                    } else if (this.currentSchedule[t.to - 1][t.day].equals(this.emptyPeriod)){
+                    } else if (this.currentSchedule[t.to - 1][t.day].equals(this.emptyPeriod)) {
                         visited[t.to - 1][t.day] = true;
                     }
                     break;
                 }
             }
         }
-        if (success){
-            //this.generationScheduleStack.push(this.deepCopy(this.currentSchedule));
+        if (success) {
             this.stack.push(this.subjects.get(iSub));
-            for (Time t : s.getTimesInPermutation()){
-                switch (t.getType()){
+            for (Time t : s.getTimesInPermutation()) {
+                switch (t.getType()) {
                     case LECTURE:
                     case SEC_LECTURE:
                     case LAB_FULL:
-                    case TUT_FULL:
-                    {
-                        for (int i = t.from; i <= t.to; i++){
+                    case TUT_FULL: {
+                        for (int i = t.from; i <= t.to; i++) {
                             this.currentSchedule[i][t.day] = (s.getSubjectName() + "!" + t.getTypeString());
                         }
                         break;
                     }
                     case LAB_HALF:
-                    case TUT_HALF:
-                    {
-                        if (this.currentSchedule[t.to][t.day].equals(this.emptyPeriod)){
+                    case TUT_HALF: {
+                        if (this.currentSchedule[t.to][t.day].equals(this.emptyPeriod)) {
                             this.currentSchedule[t.to][t.day] = (s.getSubjectName() + "!" + t.getTypeString());
                         } else {
                             this.currentSchedule[t.to - 1][t.day] = (s.getSubjectName() + "!" + t.getTypeString());
@@ -122,28 +115,26 @@ public class Generator {
     }
 
     private void pop() throws Exception {
-        if (this.stack.isEmpty()){
+        if (this.stack.isEmpty()) {
             throw new Exception("Done");
         }
         Subject s = this.stack.pop();
         //this.currentSchedule = this.generationScheduleStack.pop();
-        for (Time t : s.getTimesInPermutation()){
-            switch (t.getType()){
+        for (Time t : s.getTimesInPermutation()) {
+            switch (t.getType()) {
                 case LECTURE:
                 case SEC_LECTURE:
                 case LAB_FULL:
-                case TUT_FULL:
-                {
-                    for (int i = t.from; i <= t.to; i++){
+                case TUT_FULL: {
+                    for (int i = t.from; i <= t.to; i++) {
                         this.currentSchedule[i][t.day] = "___";
                     }
                     break;
                 }
                 case LAB_HALF:
-                case TUT_HALF:
-                {
+                case TUT_HALF: {
                     String toSubjectName = this.currentSchedule[t.to][t.day].split("!")[0];
-                    if (s.getSubjectName().equals(toSubjectName)){
+                    if (s.getSubjectName().equals(toSubjectName)) {
                         this.currentSchedule[t.to][t.day] = "___";
                     } else {
                         this.currentSchedule[t.to - 1][t.day] = "___";
@@ -155,11 +146,11 @@ public class Generator {
         iSub--;
     }
 
-    private String[][] getNewSchedule(){
+    private String[][] getNewSchedule() {
         String[][] newSchedule = new String[14][];
-        for (int i=0; i<14; i++){
+        for (int i = 0; i < 14; i++) {
             newSchedule[i] = new String[7];
-            for (int j=0; j<7; j++){
+            for (int j = 0; j < 7; j++) {
                 newSchedule[i][j] = "___";
             }
         }
