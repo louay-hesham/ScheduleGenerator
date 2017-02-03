@@ -5,6 +5,11 @@
  */
 package GUI.SubjectsPanel;
 
+import Core.Subject.MeetingType;
+import Core.Subject.Time;
+
+import java.util.ArrayList;
+
 /**
  * @author louay
  */
@@ -18,6 +23,38 @@ public class SubjectInfo {
         this.tutBiWeek = tutExists && tutBiWeek;
         this.labExists = labExists;
         this.labBiWeek = labExists && labBiweek;
+    }
+
+    public SubjectInfo(ArrayList<Time> secLectures, ArrayList<Time> tutorials, ArrayList<Time> labs){
+        if (secLectures != null && secLectures.size() != 0){
+            this.secLecExists = true;
+        } else {
+            this.secLecExists = false;
+        }
+
+        if (tutorials != null && tutorials.size() != 0){
+            this.tutExists = true;
+            if (tutorials.get(0).getType() == MeetingType.TUT_HALF){
+                this.tutBiWeek = true;
+            } else {
+                this.tutBiWeek = false;
+            }
+        } else {
+            this.tutExists = false;
+            this.tutBiWeek = false;
+        }
+
+        if (labs != null && labs.size() != 0){
+            this.labExists = true;
+            if (labs.get(0).getType() == MeetingType.LAB_HALF){
+                this.labBiWeek = true;
+            } else {
+                this.labBiWeek = false;
+            }
+        } else {
+            this.labExists = false;
+            this.labBiWeek = false;
+        }
     }
 
     public SubjectInfo(String str){
