@@ -2,6 +2,7 @@ package Core.Subject.ChaosMode;
 
 import Core.Subject.Subject;
 import Core.Subject.Time;
+import GUI.SubjectsPanel.SubjectInfo;
 
 import java.util.ArrayList;
 
@@ -13,7 +14,7 @@ public class SubjectChaos extends Subject {
     private int iLec = -1, iTut = -1, iLab = -1;
 
     public SubjectChaos(String subjectName, ArrayList<Time> lectures, ArrayList<Time> secLectures, ArrayList<Time> tutorials, ArrayList<Time> labs) {
-        super(subjectName);
+        super(subjectName, new SubjectInfo(secLectures, tutorials, labs));
         this.lectures = lectures;
         this.secLectures = secLectures;
         this.tutorials = tutorials;
@@ -84,7 +85,7 @@ public class SubjectChaos extends Subject {
         }
         sb.append("\r\n");
         if (this.secLectures != null && this.secLectures.size() != 0){
-            sb.append("SEC_LEC\r\n");
+            sb.append("SEC_LEC " + this.secLectures.size() + "\r\n");
             for (Time t : this.secLectures){
                 sb.append(t.toString());
             }

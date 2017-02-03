@@ -7,7 +7,6 @@ import Core.Subject.Time;
 import GUI.MainGUI;
 import GUI.SubjectsPanel.NormalMode.SubjectPanelNormal;
 import GUI.SubjectsPanel.SubjectInfo;
-import GUI.SubjectsPanel.SubjectPanel;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,13 +16,8 @@ import java.util.List;
  */
 public class FileParserNormal extends FileParser {
 
-    public FileParserNormal(List<String> lines, MainGUI gui) {
+    public FileParserNormal(List<String> lines, MainGUI gui) throws Exception {
         super(lines, gui);
-        this.startDecoding();
-    }
-
-    public ArrayList<SubjectPanel> getPanels(){
-        return this.panels;
     }
 
     protected void startDecoding(){

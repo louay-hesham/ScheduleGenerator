@@ -111,7 +111,6 @@ public class MainGUI {
         }
     }
 
-    //WIP for file loader
     private void loadFileButtonActionPerformed() {
         try {
             FileLoader fl = new FileLoader(this);
@@ -121,7 +120,7 @@ public class MainGUI {
                 subjectsTabbedPane.addTab(s.getSubjectName(), s.getMainPanel());
             }
         } catch (Exception e) {
-            e.printStackTrace();
+            this.showErrorMessage(e.getMessage());
         }
     }
 
@@ -134,10 +133,8 @@ public class MainGUI {
         }
     }
 
-    private void chaosModeButtonActionPerformed() {
-        if (this.chaosMode) {
-            JOptionPane.showMessageDialog(null, "Cannot go back to Normal Mode", "Error", JOptionPane.ERROR_MESSAGE);
-        } else {
+    public void chaosModeButtonActionPerformed() {
+        if (!this.chaosMode) {
             this.chaosMode = true;
             this.convertTo7ebyMode();
             this.chaosModeButton.setEnabled(false);
