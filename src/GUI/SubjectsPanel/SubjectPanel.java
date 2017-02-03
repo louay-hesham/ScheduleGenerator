@@ -16,7 +16,7 @@ public abstract class SubjectPanel {
         this.subjectName = subjectName;
     }
 
-    public SubjectPanel(String subjectName, SubjectInfo info, Subject sub) {
+    public SubjectPanel(String subjectName, SubjectInfo info) {
         this.subjectInfo = info;
         this.subjectName = subjectName;
     }

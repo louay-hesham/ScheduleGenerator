@@ -1,5 +1,7 @@
 package Core.Subject;
 
+import GUI.SubjectsPanel.SubjectInfo;
+
 import java.util.ArrayList;
 
 /**
@@ -8,9 +10,11 @@ import java.util.ArrayList;
 public abstract class Subject {
     protected final String subjectName;
     protected final ArrayList<Time> timesInPermutation = new ArrayList<>();
+    protected final SubjectInfo info;
 
-    public Subject(String subjectName) {
+    public Subject(String subjectName, SubjectInfo info) {
         this.subjectName = subjectName;
+        this.info = info;
     }
 
     public abstract ArrayList<Time> getTimesInPermutation();
@@ -21,5 +25,9 @@ public abstract class Subject {
 
     public String getSubjectName() {
         return subjectName;
+    }
+
+    public SubjectInfo getInfo() {
+        return info;
     }
 }

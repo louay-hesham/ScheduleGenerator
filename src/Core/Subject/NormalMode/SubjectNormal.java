@@ -13,13 +13,11 @@ import java.util.ArrayList;
 public class SubjectNormal extends Subject {
 
     private final ArrayList<GroupNormal> groups;
-    private final SubjectInfo info;
     private int iGroup = -1;
 
     public SubjectNormal(String subjectName, ArrayList<GroupNormal> groups, SubjectInfo info) {
-        super(subjectName);
+        super(subjectName, info);
         this.groups = groups;
-        this.info = info;
     }
 
     public void nextPermutation() throws Exception {
@@ -83,4 +81,11 @@ public class SubjectNormal extends Subject {
         return sb.toString();
     }
 
+    public SubjectInfo getInfo() {
+        return info;
+    }
+
+    public ArrayList<GroupNormal> getGroups() {
+        return groups;
+    }
 }

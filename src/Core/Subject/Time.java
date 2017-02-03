@@ -37,6 +37,47 @@ public class Time {
         }
     }
 
+    public Time(String str, MeetingType type){
+        String[] times = str.split(" ");
+        this.day = Integer.decode(times[0]);
+        this.from = Integer.decode(times[1]);
+        this.to = Integer.decode(times[2]);
+        this.period = (this.to / 2) + 1;
+        switch(type){
+            case LECTURE:
+            case SEC_LECTURE:
+            case TUT_FULL:
+            case TUT_HALF:
+            case LAB_FULL:
+            case LAB_HALF:
+            {
+                this.type = type;
+                break;
+            }
+            case TUT_UNKNOWN:
+            {
+                if (this.from == this.to){
+                    this.type = MeetingType.TUT_HALF;
+                } else {
+                    this.type = MeetingType.TUT_FULL;
+                }
+                break;
+            }
+            case LAB_UNKNOWN:
+            {
+                if (this.from == this.to){
+                    this.type = MeetingType.LAB_HALF;
+                } else {
+                    this.type = MeetingType.LAB_FULL;
+                }
+                break;
+            }
+            default:
+                this.type = MeetingType.LECTURE;
+                break;
+        }
+    }
+
     @Override
     public boolean equals(Object obj) {
         return obj instanceof Time && ((Time) obj).day == this.day && ((Time) obj).from == this.from && ((Time) obj).to == this.to;

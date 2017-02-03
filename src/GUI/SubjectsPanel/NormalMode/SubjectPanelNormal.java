@@ -4,9 +4,8 @@ import Core.Subject.ChaosMode.SubjectChaos;
 import Core.Subject.NormalMode.GroupNormal;
 import Core.Subject.NormalMode.SubjectNormal;
 import Core.Subject.Subject;
-import GUI.SubjectsPanel.ChaosMode.SubjectPanelChaos;
 import GUI.MainGUI;
-import GUI.SubjectsPanel.SubjectInfo;
+import GUI.SubjectsPanel.ChaosMode.SubjectPanelChaos;
 import GUI.SubjectsPanel.SubjectPanel;
 
 import javax.swing.*;
@@ -43,16 +42,21 @@ public class SubjectPanelNormal extends SubjectPanel {
     }
 
     //WIP for file loader
-    public SubjectPanelNormal(MainGUI gui, String subjectName, SubjectInfo info, Subject sub) {
-        super(subjectName, info, sub);
+    public SubjectPanelNormal(MainGUI gui, SubjectNormal sub) {
+        super(sub.getSubjectName(), sub.getInfo());
         this.gui = gui;
         groups = new ArrayList<>();
+        for (int i = 0; i < sub.getGroups().size(); i++){
+            this.newGroupButtonActionPerformed();
+            this.groups.get(i).setGroup(sub.getGroups().get(i));
+        }
+        this.initComponents();
     }
 
     private void newGroupButtonActionPerformed() {
         GroupPanelNormal newGroup = new GroupPanelNormal(this, subjectInfo);
-        groups.add(newGroup);
-        groupsTabbedPane.addTab("Group " + (groupsTabbedPane.getTabCount() + 1), newGroup.getMainPanel());
+        this.groups.add(newGroup);
+        this.groupsTabbedPane.addTab("Group " + (groupsTabbedPane.getTabCount() + 1), newGroup.getMainPanel());
     }
 
     private void deleteSubjectButtonActionPerformed() {
@@ -96,7 +100,7 @@ public class SubjectPanelNormal extends SubjectPanel {
     public String toString(){
         StringBuilder sb = new StringBuilder();
         sb.append(this.subjectName + "\r\n");
-        sb.append(this.groups.size() + " ");
+        sb.append(this.groups.size() + "!");
         sb.append(this.subjectInfo.toString());
         sb.append(this.getSubject().toString());
         return sb.toString();
