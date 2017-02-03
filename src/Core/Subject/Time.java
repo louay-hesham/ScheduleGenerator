@@ -37,6 +37,15 @@ public class Time {
         }
     }
 
+    public Time(String str, MeetingType type){
+        String[] times = str.split(" ");
+        this.day = Integer.decode(times[0]);
+        this.from = Integer.decode(times[1]);
+        this.to = Integer.decode(times[2]);
+        this.period = (this.to / 2) + 1;
+        this.type = type;
+    }
+
     @Override
     public boolean equals(Object obj) {
         return obj instanceof Time && ((Time) obj).day == this.day && ((Time) obj).from == this.from && ((Time) obj).to == this.to;
