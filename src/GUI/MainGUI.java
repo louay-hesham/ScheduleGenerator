@@ -65,28 +65,28 @@ public class MainGUI {
     private void addSubjectButtonActionPerformed() {
         if (subjectNameTextField.getText() == null || subjectNameTextField.getText().equals("")) {
             JOptionPane.showMessageDialog(null, "Subject name can not be empty!", "Subject name error", JOptionPane.ERROR_MESSAGE);
-        } else if (this.chaosMode) {
-            SubjectPanel subject = new SubjectPanelChaos(
-                    subjectNameTextField.getText(),
-                    secondaryLectureCheckBox.isSelected(),
-                    tutorialCheckBox.isSelected(),
-                    tutBiWeekCheckBox.isSelected(),
-                    labCheckBox.isSelected(),
-                    labBiWeekCheckBox.isSelected());
-            subjects.add(subject);
-            subjectsTabbedPane.addTab(subjectNameTextField.getText(), subject.getMainPanel());
-            subjectNameTextField.setText("");
         } else {
-            SubjectPanel subject = new SubjectPanelNormal(this,
-                    subjectNameTextField.getText(),
-                    secondaryLectureCheckBox.isSelected(),
-                    tutorialCheckBox.isSelected(),
-                    tutBiWeekCheckBox.isSelected(),
-                    labCheckBox.isSelected(),
-                    labBiWeekCheckBox.isSelected());
-            subjects.add(subject);
-            subjectsTabbedPane.addTab(subjectNameTextField.getText(), subject.getMainPanel());
-            subjectNameTextField.setText("");
+            SubjectPanel subject;
+            if (this.chaosMode) {
+                subject = new SubjectPanelChaos(
+                        this.subjectNameTextField.getText(),
+                        this.secondaryLectureCheckBox.isSelected(),
+                        this.tutorialCheckBox.isSelected(),
+                        this.tutBiWeekCheckBox.isSelected(),
+                        this.labCheckBox.isSelected(),
+                        this.labBiWeekCheckBox.isSelected());
+            } else {
+                subject = new SubjectPanelNormal(this,
+                        this.subjectNameTextField.getText(),
+                        this.secondaryLectureCheckBox.isSelected(),
+                        this.tutorialCheckBox.isSelected(),
+                        this.tutBiWeekCheckBox.isSelected(),
+                        this.labCheckBox.isSelected(),
+                        this.labBiWeekCheckBox.isSelected());
+            }
+            this.subjects.add(subject);
+            this.subjectsTabbedPane.addTab(subjectNameTextField.getText(), subject.getMainPanel());
+            this.resetInputFields();
         }
     }
 
@@ -172,6 +172,14 @@ public class MainGUI {
         chaosModeButton.addActionListener(e -> chaosModeButtonActionPerformed());
     }
 
+    private void resetInputFields(){
+        this.subjectNameTextField.setText("");
+        this.secondaryLectureCheckBox.setSelected(false);
+        this.tutorialCheckBox.setSelected(false);
+        this.tutBiWeekCheckBox.setSelected(false);
+        this.labCheckBox.setSelected(false);
+        this.labBiWeekCheckBox.setSelected(false);
+    }
 
     public void reset(){
         for (int i = 0; i < this.subjects.size(); i++){
