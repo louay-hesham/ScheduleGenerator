@@ -162,7 +162,7 @@ public class GroupPanelNormal {
         if (this.subjectInfo.tutExists){
             this.tut1DayComboBox.setSelectedIndex(group.getTutorials().get(0).day);
             this.tut1PeriodSpinner.setValue(group.getTutorials().get(0).period);
-            if (this.subjectInfo.tutBiWeek){
+            if (!this.subjectInfo.tutBiWeek){
                 this.tut2DayComboBox.setSelectedIndex(group.getTutorials().get(1).day);
                 this.tut2PeriodSpinner.setValue(group.getTutorials().get(1).period);
             }
@@ -171,7 +171,7 @@ public class GroupPanelNormal {
         if (this.subjectInfo.labExists){
             this.lab1DayComboBox.setSelectedIndex(group.getLabs().get(0).day);
             this.lab1PeriodSpinner.setValue(group.getLabs().get(0).period);
-            if (this.subjectInfo.labExists){
+            if (!this.subjectInfo.labBiWeek){
                 this.lab2DayComboBox.setSelectedIndex(group.getLabs().get(1).day);
                 this.lab2PeriodSpinner.setValue(group.getLabs().get(1).period);
             }
