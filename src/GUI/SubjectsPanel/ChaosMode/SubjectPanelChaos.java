@@ -1,9 +1,9 @@
 package GUI.SubjectsPanel.ChaosMode;
 
 import Core.Subject.ChaosMode.SubjectChaos;
+import Core.Subject.MeetingType;
 import Core.Subject.Subject;
 import Core.Subject.Time;
-import Core.Subject.MeetingType;
 import GUI.SubjectsPanel.SubjectInfo;
 import GUI.SubjectsPanel.SubjectPanel;
 
@@ -108,7 +108,7 @@ public class SubjectPanelChaos extends SubjectPanel {
                 this.getLabsTimes());
     }
 
-    public String toString(){
+    public String toString() {
         return this.getSubject().toString();
     }
 }

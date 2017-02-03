@@ -37,35 +37,32 @@ public class Time {
         }
     }
 
-    public Time(String str, MeetingType type){
+    public Time(String str, MeetingType type) {
         String[] times = str.split(" ");
         this.day = Integer.decode(times[0]);
         this.from = Integer.decode(times[1]);
         this.to = Integer.decode(times[2]);
         this.period = (this.to / 2) + 1;
-        switch(type){
+        switch (type) {
             case LECTURE:
             case SEC_LECTURE:
             case TUT_FULL:
             case TUT_HALF:
             case LAB_FULL:
-            case LAB_HALF:
-            {
+            case LAB_HALF: {
                 this.type = type;
                 break;
             }
-            case TUT_UNKNOWN:
-            {
-                if (this.from == this.to){
+            case TUT_UNKNOWN: {
+                if (this.from == this.to) {
                     this.type = MeetingType.TUT_HALF;
                 } else {
                     this.type = MeetingType.TUT_FULL;
                 }
                 break;
             }
-            case LAB_UNKNOWN:
-            {
-                if (this.from == this.to){
+            case LAB_UNKNOWN: {
+                if (this.from == this.to) {
                     this.type = MeetingType.LAB_HALF;
                 } else {
                     this.type = MeetingType.LAB_FULL;
@@ -104,7 +101,7 @@ public class Time {
         return type;
     }
 
-    public String toString(){
+    public String toString() {
         StringBuilder sb = new StringBuilder();
         sb.append(this.day + " " + this.from + " " + this.to + "\r\n");
         return sb.toString();

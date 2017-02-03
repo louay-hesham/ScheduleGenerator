@@ -24,7 +24,7 @@ public abstract class FileParser {
         this.startDecoding();
     }
 
-    public ArrayList<SubjectPanel> getPanels(){
+    public ArrayList<SubjectPanel> getPanels() {
         return this.panels;
     }
 
@@ -32,7 +32,7 @@ public abstract class FileParser {
 
     protected abstract Subject decodeSubject() throws Exception;
 
-    protected String getNextLine(){
+    protected String getNextLine() {
         String line = this.lines.get(this.i);
         this.i++;
         return line;

@@ -1,7 +1,7 @@
 package GUI.SubjectsPanel.ChaosMode;
 
-import Core.Subject.Time;
 import Core.Subject.MeetingType;
+import Core.Subject.Time;
 
 import javax.swing.*;
 import java.util.ArrayList;

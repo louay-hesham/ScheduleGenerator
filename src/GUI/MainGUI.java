@@ -116,7 +116,7 @@ public class MainGUI {
             FileLoader fl = new FileLoader(this);
             ArrayList<SubjectPanel> loadedSubjects = fl.getPanels();
             this.subjects.addAll(loadedSubjects);
-            for (SubjectPanel s : loadedSubjects){
+            for (SubjectPanel s : loadedSubjects) {
                 subjectsTabbedPane.addTab(s.getSubjectName(), s.getMainPanel());
             }
         } catch (Exception e) {
@@ -128,7 +128,7 @@ public class MainGUI {
         if (this.subjects.isEmpty()) {
             this.showErrorMessage("Must have at least one subject!");
         } else {
-            FileSaver fs = new FileSaver(this.subjects, this.chaosMode? "7eby" : "Normal");
+            FileSaver fs = new FileSaver(this.subjects, this.chaosMode ? "7eby" : "Normal");
             fs.saveFile();
         }
     }

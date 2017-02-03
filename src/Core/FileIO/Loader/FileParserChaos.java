@@ -21,7 +21,7 @@ public class FileParserChaos extends FileParser {
 
     protected void startDecoding() throws Exception {
         this.n = Integer.decode(this.getNextLine());
-        for (int i = 0; i < n; i++){
+        for (int i = 0; i < n; i++) {
             SubjectChaos s = this.decodeSubject();
             this.panels.add(new SubjectPanelChaos(s.getSubjectName(), s.getInfo(), s));
         }
@@ -40,7 +40,7 @@ public class FileParserChaos extends FileParser {
         String typeN = this.getNextLine();
         String typeString = typeN.split(" ")[0];
         MeetingType type;
-        switch(typeString){
+        switch (typeString) {
             case "LEC":
                 type = MeetingType.LECTURE;
                 break;
@@ -62,7 +62,7 @@ public class FileParserChaos extends FileParser {
         }
         int m = Integer.decode(typeN.split(" ")[1]);
         ArrayList<Time> meetings = new ArrayList<>();
-        for (int j = 0; j < m; j++){
+        for (int j = 0; j < m; j++) {
             meetings.add(new Time(this.getNextLine(), type));
         }
         return meetings;

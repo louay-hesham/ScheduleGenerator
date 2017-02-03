@@ -54,19 +54,19 @@ public class GroupNormal {
         return this.timesInPermutation;
     }
 
-    public String toString(){
+    public String toString() {
         StringBuilder sb = new StringBuilder();
         sb.append(this.lecture.toString());
-        if (this.secLecture != null){
+        if (this.secLecture != null) {
             sb.append(this.secLecture.toString());
         }
-        if (this.tutorials != null && this.tutorials.size() != 0 ){
-            for (Time t : this.tutorials){
+        if (this.tutorials != null && this.tutorials.size() != 0) {
+            for (Time t : this.tutorials) {
                 sb.append(t.toString());
             }
         }
-        if (this.labs != null && this.labs.size() != 0 ){
-            for (Time t : this.labs){
+        if (this.labs != null && this.labs.size() != 0) {
+            for (Time t : this.labs) {
                 sb.append(t.toString());
             }
         }

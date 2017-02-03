@@ -20,36 +20,36 @@ public class FileParserNormal extends FileParser {
         super(lines, gui);
     }
 
-    protected void startDecoding(){
+    protected void startDecoding() {
         this.n = Integer.decode(this.getNextLine());
-        for (int i = 0; i < n; i++){
+        for (int i = 0; i < n; i++) {
             SubjectNormal s = this.decodeSubject();
             this.panels.add(new SubjectPanelNormal(this.gui, s));
         }
     }
 
-    protected SubjectNormal decodeSubject(){
+    protected SubjectNormal decodeSubject() {
         String subjectName = this.getNextLine();
         String subjectInfoString = this.getNextLine();
         int g = Integer.decode(subjectInfoString.split("!")[0]);
         SubjectInfo subjectInfo = new SubjectInfo(subjectInfoString.split("!")[1]);
         ArrayList<GroupNormal> groups = new ArrayList<>();
-        for (int j = 0; j < g; j++){
+        for (int j = 0; j < g; j++) {
             groups.add(this.decodeGroup(subjectInfo));
         }
         return new SubjectNormal(subjectName, groups, subjectInfo);
     }
 
-    private GroupNormal decodeGroup(SubjectInfo info){
+    private GroupNormal decodeGroup(SubjectInfo info) {
         Time lecture = new Time(this.getNextLine(), MeetingType.LECTURE);
         Time secLecture = null;
-        if (info.secLecExists){
-            secLecture= new Time(this.getNextLine(), MeetingType.SEC_LECTURE);
+        if (info.secLecExists) {
+            secLecture = new Time(this.getNextLine(), MeetingType.SEC_LECTURE);
         }
         ArrayList<Time> tutorials = null;
-        if (info.tutExists){
+        if (info.tutExists) {
             tutorials = new ArrayList<>();
-            if (info.tutBiWeek){
+            if (info.tutBiWeek) {
                 tutorials.add(new Time(this.getNextLine(), MeetingType.TUT_HALF));
             } else {
                 tutorials.add(new Time(this.getNextLine(), MeetingType.TUT_FULL));
@@ -57,9 +57,9 @@ public class FileParserNormal extends FileParser {
             }
         }
         ArrayList<Time> labs = null;
-        if (info.labExists){
+        if (info.labExists) {
             labs = new ArrayList<>();
-            if (info.labBiWeek){
+            if (info.labBiWeek) {
                 labs.add(new Time(this.getNextLine(), MeetingType.LAB_HALF));
             } else {
                 labs.add(new Time(this.getNextLine(), MeetingType.LAB_FULL));

@@ -46,7 +46,7 @@ public class SubjectPanelNormal extends SubjectPanel {
         super(sub.getSubjectName(), sub.getInfo());
         this.gui = gui;
         groups = new ArrayList<>();
-        for (int i = 0; i < sub.getGroups().size(); i++){
+        for (int i = 0; i < sub.getGroups().size(); i++) {
             this.newGroupButtonActionPerformed();
             this.groups.get(i).setGroup(sub.getGroups().get(i));
         }
@@ -97,7 +97,7 @@ public class SubjectPanelNormal extends SubjectPanel {
         return new SubjectPanelChaos(this.subjectName, this.subjectInfo, chaos);
     }
 
-    public String toString(){
+    public String toString() {
         StringBuilder sb = new StringBuilder();
         sb.append(this.subjectName + "\r\n");
         sb.append(this.groups.size() + "!");
