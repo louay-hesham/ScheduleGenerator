@@ -69,19 +69,23 @@ public class SubjectPanelNormal extends SubjectPanel {
     }
 
     void deleteGroup(GroupPanelNormal group) {
-        int choice = JOptionPane.showConfirmDialog(null, "Are you sure wou want to delete this group?", "Confirm deletion", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
-        if (choice == 0) {
-            this.groups.remove(group);
-            this.groupsTabbedPane.remove(group.getMainPanel());
+        if (this.groups.size() == 1){
+
+            JOptionPane.showMessageDialog(null,
+                    "Must at least have one group.",
+                    "Can't Delete",
+                    JOptionPane.ERROR_MESSAGE);
+        } else {
+            int choice = JOptionPane.showConfirmDialog(null, "Are you sure wou want to delete this group?", "Confirm deletion", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
+            if (choice == 0) {
+                this.groups.remove(group);
+                this.groupsTabbedPane.remove(group.getMainPanel());
+            }
         }
     }
 
     public JPanel getMainPanel() {
         return mainPanel;
-    }
-
-    public String getSubjectName() {
-        return subjectName;
     }
 
     public Subject getSubject() {

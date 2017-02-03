@@ -91,15 +91,26 @@ public class Meeting {
     }
 
     void deleteTime(MeetingTime time) {
-        int i = 0;
-        for (int j = 0; j < meetings.size(); j++) {
-            if (time.equals(meetings.get(j))) {
-                i = j;
-                break;
+        if (this.meetings.size() == 1){
+
+            JOptionPane.showMessageDialog(null,
+                    "Must at least have one " + this.meetingType.getTypeStringSimplified() + ".",
+                    "Can't Delete",
+                    JOptionPane.ERROR_MESSAGE);
+        } else {
+            int choice = JOptionPane.showConfirmDialog(null, "Are you sure wou want to delete this " + this.meetingType.getTypeStringSimplified() + "?", "Confirm deletion", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
+            if (choice == 0){
+                int i = 0;
+                for (int j = 0; j < this.meetings.size(); j++) {
+                    if (time.equals(this.meetings.get(j))) {
+                        i = j;
+                        break;
+                    }
+                }
+                this.meetings.remove(i);
+                this.resetMeetingsGUI();
             }
         }
-        this.meetings.remove(i);
-        this.resetMeetingsGUI();
     }
 
     private void addMeetingToGUI(MeetingTime meetingTime) {
