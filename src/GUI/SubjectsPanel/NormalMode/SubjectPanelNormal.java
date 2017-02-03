@@ -100,7 +100,7 @@ public class SubjectPanelNormal extends SubjectPanel {
     public String toString(){
         StringBuilder sb = new StringBuilder();
         sb.append(this.subjectName + "\r\n");
-        sb.append(this.groups.size() + " ");
+        sb.append(this.groups.size() + "!");
         sb.append(this.subjectInfo.toString());
         sb.append(this.getSubject().toString());
         return sb.toString();
