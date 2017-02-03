@@ -39,9 +39,9 @@ public class SubjectPanelNormal extends SubjectPanel {
         this.gui = gui;
         groups = new ArrayList<>();
         this.initComponents();
+        this.newGroupButtonActionPerformed();
     }
 
-    //WIP for file loader
     public SubjectPanelNormal(MainGUI gui, SubjectNormal sub) {
         super(sub.getSubjectName(), sub.getInfo());
         this.gui = gui;

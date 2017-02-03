@@ -28,6 +28,7 @@ public class Meeting {
         GroupLayout timesPanelLayout = (GroupLayout) timesPanel.getLayout();
         this.h = timesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING);
         this.v = timesPanelLayout.createSequentialGroup();
+        this.newTimeButtonActionPerformed();
     }
 
     private void newTimeButtonActionPerformed() {
