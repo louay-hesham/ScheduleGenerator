@@ -1,16 +1,16 @@
 package GUI;
 
 
+import Core.FileIO.Loader.FileLoader;
 import Core.FileIO.Saver.FileSaver;
 import Core.Generator.Generator;
 import Core.Subject.Subject;
+import GUI.ResultsWindow.ResultMainGUI;
 import GUI.SubjectsPanel.ChaosMode.SubjectPanelChaos;
 import GUI.SubjectsPanel.NormalMode.SubjectPanelNormal;
-import GUI.ResultsWindow.ResultMainGUI;
 import GUI.SubjectsPanel.SubjectPanel;
 
 import javax.swing.*;
-import java.io.File;
 import java.util.ArrayList;
 
 
@@ -43,8 +43,6 @@ public class MainGUI {
         tutBiWeekCheckBox.setVisible(false);
         subjects = new ArrayList<>();
         this.initComponents();
-        //till file loader is implemented
-        this.loadFileButton.setEnabled(false);
     }
 
     public static void main(String[] args) {
@@ -115,20 +113,18 @@ public class MainGUI {
 
     //WIP for file loader
     private void loadFileButtonActionPerformed() {
-        JFileChooser fileChooser = new JFileChooser();
-        int returnVal = fileChooser.showOpenDialog(null);
-        String path;
-        if (returnVal == JFileChooser.APPROVE_OPTION) {
-            File file = fileChooser.getSelectedFile();
-            path = file.getAbsolutePath();
-            System.out.println("\nYou chose to open this file: " + file.getName());
-            System.out.println("In this location: " + path);
-            /*FileLoader fileLoader = new FileLoader(file);
-            fileLoader.loadFile(this);*/
+        try {
+            FileLoader fl = new FileLoader(this);
+            ArrayList<SubjectPanel> loadedSubjects = fl.getPanels();
+            this.subjects.addAll(loadedSubjects);
+            for (SubjectPanel s : loadedSubjects){
+                subjectsTabbedPane.addTab(s.getSubjectName(), s.getMainPanel());
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 
-    //WIP for file saver
     private void saveFileButtonActionPerformed() {
         if (this.subjects.isEmpty()) {
             this.showErrorMessage("Must have at least one subject!");
@@ -156,15 +152,6 @@ public class MainGUI {
         loadFileButton.addActionListener(e -> loadFileButtonActionPerformed());
         saveFileButton.addActionListener(e -> saveFileButtonActionPerformed());
         chaosModeButton.addActionListener(e -> chaosModeButtonActionPerformed());
-    }
-
-    //WIP for file loader
-    public SubjectPanelNormal addSubject(String subjectName, boolean secLecExists, boolean tutExists, boolean tutBiWeek, boolean labExists, boolean labBiweek) {
-        SubjectPanelNormal subject = new SubjectPanelNormal(this, subjectName, secLecExists, tutExists, tutBiWeek, labExists, labBiweek);
-        subjects.add(subject);
-        subjectsTabbedPane.addTab(subjectName, subject.getMainPanel());
-        subjectNameTextField.setText("");
-        return subject;
     }
 
     public void deleteSubject(SubjectPanelNormal subject) {
