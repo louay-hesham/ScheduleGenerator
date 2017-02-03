@@ -1,6 +1,6 @@
 package Core.FileIO.Loader;
 
-import Core.Subject.NormalMode.SubjectNormal;
+import Core.Subject.Subject;
 import GUI.MainGUI;
 import GUI.SubjectsPanel.SubjectPanel;
 
@@ -17,17 +17,20 @@ public abstract class FileParser {
     protected int i = 1;
     protected int n;
 
-    public FileParser(List<String> lines, MainGUI gui) {
+    public FileParser(List<String> lines, MainGUI gui) throws Exception {
         this.lines = lines;
         this.panels = new ArrayList<>();
         this.gui = gui;
+        this.startDecoding();
     }
 
-    public abstract ArrayList<SubjectPanel> getPanels();
+    public ArrayList<SubjectPanel> getPanels(){
+        return this.panels;
+    }
 
     protected abstract void startDecoding() throws Exception;
 
-    protected abstract SubjectNormal decodeSubject();
+    protected abstract Subject decodeSubject() throws Exception;
 
     protected String getNextLine(){
         String line = this.lines.get(this.i);

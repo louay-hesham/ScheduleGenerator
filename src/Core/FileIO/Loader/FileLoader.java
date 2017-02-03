@@ -33,7 +33,9 @@ public class FileLoader {
                     this.parser = new FileParserNormal(lines, gui);
                     break;
                 case "7eby":
-
+                    gui.chaosModeButtonActionPerformed();
+                    this.parser = new FileParserChaos(lines, gui);
+                    break;
                 default:
                     throw new Exception("Invalid file format");
             }
