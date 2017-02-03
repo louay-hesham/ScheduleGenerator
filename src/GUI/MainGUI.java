@@ -135,10 +135,31 @@ public class MainGUI {
 
     public void chaosModeButtonActionPerformed() {
         if (!this.chaosMode) {
-            this.chaosMode = true;
-            this.convertTo7ebyMode();
-            this.chaosModeButton.setEnabled(false);
+            int choice = JOptionPane.showConfirmDialog(null,
+                    "Going to 7eby mode, you can't go back unless the program resets.\r\nAre you sure you want to continue?",
+                    "Converting to 7eby mode",
+                    JOptionPane.YES_NO_OPTION,
+                    JOptionPane.WARNING_MESSAGE);
+            if (choice == 0){
+                this.chaosMode = true;
+                this.chaosModeButton.setText("Convert to normal mode");
+                this.convertTo7ebyMode();
+            }
+        } else {
+            int choice = JOptionPane.showConfirmDialog(null,
+                    "Going to normal mode (website registration), the program must reset to do this.\r\nAre you sure you want to continue?",
+                    "Converting to normal mode",
+                    JOptionPane.YES_NO_OPTION,
+                    JOptionPane.WARNING_MESSAGE);
+            if (choice == 0) {
+                this.chaosMode = false;
+                this.convertToNormalMode();
+            }
         }
+    }
+
+    private void convertToNormalMode(){
+        this.reset();
     }
 
     private void initComponents() {
@@ -149,6 +170,15 @@ public class MainGUI {
         loadFileButton.addActionListener(e -> loadFileButtonActionPerformed());
         saveFileButton.addActionListener(e -> saveFileButtonActionPerformed());
         chaosModeButton.addActionListener(e -> chaosModeButtonActionPerformed());
+    }
+
+
+    public void reset(){
+        for (int i = 0; i < this.subjects.size(); i++){
+            this.subjectsTabbedPane.removeTabAt(0);
+        }
+        this.subjects.clear();
+        this.resetInputFields();
     }
 
     public void deleteSubject(SubjectPanelNormal subject) {
