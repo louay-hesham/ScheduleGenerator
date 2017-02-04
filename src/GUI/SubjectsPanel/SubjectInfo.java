@@ -25,16 +25,16 @@ public class SubjectInfo {
         this.labBiWeek = labExists && labBiweek;
     }
 
-    public SubjectInfo(ArrayList<Time> secLectures, ArrayList<Time> tutorials, ArrayList<Time> labs){
-        if (secLectures != null && secLectures.size() != 0){
+    public SubjectInfo(ArrayList<Time> secLectures, ArrayList<Time> tutorials, ArrayList<Time> labs) {
+        if (secLectures != null && secLectures.size() != 0) {
             this.secLecExists = true;
         } else {
             this.secLecExists = false;
         }
 
-        if (tutorials != null && tutorials.size() != 0){
+        if (tutorials != null && tutorials.size() != 0) {
             this.tutExists = true;
-            if (tutorials.get(0).getType() == MeetingType.TUT_HALF){
+            if (tutorials.get(0).getType() == MeetingType.TUT_HALF) {
                 this.tutBiWeek = true;
             } else {
                 this.tutBiWeek = false;
@@ -44,9 +44,9 @@ public class SubjectInfo {
             this.tutBiWeek = false;
         }
 
-        if (labs != null && labs.size() != 0){
+        if (labs != null && labs.size() != 0) {
             this.labExists = true;
-            if (labs.get(0).getType() == MeetingType.LAB_HALF){
+            if (labs.get(0).getType() == MeetingType.LAB_HALF) {
                 this.labBiWeek = true;
             } else {
                 this.labBiWeek = false;
@@ -57,9 +57,9 @@ public class SubjectInfo {
         }
     }
 
-    public SubjectInfo(String str){
+    public SubjectInfo(String str) {
         String[] info = str.split(" ");
-        switch(info[0]){
+        switch (info[0]) {
             case "LEC":
                 this.secLecExists = false;
                 break;
@@ -69,7 +69,7 @@ public class SubjectInfo {
                 break;
         }
 
-        switch(info[1]){
+        switch (info[1]) {
             case "NO_TUT":
                 this.tutExists = false;
                 this.tutBiWeek = false;
@@ -85,7 +85,7 @@ public class SubjectInfo {
                 break;
         }
 
-        switch(info[2]){
+        switch (info[2]) {
             case "NO_LAB":
                 this.labExists = false;
                 this.labBiWeek = false;
@@ -102,16 +102,16 @@ public class SubjectInfo {
         }
     }
 
-    public String toString(){
+    public String toString() {
         StringBuilder sb = new StringBuilder();
-        if (this.secLecExists){
+        if (this.secLecExists) {
             sb.append("SEC_LEC ");
         } else {
             sb.append("LEC ");
         }
 
-        if (this.tutExists){
-            if (this.tutBiWeek){
+        if (this.tutExists) {
+            if (this.tutBiWeek) {
                 sb.append("TUT_HALF ");
             } else {
                 sb.append("TUT_FULL ");
@@ -120,8 +120,8 @@ public class SubjectInfo {
             sb.append("NO_TUT ");
         }
 
-        if (this.labExists){
-            if (this.labBiWeek){
+        if (this.labExists) {
+            if (this.labBiWeek) {
                 sb.append("LAB_HALF");
             } else {
                 sb.append("LAB_FULL");

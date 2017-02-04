@@ -72,9 +72,9 @@ public class SubjectNormal extends Subject {
         return new SubjectChaos(this.subjectName, lectures, secLectures, tutorials, labs);
     }
 
-    public String toString(){
+    public String toString() {
         StringBuilder sb = new StringBuilder();
-        for (GroupNormal g : this.groups){
+        for (GroupNormal g : this.groups) {
             sb.append(g.toString());
         }
         sb.append("\r\n");

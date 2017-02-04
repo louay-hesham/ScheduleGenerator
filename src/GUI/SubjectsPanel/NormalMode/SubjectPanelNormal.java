@@ -18,7 +18,6 @@ import java.util.ArrayList;
 public class SubjectPanelNormal extends SubjectPanel {
 
     private final ArrayList<GroupPanelNormal> groups;
-    private final MainGUI gui;
     private JPanel mainPanel;
     private JButton newGroupButton;
     private JButton deleteSubjectButton;
@@ -35,18 +34,16 @@ public class SubjectPanelNormal extends SubjectPanel {
      * @param labBiweek    /
      */
     public SubjectPanelNormal(MainGUI gui, String subjectName, boolean secLecExists, boolean tutExists, boolean tutBiWeek, boolean labExists, boolean labBiweek) {
-        super(subjectName, secLecExists, tutExists, tutBiWeek, labExists, labBiweek);
-        this.gui = gui;
+        super(gui, subjectName, secLecExists, tutExists, tutBiWeek, labExists, labBiweek);
         groups = new ArrayList<>();
         this.initComponents();
+        this.newGroupButtonActionPerformed();
     }
 
-    //WIP for file loader
     public SubjectPanelNormal(MainGUI gui, SubjectNormal sub) {
-        super(sub.getSubjectName(), sub.getInfo());
-        this.gui = gui;
+        super(gui, sub.getSubjectName(), sub.getInfo());
         groups = new ArrayList<>();
-        for (int i = 0; i < sub.getGroups().size(); i++){
+        for (int i = 0; i < sub.getGroups().size(); i++) {
             this.newGroupButtonActionPerformed();
             this.groups.get(i).setGroup(sub.getGroups().get(i));
         }
@@ -64,24 +61,28 @@ public class SubjectPanelNormal extends SubjectPanel {
     }
 
     protected void initComponents() {
-        newGroupButton.addActionListener(e -> newGroupButtonActionPerformed());
-        deleteSubjectButton.addActionListener(e -> deleteSubjectButtonActionPerformed());
+        this.newGroupButton.addActionListener(e -> newGroupButtonActionPerformed());
+        this.deleteSubjectButton.addActionListener(e -> deleteSubjectButtonActionPerformed());
     }
 
     void deleteGroup(GroupPanelNormal group) {
-        int choice = JOptionPane.showConfirmDialog(null, "Are you sure wou want to delete this group?", "Confirm deletion", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
-        if (choice == 0) {
-            this.groups.remove(group);
-            this.groupsTabbedPane.remove(group.getMainPanel());
+        if (this.groups.size() == 1) {
+
+            JOptionPane.showMessageDialog(null,
+                    "Must at least have one group.",
+                    "Can't Delete",
+                    JOptionPane.ERROR_MESSAGE);
+        } else {
+            int choice = JOptionPane.showConfirmDialog(null, "Are you sure wou want to delete this group?", "Confirm deletion", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
+            if (choice == 0) {
+                this.groups.remove(group);
+                this.groupsTabbedPane.remove(group.getMainPanel());
+            }
         }
     }
 
     public JPanel getMainPanel() {
         return mainPanel;
-    }
-
-    public String getSubjectName() {
-        return subjectName;
     }
 
     public Subject getSubject() {
@@ -94,10 +95,10 @@ public class SubjectPanelNormal extends SubjectPanel {
 
     public SubjectPanelChaos getChaos() {
         SubjectChaos chaos = ((SubjectNormal) this.getSubject()).getChaos();
-        return new SubjectPanelChaos(this.subjectName, this.subjectInfo, chaos);
+        return new SubjectPanelChaos(this.gui, this.subjectName, this.subjectInfo, chaos);
     }
 
-    public String toString(){
+    public String toString() {
         StringBuilder sb = new StringBuilder();
         sb.append(this.subjectName + "\r\n");
         sb.append(this.groups.size() + "!");

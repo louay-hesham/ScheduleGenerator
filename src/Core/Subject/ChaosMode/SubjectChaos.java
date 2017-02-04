@@ -76,17 +76,17 @@ public class SubjectChaos extends Subject {
         return labs;
     }
 
-    public String toString(){
+    public String toString() {
         StringBuilder sb = new StringBuilder();
         sb.append(this.subjectName + "\r\n");
         sb.append("LEC " + this.lectures.size() + "\r\n");
-        for (Time t : this.lectures){
+        for (Time t : this.lectures) {
             sb.append(t.toString());
         }
         sb.append("\r\n");
-        if (this.secLectures != null && this.secLectures.size() != 0){
+        if (this.secLectures != null && this.secLectures.size() != 0) {
             sb.append("SEC_LEC " + this.secLectures.size() + "\r\n");
-            for (Time t : this.secLectures){
+            for (Time t : this.secLectures) {
                 sb.append(t.toString());
             }
             sb.append("\r\n");
@@ -94,9 +94,9 @@ public class SubjectChaos extends Subject {
             sb.append("NO_SEC_LEC\r\n");
         }
 
-        if (this.tutorials != null && this.tutorials.size() != 0){
+        if (this.tutorials != null && this.tutorials.size() != 0) {
             sb.append("TUT " + this.tutorials.size() + "\r\n");
-            for (Time t : this.tutorials){
+            for (Time t : this.tutorials) {
                 sb.append(t.toString());
             }
             sb.append("\r\n");
@@ -104,9 +104,9 @@ public class SubjectChaos extends Subject {
             sb.append("NO_TUT\r\n");
         }
 
-        if (this.labs != null && this.labs.size() != 0){
+        if (this.labs != null && this.labs.size() != 0) {
             sb.append("LAB " + this.labs.size() + "\r\n");
-            for (Time t : this.labs){
+            for (Time t : this.labs) {
                 sb.append(t.toString());
             }
             sb.append("\r\n");

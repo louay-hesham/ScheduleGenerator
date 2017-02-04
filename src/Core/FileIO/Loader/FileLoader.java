@@ -22,18 +22,19 @@ public class FileLoader {
         if (fileChooser.showOpenDialog(null) == JFileChooser.APPROVE_OPTION) {
             this.file = fileChooser.getSelectedFile();
             List<String> lines = Files.readAllLines(Paths.get(this.file.getPath()));
-            for (int i = 0; i < lines.size(); i++){
-                if (lines.get(i).equals("")){
+            for (int i = 0; i < lines.size(); i++) {
+                if (lines.get(i).equals("")) {
                     lines.remove(i);
                     i--;
                 }
             }
-            switch(lines.get(0)){
+            switch (lines.get(0)) {
                 case "Normal":
+                    gui.convertToNormalMode();
                     this.parser = new FileParserNormal(lines, gui);
                     break;
                 case "7eby":
-                    gui.chaosModeButtonActionPerformed();
+                    gui.convertTo7ebyMode();
                     this.parser = new FileParserChaos(lines, gui);
                     break;
                 default:
@@ -44,7 +45,7 @@ public class FileLoader {
         }
     }
 
-    public ArrayList<SubjectPanel> getPanels(){
+    public ArrayList<SubjectPanel> getPanels() {
         return this.parser.getPanels();
     }
 }

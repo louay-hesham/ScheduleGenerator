@@ -1,8 +1,8 @@
 package GUI.SubjectsPanel.NormalMode;
 
+import Core.Subject.MeetingType;
 import Core.Subject.NormalMode.GroupNormal;
 import Core.Subject.Time;
-import Core.Subject.MeetingType;
 import GUI.SubjectsPanel.SubjectInfo;
 
 import javax.swing.*;
@@ -151,27 +151,27 @@ public class GroupPanelNormal {
         return new GroupNormal(lecture, secLecture, tutorials, labs);
     }
 
-    protected void setGroup(GroupNormal group){
+    protected void setGroup(GroupNormal group) {
         this.lectureDayComboBox.setSelectedIndex(group.getLecture().day);
         this.lecturePeriodSpinner.setValue(group.getLecture().period);
-        if (this.subjectInfo.secLecExists){
+        if (this.subjectInfo.secLecExists) {
             this.secLectureDayComboBox.setSelectedIndex(group.getSecLecture().day);
             this.secLecturePeriodSpinner.setValue(group.getSecLecture().period);
         }
 
-        if (this.subjectInfo.tutExists){
+        if (this.subjectInfo.tutExists) {
             this.tut1DayComboBox.setSelectedIndex(group.getTutorials().get(0).day);
             this.tut1PeriodSpinner.setValue(group.getTutorials().get(0).period);
-            if (!this.subjectInfo.tutBiWeek){
+            if (!this.subjectInfo.tutBiWeek) {
                 this.tut2DayComboBox.setSelectedIndex(group.getTutorials().get(1).day);
                 this.tut2PeriodSpinner.setValue(group.getTutorials().get(1).period);
             }
         }
 
-        if (this.subjectInfo.labExists){
+        if (this.subjectInfo.labExists) {
             this.lab1DayComboBox.setSelectedIndex(group.getLabs().get(0).day);
             this.lab1PeriodSpinner.setValue(group.getLabs().get(0).period);
-            if (!this.subjectInfo.labBiWeek){
+            if (!this.subjectInfo.labBiWeek) {
                 this.lab2DayComboBox.setSelectedIndex(group.getLabs().get(1).day);
                 this.lab2PeriodSpinner.setValue(group.getLabs().get(1).period);
             }

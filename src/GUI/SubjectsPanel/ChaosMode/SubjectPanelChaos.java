@@ -1,9 +1,10 @@
 package GUI.SubjectsPanel.ChaosMode;
 
 import Core.Subject.ChaosMode.SubjectChaos;
+import Core.Subject.MeetingType;
 import Core.Subject.Subject;
 import Core.Subject.Time;
-import Core.Subject.MeetingType;
+import GUI.MainGUI;
 import GUI.SubjectsPanel.SubjectInfo;
 import GUI.SubjectsPanel.SubjectPanel;
 
@@ -18,6 +19,7 @@ public class SubjectPanelChaos extends SubjectPanel {
     private Meeting lectures, tutorials, labs;
     private JTabbedPane subjectTabbedPane;
     private JPanel mainPanel;
+    private JButton deleteSubjectButton;
 
     /**
      * Creates new form SubjectPanel
@@ -29,13 +31,20 @@ public class SubjectPanelChaos extends SubjectPanel {
      * @param labExists    /
      * @param labBiWeek    /
      */
-    public SubjectPanelChaos(String subjectName, boolean secLecExists, boolean tutExists, boolean tutBiWeek, boolean labExists, boolean labBiWeek) {
-        super(subjectName, secLecExists, tutExists, tutBiWeek, labExists, labBiWeek);
+    public SubjectPanelChaos(MainGUI gui, String subjectName, boolean secLecExists, boolean tutExists, boolean tutBiWeek, boolean labExists, boolean labBiWeek) {
+        super(gui, subjectName, secLecExists, tutExists, tutBiWeek, labExists, labBiWeek);
         this.initComponents();
+        this.lectures.newTimeButtonActionPerformed();
+        if (this.tutorials != null) {
+            this.tutorials.newTimeButtonActionPerformed();
+        }
+        if (this.labs != null) {
+            this.labs.newTimeButtonActionPerformed();
+        }
     }
 
-    public SubjectPanelChaos(String subjectName, SubjectInfo info, SubjectChaos sub) {
-        super(subjectName, info);
+    public SubjectPanelChaos(MainGUI gui, String subjectName, SubjectInfo info, SubjectChaos sub) {
+        super(gui, subjectName, info);
         this.initComponents();
         if (info.secLecExists) {
             this.lectures.addMeetings(sub.getLectures(), sub.getSecLectures());
@@ -66,6 +75,10 @@ public class SubjectPanelChaos extends SubjectPanel {
         return labs == null ? null : labs.getMeetingTimes();
     }
 
+    private void deleteSubjectButtonActionPerformed() {
+        this.gui.deleteSubject(this);
+    }
+
     protected void initComponents() {
         if (this.subjectInfo.secLecExists) {
             this.lectures = new Meeting(MeetingType.SEC_LECTURE);
@@ -90,6 +103,7 @@ public class SubjectPanelChaos extends SubjectPanel {
             }
             this.subjectTabbedPane.addTab("Labs", labs.getMainPanel());
         }
+        this.deleteSubjectButton.addActionListener(e -> deleteSubjectButtonActionPerformed());
     }
 
     public String getSubjectName() {
@@ -108,7 +122,7 @@ public class SubjectPanelChaos extends SubjectPanel {
                 this.getLabsTimes());
     }
 
-    public String toString(){
+    public String toString() {
         return this.getSubject().toString();
     }
 }

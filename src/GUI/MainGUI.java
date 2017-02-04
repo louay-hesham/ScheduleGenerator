@@ -65,28 +65,28 @@ public class MainGUI {
     private void addSubjectButtonActionPerformed() {
         if (subjectNameTextField.getText() == null || subjectNameTextField.getText().equals("")) {
             JOptionPane.showMessageDialog(null, "Subject name can not be empty!", "Subject name error", JOptionPane.ERROR_MESSAGE);
-        } else if (this.chaosMode) {
-            SubjectPanel subject = new SubjectPanelChaos(
-                    subjectNameTextField.getText(),
-                    secondaryLectureCheckBox.isSelected(),
-                    tutorialCheckBox.isSelected(),
-                    tutBiWeekCheckBox.isSelected(),
-                    labCheckBox.isSelected(),
-                    labBiWeekCheckBox.isSelected());
-            subjects.add(subject);
-            subjectsTabbedPane.addTab(subjectNameTextField.getText(), subject.getMainPanel());
-            subjectNameTextField.setText("");
         } else {
-            SubjectPanel subject = new SubjectPanelNormal(this,
-                    subjectNameTextField.getText(),
-                    secondaryLectureCheckBox.isSelected(),
-                    tutorialCheckBox.isSelected(),
-                    tutBiWeekCheckBox.isSelected(),
-                    labCheckBox.isSelected(),
-                    labBiWeekCheckBox.isSelected());
-            subjects.add(subject);
-            subjectsTabbedPane.addTab(subjectNameTextField.getText(), subject.getMainPanel());
-            subjectNameTextField.setText("");
+            SubjectPanel subject;
+            if (this.chaosMode) {
+                subject = new SubjectPanelChaos( this,
+                        this.subjectNameTextField.getText(),
+                        this.secondaryLectureCheckBox.isSelected(),
+                        this.tutorialCheckBox.isSelected(),
+                        this.tutBiWeekCheckBox.isSelected(),
+                        this.labCheckBox.isSelected(),
+                        this.labBiWeekCheckBox.isSelected());
+            } else {
+                subject = new SubjectPanelNormal(this,
+                        this.subjectNameTextField.getText(),
+                        this.secondaryLectureCheckBox.isSelected(),
+                        this.tutorialCheckBox.isSelected(),
+                        this.tutBiWeekCheckBox.isSelected(),
+                        this.labCheckBox.isSelected(),
+                        this.labBiWeekCheckBox.isSelected());
+            }
+            this.subjects.add(subject);
+            this.subjectsTabbedPane.addTab(subjectNameTextField.getText(), subject.getMainPanel());
+            this.resetInputFields();
         }
     }
 
@@ -116,7 +116,7 @@ public class MainGUI {
             FileLoader fl = new FileLoader(this);
             ArrayList<SubjectPanel> loadedSubjects = fl.getPanels();
             this.subjects.addAll(loadedSubjects);
-            for (SubjectPanel s : loadedSubjects){
+            for (SubjectPanel s : loadedSubjects) {
                 subjectsTabbedPane.addTab(s.getSubjectName(), s.getMainPanel());
             }
         } catch (Exception e) {
@@ -128,17 +128,41 @@ public class MainGUI {
         if (this.subjects.isEmpty()) {
             this.showErrorMessage("Must have at least one subject!");
         } else {
-            FileSaver fs = new FileSaver(this.subjects, this.chaosMode? "7eby" : "Normal");
+            FileSaver fs = new FileSaver(this.subjects, this.chaosMode ? "7eby" : "Normal");
             fs.saveFile();
         }
     }
 
-    public void chaosModeButtonActionPerformed() {
-        if (!this.chaosMode) {
-            this.chaosMode = true;
-            this.convertTo7ebyMode();
-            this.chaosModeButton.setEnabled(false);
+    private void chaosModeButtonActionPerformed() {
+        if (this.showConversionDialog() == 0) {
+            this.convert();
         }
+    }
+
+    private void convert() {
+        if (!this.chaosMode) {
+            this.convertTo7ebyMode();
+        } else {
+            this.convertToNormalMode();
+        }
+    }
+
+    private int showConversionDialog() {
+        int choice;
+        if (!this.chaosMode) {
+            choice = JOptionPane.showConfirmDialog(null,
+                    "Going to 7eby mode, you can't go back unless the program resets.\r\nAre you sure you want to continue?",
+                    "Converting to 7eby mode",
+                    JOptionPane.YES_NO_OPTION,
+                    JOptionPane.WARNING_MESSAGE);
+        } else {
+            choice = JOptionPane.showConfirmDialog(null,
+                    "Going to normal mode (website registration), the program must reset to do this.\r\nAre you sure you want to continue?",
+                    "Converting to normal mode",
+                    JOptionPane.YES_NO_OPTION,
+                    JOptionPane.WARNING_MESSAGE);
+        }
+        return choice;
     }
 
     private void initComponents() {
@@ -151,27 +175,56 @@ public class MainGUI {
         chaosModeButton.addActionListener(e -> chaosModeButtonActionPerformed());
     }
 
-    public void deleteSubject(SubjectPanelNormal subject) {
-        int choice = JOptionPane.showConfirmDialog(null, "Are you sure wou want to delete the subject?", "Confirm deletion", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
-        if (choice == 0) {
-            this.subjects.remove(subject);
-            this.subjectsTabbedPane.remove(subject.getMainPanel());
+    private void resetInputFields() {
+        this.subjectNameTextField.setText("");
+        this.secondaryLectureCheckBox.setSelected(false);
+        this.tutorialCheckBox.setSelected(false);
+        this.tutBiWeekCheckBox.setSelected(false);
+        this.labCheckBox.setSelected(false);
+        this.labBiWeekCheckBox.setSelected(false);
+    }
+
+    private void reset() {
+        for (int i = 0; i < this.subjects.size(); i++) {
+            this.subjectsTabbedPane.removeTabAt(0);
         }
+        this.subjects.clear();
+        this.resetInputFields();
     }
 
     private void showErrorMessage(String error) {
         JOptionPane.showMessageDialog(null, error, "Error", JOptionPane.ERROR_MESSAGE);
     }
 
-    private void convertTo7ebyMode() {
-        ArrayList<SubjectPanel> subjectsChaos = new ArrayList<>();
-        for (SubjectPanel s : this.subjects) {
-            this.subjectsTabbedPane.removeTabAt(0);
-            SubjectPanel chaos = ((SubjectPanelNormal) s).getChaos();
-            subjectsChaos.add(chaos);
-            this.subjectsTabbedPane.addTab(s.getSubjectName(), chaos.getMainPanel());
+    public void convertToNormalMode() {
+        if (this.chaosMode) {
+            this.chaosMode = false;
+            this.chaosModeButton.setText("Convert to 7eby mode");
+            this.reset();
         }
-        this.subjects.clear();
-        this.subjects.addAll(subjectsChaos);
+    }
+
+    public void convertTo7ebyMode() {
+        if (!this.chaosMode) {
+            this.chaosMode = true;
+            this.chaosModeButton.setText("Convert to normal mode");
+            ArrayList<SubjectPanel> subjectsChaos = new ArrayList<>();
+            for (SubjectPanel s : this.subjects) {
+                this.subjectsTabbedPane.removeTabAt(0);
+                SubjectPanel chaos = ((SubjectPanelNormal) s).getChaos();
+                subjectsChaos.add(chaos);
+                this.subjectsTabbedPane.addTab(s.getSubjectName(), chaos.getMainPanel());
+            }
+            this.subjects.clear();
+            this.subjects.addAll(subjectsChaos);
+        }
+    }
+
+    public void deleteSubject(SubjectPanel subject) {
+        int choice = JOptionPane.showConfirmDialog(null, "Are you sure wou want to delete the subject?", "Confirm deletion", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
+        if (choice == 0) {
+            this.subjects.remove(subject);
+            this.subjectsTabbedPane.remove(subject.getMainPanel());
+        }
     }
 }
