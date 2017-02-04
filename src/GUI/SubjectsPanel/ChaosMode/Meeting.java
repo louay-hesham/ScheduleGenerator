@@ -90,7 +90,7 @@ public class Meeting {
     }
 
     void deleteTime(MeetingTime time) {
-        if (this.meetings.size() == 1){
+        if (this.meetings.size() == 1) {
 
             JOptionPane.showMessageDialog(null,
                     "Must at least have one " + this.meetingType.getTypeStringSimplified() + ".",
@@ -98,7 +98,7 @@ public class Meeting {
                     JOptionPane.ERROR_MESSAGE);
         } else {
             int choice = JOptionPane.showConfirmDialog(null, "Are you sure wou want to delete this " + this.meetingType.getTypeStringSimplified() + "?", "Confirm deletion", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
-            if (choice == 0){
+            if (choice == 0) {
                 int i = 0;
                 for (int j = 0; j < this.meetings.size(); j++) {
                     if (time.equals(this.meetings.get(j))) {

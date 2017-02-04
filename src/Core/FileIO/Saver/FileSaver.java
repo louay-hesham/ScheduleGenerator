@@ -16,17 +16,17 @@ public class FileSaver {
     private final StringBuilder sb;
     private final String type;
 
-    public FileSaver(ArrayList<SubjectPanel> subjects, String type){
+    public FileSaver(ArrayList<SubjectPanel> subjects, String type) {
         this.type = type;
         this.sb = new StringBuilder();
         this.sb.append(type + "\r\n");
         this.sb.append(subjects.size() + "\r\n\r\n");
-        for (SubjectPanel s : subjects){
+        for (SubjectPanel s : subjects) {
             this.sb.append(s.toString());
         }
     }
 
-    public void saveFile(){
+    public void saveFile() {
         JFileChooser fileChooser = new JFileChooser();
         if (fileChooser.showSaveDialog(null) == JFileChooser.APPROVE_OPTION) {
             File file = fileChooser.getSelectedFile();

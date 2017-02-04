@@ -33,10 +33,10 @@ public class SubjectPanelChaos extends SubjectPanel {
         super(subjectName, secLecExists, tutExists, tutBiWeek, labExists, labBiWeek);
         this.initComponents();
         this.lectures.newTimeButtonActionPerformed();
-        if (this.tutorials != null){
+        if (this.tutorials != null) {
             this.tutorials.newTimeButtonActionPerformed();
         }
-        if (this.labs != null){
+        if (this.labs != null) {
             this.labs.newTimeButtonActionPerformed();
         }
     }

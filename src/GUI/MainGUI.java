@@ -134,12 +134,12 @@ public class MainGUI {
     }
 
     private void chaosModeButtonActionPerformed() {
-        if (this.showConversionDialog() == 0){
+        if (this.showConversionDialog() == 0) {
             this.convert();
         }
     }
 
-    private void convert(){
+    private void convert() {
         if (!this.chaosMode) {
             this.convertTo7ebyMode();
         } else {
@@ -147,7 +147,7 @@ public class MainGUI {
         }
     }
 
-    private int showConversionDialog(){
+    private int showConversionDialog() {
         int choice;
         if (!this.chaosMode) {
             choice = JOptionPane.showConfirmDialog(null,
@@ -165,14 +165,6 @@ public class MainGUI {
         return choice;
     }
 
-    public void convertToNormalMode(){
-        if (this.chaosMode){
-            this.chaosMode = false;
-            this.chaosModeButton.setText("Convert to 7eby mode");
-            this.reset();
-        }
-    }
-
     private void initComponents() {
         addSubjectButton.addActionListener(e -> addSubjectButtonActionPerformed());
         tutorialCheckBox.addActionListener(e -> tutorialCheckBoxActionPerformed());
@@ -183,7 +175,7 @@ public class MainGUI {
         chaosModeButton.addActionListener(e -> chaosModeButtonActionPerformed());
     }
 
-    private void resetInputFields(){
+    private void resetInputFields() {
         this.subjectNameTextField.setText("");
         this.secondaryLectureCheckBox.setSelected(false);
         this.tutorialCheckBox.setSelected(false);
@@ -192,28 +184,28 @@ public class MainGUI {
         this.labBiWeekCheckBox.setSelected(false);
     }
 
-    private void reset(){
-        for (int i = 0; i < this.subjects.size(); i++){
+    private void reset() {
+        for (int i = 0; i < this.subjects.size(); i++) {
             this.subjectsTabbedPane.removeTabAt(0);
         }
         this.subjects.clear();
         this.resetInputFields();
     }
 
-    public void deleteSubject(SubjectPanelNormal subject) {
-        int choice = JOptionPane.showConfirmDialog(null, "Are you sure wou want to delete the subject?", "Confirm deletion", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
-        if (choice == 0) {
-            this.subjects.remove(subject);
-            this.subjectsTabbedPane.remove(subject.getMainPanel());
-        }
-    }
-
     private void showErrorMessage(String error) {
         JOptionPane.showMessageDialog(null, error, "Error", JOptionPane.ERROR_MESSAGE);
     }
 
+    public void convertToNormalMode() {
+        if (this.chaosMode) {
+            this.chaosMode = false;
+            this.chaosModeButton.setText("Convert to 7eby mode");
+            this.reset();
+        }
+    }
+
     public void convertTo7ebyMode() {
-        if (!this.chaosMode){
+        if (!this.chaosMode) {
             this.chaosMode = true;
             this.chaosModeButton.setText("Convert to normal mode");
             ArrayList<SubjectPanel> subjectsChaos = new ArrayList<>();
@@ -225,6 +217,14 @@ public class MainGUI {
             }
             this.subjects.clear();
             this.subjects.addAll(subjectsChaos);
+        }
+    }
+
+    public void deleteSubject(SubjectPanelNormal subject) {
+        int choice = JOptionPane.showConfirmDialog(null, "Are you sure wou want to delete the subject?", "Confirm deletion", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
+        if (choice == 0) {
+            this.subjects.remove(subject);
+            this.subjectsTabbedPane.remove(subject.getMainPanel());
         }
     }
 }

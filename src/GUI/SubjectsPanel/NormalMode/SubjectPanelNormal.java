@@ -69,7 +69,7 @@ public class SubjectPanelNormal extends SubjectPanel {
     }
 
     void deleteGroup(GroupPanelNormal group) {
-        if (this.groups.size() == 1){
+        if (this.groups.size() == 1) {
 
             JOptionPane.showMessageDialog(null,
                     "Must at least have one group.",

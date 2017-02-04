@@ -7,7 +7,7 @@ public enum MeetingType {
     LECTURE, SEC_LECTURE, TUT_FULL, TUT_HALF, LAB_FULL, LAB_HALF, TUT_UNKNOWN, LAB_UNKNOWN;
 
     public String getTypeStringSimplified() {
-        switch (this){
+        switch (this) {
             case LECTURE:
             case SEC_LECTURE:
                 return "Lecture";
