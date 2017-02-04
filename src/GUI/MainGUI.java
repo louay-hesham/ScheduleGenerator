@@ -68,7 +68,7 @@ public class MainGUI {
         } else {
             SubjectPanel subject;
             if (this.chaosMode) {
-                subject = new SubjectPanelChaos(
+                subject = new SubjectPanelChaos( this,
                         this.subjectNameTextField.getText(),
                         this.secondaryLectureCheckBox.isSelected(),
                         this.tutorialCheckBox.isSelected(),
@@ -220,7 +220,7 @@ public class MainGUI {
         }
     }
 
-    public void deleteSubject(SubjectPanelNormal subject) {
+    public void deleteSubject(SubjectPanel subject) {
         int choice = JOptionPane.showConfirmDialog(null, "Are you sure wou want to delete the subject?", "Confirm deletion", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
         if (choice == 0) {
             this.subjects.remove(subject);

@@ -18,7 +18,6 @@ import java.util.ArrayList;
 public class SubjectPanelNormal extends SubjectPanel {
 
     private final ArrayList<GroupPanelNormal> groups;
-    private final MainGUI gui;
     private JPanel mainPanel;
     private JButton newGroupButton;
     private JButton deleteSubjectButton;
@@ -35,16 +34,14 @@ public class SubjectPanelNormal extends SubjectPanel {
      * @param labBiweek    /
      */
     public SubjectPanelNormal(MainGUI gui, String subjectName, boolean secLecExists, boolean tutExists, boolean tutBiWeek, boolean labExists, boolean labBiweek) {
-        super(subjectName, secLecExists, tutExists, tutBiWeek, labExists, labBiweek);
-        this.gui = gui;
+        super(gui, subjectName, secLecExists, tutExists, tutBiWeek, labExists, labBiweek);
         groups = new ArrayList<>();
         this.initComponents();
         this.newGroupButtonActionPerformed();
     }
 
     public SubjectPanelNormal(MainGUI gui, SubjectNormal sub) {
-        super(sub.getSubjectName(), sub.getInfo());
-        this.gui = gui;
+        super(gui, sub.getSubjectName(), sub.getInfo());
         groups = new ArrayList<>();
         for (int i = 0; i < sub.getGroups().size(); i++) {
             this.newGroupButtonActionPerformed();
@@ -64,8 +61,8 @@ public class SubjectPanelNormal extends SubjectPanel {
     }
 
     protected void initComponents() {
-        newGroupButton.addActionListener(e -> newGroupButtonActionPerformed());
-        deleteSubjectButton.addActionListener(e -> deleteSubjectButtonActionPerformed());
+        this.newGroupButton.addActionListener(e -> newGroupButtonActionPerformed());
+        this.deleteSubjectButton.addActionListener(e -> deleteSubjectButtonActionPerformed());
     }
 
     void deleteGroup(GroupPanelNormal group) {
@@ -98,7 +95,7 @@ public class SubjectPanelNormal extends SubjectPanel {
 
     public SubjectPanelChaos getChaos() {
         SubjectChaos chaos = ((SubjectNormal) this.getSubject()).getChaos();
-        return new SubjectPanelChaos(this.subjectName, this.subjectInfo, chaos);
+        return new SubjectPanelChaos(this.gui, this.subjectName, this.subjectInfo, chaos);
     }
 
     public String toString() {
