@@ -13,9 +13,11 @@ import java.util.ArrayList;
  */
 public class FileSaver {
 
-    protected final StringBuilder sb;
+    private final StringBuilder sb;
+    private final String type;
 
     public FileSaver(ArrayList<SubjectPanel> subjects, String type){
+        this.type = type;
         this.sb = new StringBuilder();
         this.sb.append(type + "\r\n");
         this.sb.append(subjects.size() + "\r\n\r\n");
@@ -29,7 +31,7 @@ public class FileSaver {
         if (fileChooser.showSaveDialog(null) == JFileChooser.APPROVE_OPTION) {
             File file = fileChooser.getSelectedFile();
             try {
-                PrintWriter writer = new PrintWriter(file);
+                PrintWriter writer = new PrintWriter(file.getPath() + "_" + this.type + ".SGEN");
                 writer.write(this.sb.toString());
                 writer.close();
             } catch (FileNotFoundException e) {
