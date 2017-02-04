@@ -133,33 +133,44 @@ public class MainGUI {
         }
     }
 
-    public void chaosModeButtonActionPerformed() {
+    private void chaosModeButtonActionPerformed() {
+        if (this.showConversionDialog() == 0){
+            this.convert();
+        }
+    }
+
+    private void convert(){
         if (!this.chaosMode) {
-            int choice = JOptionPane.showConfirmDialog(null,
+            this.convertTo7ebyMode();
+        } else {
+            this.convertToNormalMode();
+        }
+    }
+
+    private int showConversionDialog(){
+        int choice;
+        if (!this.chaosMode) {
+            choice = JOptionPane.showConfirmDialog(null,
                     "Going to 7eby mode, you can't go back unless the program resets.\r\nAre you sure you want to continue?",
                     "Converting to 7eby mode",
                     JOptionPane.YES_NO_OPTION,
                     JOptionPane.WARNING_MESSAGE);
-            if (choice == 0){
-                this.chaosMode = true;
-                this.chaosModeButton.setText("Convert to normal mode");
-                this.convertTo7ebyMode();
-            }
         } else {
-            int choice = JOptionPane.showConfirmDialog(null,
+            choice = JOptionPane.showConfirmDialog(null,
                     "Going to normal mode (website registration), the program must reset to do this.\r\nAre you sure you want to continue?",
                     "Converting to normal mode",
                     JOptionPane.YES_NO_OPTION,
                     JOptionPane.WARNING_MESSAGE);
-            if (choice == 0) {
-                this.chaosMode = false;
-                this.convertToNormalMode();
-            }
         }
+        return choice;
     }
 
-    private void convertToNormalMode(){
-        this.reset();
+    public void convertToNormalMode(){
+        if (this.chaosMode){
+            this.chaosMode = false;
+            this.chaosModeButton.setText("Convert to 7eby mode");
+            this.reset();
+        }
     }
 
     private void initComponents() {
@@ -181,7 +192,7 @@ public class MainGUI {
         this.labBiWeekCheckBox.setSelected(false);
     }
 
-    public void reset(){
+    private void reset(){
         for (int i = 0; i < this.subjects.size(); i++){
             this.subjectsTabbedPane.removeTabAt(0);
         }
@@ -201,15 +212,19 @@ public class MainGUI {
         JOptionPane.showMessageDialog(null, error, "Error", JOptionPane.ERROR_MESSAGE);
     }
 
-    private void convertTo7ebyMode() {
-        ArrayList<SubjectPanel> subjectsChaos = new ArrayList<>();
-        for (SubjectPanel s : this.subjects) {
-            this.subjectsTabbedPane.removeTabAt(0);
-            SubjectPanel chaos = ((SubjectPanelNormal) s).getChaos();
-            subjectsChaos.add(chaos);
-            this.subjectsTabbedPane.addTab(s.getSubjectName(), chaos.getMainPanel());
+    public void convertTo7ebyMode() {
+        if (!this.chaosMode){
+            this.chaosMode = true;
+            this.chaosModeButton.setText("Convert to normal mode");
+            ArrayList<SubjectPanel> subjectsChaos = new ArrayList<>();
+            for (SubjectPanel s : this.subjects) {
+                this.subjectsTabbedPane.removeTabAt(0);
+                SubjectPanel chaos = ((SubjectPanelNormal) s).getChaos();
+                subjectsChaos.add(chaos);
+                this.subjectsTabbedPane.addTab(s.getSubjectName(), chaos.getMainPanel());
+            }
+            this.subjects.clear();
+            this.subjects.addAll(subjectsChaos);
         }
-        this.subjects.clear();
-        this.subjects.addAll(subjectsChaos);
     }
 }

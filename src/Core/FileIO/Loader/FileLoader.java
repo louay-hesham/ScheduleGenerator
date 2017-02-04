@@ -30,10 +30,11 @@ public class FileLoader {
             }
             switch (lines.get(0)) {
                 case "Normal":
+                    gui.convertToNormalMode();
                     this.parser = new FileParserNormal(lines, gui);
                     break;
                 case "7eby":
-                    gui.chaosModeButtonActionPerformed();
+                    gui.convertTo7ebyMode();
                     this.parser = new FileParserChaos(lines, gui);
                     break;
                 default:
