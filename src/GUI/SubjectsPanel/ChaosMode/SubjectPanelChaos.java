@@ -32,6 +32,13 @@ public class SubjectPanelChaos extends SubjectPanel {
     public SubjectPanelChaos(String subjectName, boolean secLecExists, boolean tutExists, boolean tutBiWeek, boolean labExists, boolean labBiWeek) {
         super(subjectName, secLecExists, tutExists, tutBiWeek, labExists, labBiWeek);
         this.initComponents();
+        this.lectures.newTimeButtonActionPerformed();
+        if (this.tutorials != null){
+            this.tutorials.newTimeButtonActionPerformed();
+        }
+        if (this.labs != null){
+            this.labs.newTimeButtonActionPerformed();
+        }
     }
 
     public SubjectPanelChaos(String subjectName, SubjectInfo info, SubjectChaos sub) {
