@@ -1,104 +1,175 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package Core.Generator;
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
-import java.net.URL;
+import Core.Subject.Subject;
+import Core.Subject.Time;
+
 import java.util.ArrayList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import java.util.Arrays;
+import java.util.Stack;
 
 /**
- *
- * @author louay
+ * Created by louay on 1/30/2017.
  */
 public class Generator {
-    
-    public static ArrayList<String[][]> getGeneratedSchedules(String input){
-        String output = runExe(input);
-        ArrayList<String[][]> schedules = new ArrayList<>();
-        String[] timetables = output.split("#");
-        for (String timetable : timetables){
-            String[] periods = timetable.split("@");
-            String[][] t = new String[14][];
-            int i = 0;
-            for (String period : periods){
-                String[] days = period.split("!");
-                int j = 0;
-                t[i] = new String[6];
-                for (String day : days){
-                    t[i][j] = day;
-                    j++;
+    private final Stack<Subject> stack;
+    private final ArrayList<Subject> subjects;
+    private final String[][] currentSchedule;
+    private final String emptyPeriod;
+    private final Optimizer optimizer;
+    private int iSub, nSub;
+
+    public Generator(ArrayList<Subject> subject) {
+        this.subjects = subject;
+        this.stack = new Stack<>();
+        this.nSub = this.subjects.size();
+        this.iSub = 0;
+        this.currentSchedule = this.getNewSchedule();
+        this.emptyPeriod = new String("___");
+        this.optimizer = new Optimizer();
+    }
+
+    public ArrayList<String[][]> getSchedules() {
+        this.generate();
+        return this.optimizer.getOptimizedSchedules();
+    }
+
+    private void generate() {
+        while (true) {
+            Subject s = this.subjects.get(iSub);
+            try {
+                s.nextPermutation();
+                boolean pushed = this.push(s);
+                if (pushed) {
+                    if (iSub == nSub) {
+                        this.optimizer.insertSchedule(this.deepCopy(this.currentSchedule));
+                        this.pop();
+                        continue;
+                    } else {
+                        continue;
+                    }
+                } else {
+                    continue;
                 }
-                i++;
-            }
-            schedules.add(t);
-        }
-        return schedules;
-    }
-    
-    private static String runExe(String input) {
-        try {
-            Runtime rt = Runtime.getRuntime();
-            URL url = Generator.class.getResource("Schedule_Creator.exe");
-            Process p = rt.exec(url.getPath());
-            InputStream in = p.getInputStream();
-            OutputStream out = p.getOutputStream();
-            //InputStream err = p.getErrorStream();
-            
-            System.out.println(getStreamOutput(in));
-            writeToStream(out, input);
-            while (true){
-                if (getStreamOutput(in).endsWith("*")){
-                    writeToStream(out, "2\n");
-//                    int exit = waitForExit(p);
-//                    System.out.println("Exit code is: " + exit);
-                    String str = getStreamOutput(in);
-                    System.out.println(str);
-                    return str;
+            } catch (Exception e) {
+                try {
+                    this.pop();
+                    continue;
+                } catch (Exception e1) {
+                    return;
                 }
             }
-        } catch (IOException ex) {
-            Logger.getLogger(Generator.class.getName()).log(Level.SEVERE, null, ex);
-            return "Error";
         }
     }
 
-    private static String getStreamOutput(InputStream in) {
-        try {
-            while (in.available() == 0) {
+    private boolean push(Subject s) {
+        boolean success = true;
+        boolean[][] visited = new boolean[14][7];
+        for (Time t : s.getTimesInPermutation()) {
+            switch (t.getType()) {
+                case LECTURE:
+                case SEC_LECTURE:
+                case LAB_FULL:
+                case TUT_FULL: {
+                    for (int i = t.from; i <= t.to; i++) {
+                        success = success && (this.currentSchedule[i][t.day].equals(this.emptyPeriod)) && (!visited[i][t.day]);
+                        visited[i][t.day] = true;
+                    }
+                    break;
+                }
+                case LAB_HALF:
+                case TUT_HALF: {
+                    success = success && ((this.currentSchedule[t.to][t.day].equals(this.emptyPeriod) && (!visited[t.to][t.day])) || (this.currentSchedule[t.to - 1][t.day].equals(this.emptyPeriod) && (!visited[t.to - 1][t.day])));
+                    if (this.currentSchedule[t.to][t.day].equals(this.emptyPeriod)) {
+                        visited[t.to][t.day] = true;
+                    } else if (this.currentSchedule[t.to - 1][t.day].equals(this.emptyPeriod)) {
+                        visited[t.to - 1][t.day] = true;
+                    }
+                    break;
+                }
             }
-            byte[] b;
-            b = new byte[in.available()];
-            in.read(b);
-            StringBuilder sb = new StringBuilder();
-            for (byte c : b) {
-                sb.append(Character.toChars(c));
+        }
+        if (success) {
+            this.stack.push(this.subjects.get(iSub));
+            for (Time t : s.getTimesInPermutation()) {
+                switch (t.getType()) {
+                    case LECTURE:
+                    case SEC_LECTURE:
+                    case LAB_FULL:
+                    case TUT_FULL: {
+                        for (int i = t.from; i <= t.to; i++) {
+                            this.currentSchedule[i][t.day] = (s.getSubjectName() + "!" + t.getTypeString());
+                        }
+                        break;
+                    }
+                    case LAB_HALF:
+                    case TUT_HALF: {
+                        if (this.currentSchedule[t.to][t.day].equals(this.emptyPeriod)) {
+                            this.currentSchedule[t.to][t.day] = (s.getSubjectName() + "!" + t.getTypeString());
+                        } else {
+                            this.currentSchedule[t.to - 1][t.day] = (s.getSubjectName() + "!" + t.getTypeString());
+                        }
+                        break;
+                    }
+                }
             }
-            return sb.toString();
-
-        } catch (IOException ex) {
-            Logger.getLogger(Generator.class.getName()).log(Level.SEVERE, null, ex);
-            return "Error";
+            iSub++;
         }
+        return success;
     }
 
-    private static void writeToStream(OutputStream out, String str) {
-        try {
-            out.write(str.getBytes());
-            out.flush();
-        } catch (IOException ex) {
-            Logger.getLogger(Generator.class.getName()).log(Level.SEVERE, null, ex);
+    private void pop() throws Exception {
+        if (this.stack.isEmpty()) {
+            throw new Exception("Done");
         }
+        Subject s = this.stack.pop();
+        //this.currentSchedule = this.generationScheduleStack.pop();
+        for (Time t : s.getTimesInPermutation()) {
+            switch (t.getType()) {
+                case LECTURE:
+                case SEC_LECTURE:
+                case LAB_FULL:
+                case TUT_FULL: {
+                    for (int i = t.from; i <= t.to; i++) {
+                        this.currentSchedule[i][t.day] = "___";
+                    }
+                    break;
+                }
+                case LAB_HALF:
+                case TUT_HALF: {
+                    String toSubjectName = this.currentSchedule[t.to][t.day].split("!")[0];
+                    if (s.getSubjectName().equals(toSubjectName)) {
+                        this.currentSchedule[t.to][t.day] = "___";
+                    } else {
+                        this.currentSchedule[t.to - 1][t.day] = "___";
+                    }
+                    break;
+                }
+            }
+        }
+        iSub--;
     }
-    
-    private static int waitForExit(Process p){
-        while (p.isAlive()){}
-        return p.exitValue();
+
+    private String[][] getNewSchedule() {
+        String[][] newSchedule = new String[14][];
+        for (int i = 0; i < 14; i++) {
+            newSchedule[i] = new String[7];
+            for (int j = 0; j < 7; j++) {
+                newSchedule[i][j] = "___";
+            }
+        }
+        return newSchedule;
     }
+
+    private String[][] deepCopy(String[][] original) {
+        if (original == null) {
+            return null;
+        }
+
+        final String[][] result = new String[original.length][];
+        for (int i = 0; i < original.length; i++) {
+            result[i] = Arrays.copyOf(original[i], original[i].length);
+        }
+        return result;
+    }
+
 }

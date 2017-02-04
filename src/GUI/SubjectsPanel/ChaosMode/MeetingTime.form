@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<form xmlns="http://www.intellij.com/uidesigner/form/" version="1" bind-to-class="GUI.SubjectsPanel.ChaosMode.MeetingTime">
+  <grid id="27dc6" binding="mainPanel" layout-manager="GridLayoutManager" row-count="2" column-count="5" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+    <margin top="3" left="3" bottom="3" right="3"/>
+    <constraints>
+      <xy x="20" y="20" width="500" height="75"/>
+    </constraints>
+    <properties>
+      <background color="-16737637"/>
+      <opaque value="false"/>
+    </properties>
+    <border type="line">
+      <color color="-16576074"/>
+    </border>
+    <children>
+      <component id="ae510" class="javax.swing.JComboBox" binding="meetingDay">
+        <constraints>
+          <grid row="0" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="2" anchor="8" fill="1" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <model>
+            <item value="Saturday"/>
+            <item value="Sunday"/>
+            <item value="Monday"/>
+            <item value="Tuesday"/>
+            <item value="Wednesday"/>
+            <item value="Thursday"/>
+          </model>
+        </properties>
+      </component>
+      <component id="59850" class="javax.swing.JComboBox" binding="secLecDay">
+        <constraints>
+          <grid row="1" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="2" anchor="8" fill="1" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <model>
+            <item value="Saturday"/>
+            <item value="Sunday"/>
+            <item value="Monday"/>
+            <item value="Tuesday"/>
+            <item value="Wednesday"/>
+            <item value="Thursday"/>
+          </model>
+        </properties>
+      </component>
+      <component id="f17d3" class="javax.swing.JLabel" binding="meetingTypeLabel">
+        <constraints>
+          <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <text value="meetingTypeLabel"/>
+        </properties>
+      </component>
+      <component id="9d02d" class="javax.swing.JLabel" binding="secLecLabel">
+        <constraints>
+          <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <text value="Secondary Lecture"/>
+        </properties>
+      </component>
+      <component id="74834" class="javax.swing.JLabel" binding="meetingPeriodLabel">
+        <constraints>
+          <grid row="0" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <text value="Period"/>
+        </properties>
+      </component>
+      <component id="10d9c" class="javax.swing.JLabel" binding="secLecPeriodLabel">
+        <constraints>
+          <grid row="1" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <text value="Period"/>
+        </properties>
+      </component>
+      <component id="f1b25" class="javax.swing.JSpinner" binding="meetingPeriodSpinner">
+        <constraints>
+          <grid row="0" column="3" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <editor value=""/>
+          <enabled value="true"/>
+          <opaque value="false"/>
+          <requestFocusEnabled value="false"/>
+        </properties>
+      </component>
+      <component id="46256" class="javax.swing.JSpinner" binding="secLecPeriodSpinner">
+        <constraints>
+          <grid row="1" column="3" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties/>
+      </component>
+      <component id="4ed5d" class="javax.swing.JButton" binding="deleteMeetingButton">
+        <constraints>
+          <grid row="0" column="4" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <background color="-65508"/>
+          <text value="Delete Meeting"/>
+        </properties>
+      </component>
+    </children>
+  </grid>
+</form>
