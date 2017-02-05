@@ -106,6 +106,10 @@ public class SubjectPanelChaos extends SubjectPanel {
         this.deleteSubjectButton.addActionListener(e -> deleteSubjectButtonActionPerformed());
     }
 
+    public void advancedModeConvert(){
+
+    }
+
     public String getSubjectName() {
         return subjectName;
     }

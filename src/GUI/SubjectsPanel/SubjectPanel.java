@@ -27,6 +27,8 @@ public abstract class SubjectPanel {
 
     protected abstract void initComponents();
 
+    public abstract void advancedModeConvert();
+
     public abstract JPanel getMainPanel();
 
     public abstract Subject getSubject();
