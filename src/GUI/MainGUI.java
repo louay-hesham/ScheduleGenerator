@@ -20,7 +20,7 @@ import java.util.ArrayList;
 public class MainGUI {
 
     private final ArrayList<SubjectPanel> subjects;
-    private boolean chaosMode;
+    private boolean chaosMode, advanced;
     private JPanel mainPanel;
     private JTextField subjectNameTextField;
     private JCheckBox secondaryLectureCheckBox;
@@ -36,9 +36,11 @@ public class MainGUI {
     @SuppressWarnings("unused")
     private JLabel subjectNameLabel;
     private JTabbedPane subjectsTabbedPane;
+    private JButton goAdvancedButton;
 
     private MainGUI() {
         this.chaosMode = false;
+        this.advanced = false;
         labBiWeekCheckBox.setVisible(false);
         tutBiWeekCheckBox.setVisible(false);
         subjects = new ArrayList<>();
@@ -139,6 +141,14 @@ public class MainGUI {
         }
     }
 
+    private void advancedButtonActionPerformed(){
+        this.advanced = !this.advanced;
+        this.goAdvancedButton.setText(this.advanced? "Disable Advanced Mode" : "Enable Advanced Mode");
+        for (SubjectPanel s : this.subjects){
+            s.advancedModeConvert();
+        }
+    }
+
     private void convert() {
         if (!this.chaosMode) {
             this.convertTo7ebyMode();
@@ -173,6 +183,7 @@ public class MainGUI {
         loadFileButton.addActionListener(e -> loadFileButtonActionPerformed());
         saveFileButton.addActionListener(e -> saveFileButtonActionPerformed());
         chaosModeButton.addActionListener(e -> chaosModeButtonActionPerformed());
+        goAdvancedButton.addActionListener(e -> advancedButtonActionPerformed());
     }
 
     private void resetInputFields() {
