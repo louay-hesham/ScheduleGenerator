@@ -22,7 +22,6 @@ public class SubjectPanelNormal extends SubjectPanel {
     private JButton newGroupButton;
     private JButton deleteSubjectButton;
     private JTabbedPane groupsTabbedPane;
-    private boolean advanced = false;
 
     /**
      * Creates new form SubjectPanel
@@ -34,15 +33,15 @@ public class SubjectPanelNormal extends SubjectPanel {
      * @param labExists    /
      * @param labBiweek    /
      */
-    public SubjectPanelNormal(MainGUI gui, String subjectName, boolean secLecExists, boolean tutExists, boolean tutBiWeek, boolean labExists, boolean labBiweek) {
-        super(gui, subjectName, secLecExists, tutExists, tutBiWeek, labExists, labBiweek);
+    public SubjectPanelNormal(MainGUI gui, String subjectName, boolean secLecExists, boolean tutExists, boolean tutBiWeek, boolean labExists, boolean labBiweek, boolean advanced) {
+        super(gui, subjectName, secLecExists, tutExists, tutBiWeek, labExists, labBiweek, advanced);
         groups = new ArrayList<>();
         this.initComponents();
         this.newGroupButtonActionPerformed();
     }
 
-    public SubjectPanelNormal(MainGUI gui, SubjectNormal sub) {
-        super(gui, sub.getSubjectName(), sub.getInfo());
+    public SubjectPanelNormal(MainGUI gui, SubjectNormal sub, boolean advanced) {
+        super(gui, sub.getSubjectName(), sub.getInfo(), advanced);
         groups = new ArrayList<>();
         for (int i = 0; i < sub.getGroups().size(); i++) {
             this.newGroupButtonActionPerformed();
@@ -52,7 +51,12 @@ public class SubjectPanelNormal extends SubjectPanel {
     }
 
     private void newGroupButtonActionPerformed() {
-        GroupPanelNormal newGroup = new GroupPanelNormal(this, subjectInfo);
+        GroupPanel newGroup;
+        if (this.advanced){
+            newGroup = new GroupPanelNormalAdvanced(this, subjectInfo);
+        } else {
+            newGroup = new GroupPanelNormal(this, subjectInfo);
+        }
         this.groups.add(newGroup);
         this.groupsTabbedPane.addTab("Group " + (groupsTabbedPane.getTabCount() + 1), newGroup.getMainPanel());
     }

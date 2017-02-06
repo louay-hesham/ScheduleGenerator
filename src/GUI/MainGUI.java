@@ -84,7 +84,8 @@ public class MainGUI {
                         this.tutorialCheckBox.isSelected(),
                         this.tutBiWeekCheckBox.isSelected(),
                         this.labCheckBox.isSelected(),
-                        this.labBiWeekCheckBox.isSelected());
+                        this.labBiWeekCheckBox.isSelected(),
+                        this.advanced);
             }
             this.subjects.add(subject);
             this.subjectsTabbedPane.addTab(subjectNameTextField.getText(), subject.getMainPanel());
@@ -237,5 +238,9 @@ public class MainGUI {
             this.subjects.remove(subject);
             this.subjectsTabbedPane.remove(subject.getMainPanel());
         }
+    }
+
+    public boolean isAdvanced() {
+        return advanced;
     }
 }
