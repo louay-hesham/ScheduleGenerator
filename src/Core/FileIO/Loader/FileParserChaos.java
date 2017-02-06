@@ -23,7 +23,7 @@ public class FileParserChaos extends FileParser {
         this.n = Integer.decode(this.getNextLine());
         for (int i = 0; i < n; i++) {
             SubjectChaos s = this.decodeSubject();
-            this.panels.add(new SubjectPanelChaos(this.gui, s.getSubjectName(), s.getInfo(), s));
+            this.panels.add(new SubjectPanelChaos(this.gui, s.getSubjectName(), s.getInfo(), s, this.gui.isAdvanced()));
         }
     }
 

@@ -31,8 +31,8 @@ public class SubjectPanelChaos extends SubjectPanel {
      * @param labExists    /
      * @param labBiWeek    /
      */
-    public SubjectPanelChaos(MainGUI gui, String subjectName, boolean secLecExists, boolean tutExists, boolean tutBiWeek, boolean labExists, boolean labBiWeek) {
-        super(gui, subjectName, secLecExists, tutExists, tutBiWeek, labExists, labBiWeek);
+    public SubjectPanelChaos(MainGUI gui, String subjectName, boolean secLecExists, boolean tutExists, boolean tutBiWeek, boolean labExists, boolean labBiWeek, boolean advanced) {
+        super(gui, subjectName, secLecExists, tutExists, tutBiWeek, labExists, labBiWeek, advanced);
         this.initComponents();
         this.lectures.newTimeButtonActionPerformed();
         if (this.tutorials != null) {
@@ -43,8 +43,8 @@ public class SubjectPanelChaos extends SubjectPanel {
         }
     }
 
-    public SubjectPanelChaos(MainGUI gui, String subjectName, SubjectInfo info, SubjectChaos sub) {
-        super(gui, subjectName, info);
+    public SubjectPanelChaos(MainGUI gui, String subjectName, SubjectInfo info, SubjectChaos sub, boolean advanced) {
+        super(gui, subjectName, info, advanced);
         this.initComponents();
         if (info.secLecExists) {
             this.lectures.addMeetings(sub.getLectures(), sub.getSecLectures());

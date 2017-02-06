@@ -76,7 +76,8 @@ public class MainGUI {
                         this.tutorialCheckBox.isSelected(),
                         this.tutBiWeekCheckBox.isSelected(),
                         this.labCheckBox.isSelected(),
-                        this.labBiWeekCheckBox.isSelected());
+                        this.labBiWeekCheckBox.isSelected(),
+                        this.advanced);
             } else {
                 subject = new SubjectPanelNormal(this,
                         this.subjectNameTextField.getText(),

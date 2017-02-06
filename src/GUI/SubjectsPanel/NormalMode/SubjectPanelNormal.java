@@ -132,7 +132,7 @@ public class SubjectPanelNormal extends SubjectPanel {
 
     public SubjectPanelChaos getChaos() {
         SubjectChaos chaos = ((SubjectNormal) this.getSubject()).getChaos();
-        return new SubjectPanelChaos(this.gui, this.subjectName, this.subjectInfo, chaos);
+        return new SubjectPanelChaos(this.gui, this.subjectName, this.subjectInfo, chaos, this.advanced);
     }
 
     public String toString() {
