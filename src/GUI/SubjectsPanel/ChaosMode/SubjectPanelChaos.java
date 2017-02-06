@@ -16,7 +16,7 @@ import java.util.ArrayList;
  */
 public class SubjectPanelChaos extends SubjectPanel {
 
-    private Meeting lectures, tutorials, labs;
+    private MeetingsPanel lectures, tutorials, labs;
     private JTabbedPane subjectTabbedPane;
     private JPanel mainPanel;
     private JButton deleteSubjectButton;
@@ -81,25 +81,25 @@ public class SubjectPanelChaos extends SubjectPanel {
 
     protected void initComponents() {
         if (this.subjectInfo.secLecExists) {
-            this.lectures = new Meeting(MeetingType.SEC_LECTURE);
+            this.lectures = new MeetingsPanel(MeetingType.SEC_LECTURE);
         } else {
-            this.lectures = new Meeting(MeetingType.LECTURE);
+            this.lectures = new MeetingsPanel(MeetingType.LECTURE);
         }
         this.subjectTabbedPane.addTab("Lectures", lectures.getMainPanel());
         if (this.subjectInfo.tutExists) {
             if (this.subjectInfo.tutBiWeek) {
-                this.tutorials = new Meeting(MeetingType.TUT_HALF);
+                this.tutorials = new MeetingsPanel(MeetingType.TUT_HALF);
             } else {
-                this.tutorials = new Meeting(MeetingType.TUT_FULL);
+                this.tutorials = new MeetingsPanel(MeetingType.TUT_FULL);
             }
 
             this.subjectTabbedPane.addTab("Tutorials", tutorials.getMainPanel());
         }
         if (this.subjectInfo.labExists) {
             if (this.subjectInfo.labBiWeek) {
-                this.labs = new Meeting(MeetingType.LAB_HALF);
+                this.labs = new MeetingsPanel(MeetingType.LAB_HALF);
             } else {
-                this.labs = new Meeting(MeetingType.LAB_FULL);
+                this.labs = new MeetingsPanel(MeetingType.LAB_FULL);
             }
             this.subjectTabbedPane.addTab("Labs", labs.getMainPanel());
         }

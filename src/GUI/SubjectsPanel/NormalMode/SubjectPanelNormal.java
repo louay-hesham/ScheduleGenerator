@@ -53,9 +53,9 @@ public class SubjectPanelNormal extends SubjectPanel {
     private void newGroupButtonActionPerformed() {
         GroupPanel newGroup;
         if (this.advanced){
-            newGroup = new GroupPanelNormalAdvanced(this, subjectInfo);
+            newGroup = new GroupPanelAdvanced(this, subjectInfo);
         } else {
-            newGroup = new GroupPanelNormal(this, subjectInfo);
+            newGroup = new GroupPanelSimple(this, subjectInfo);
         }
         this.groups.add(newGroup);
         this.groupsTabbedPane.addTab("Group " + (groupsTabbedPane.getTabCount() + 1), newGroup.getMainPanel());
@@ -88,11 +88,11 @@ public class SubjectPanelNormal extends SubjectPanel {
 
     public void advancedModeConvert(){
         if (this.advanced){
-            ArrayList<GroupPanelNormal> simpleGroups = new ArrayList<>();
+            ArrayList<GroupPanelSimple> simpleGroups = new ArrayList<>();
             int i = 1;
             for (GroupPanel g : this.groups){
                 this.groupsTabbedPane.removeTabAt(0);
-                GroupPanelNormal ng = new GroupPanelNormal(this, this.subjectInfo);
+                GroupPanelSimple ng = new GroupPanelSimple(this, this.subjectInfo);
                 ng.setGroup(g.getGroup());
                 simpleGroups.add(ng);
                 this.groupsTabbedPane.addTab("Group " + i, ng.getMainPanel());
@@ -102,11 +102,11 @@ public class SubjectPanelNormal extends SubjectPanel {
             this.groups.addAll(simpleGroups);
             this.advanced = false;
         } else {
-            ArrayList<GroupPanelNormalAdvanced> advancedGroups = new ArrayList<>();
+            ArrayList<GroupPanelAdvanced> advancedGroups = new ArrayList<>();
             int i = 1;
             for (GroupPanel g : this.groups){
                 this.groupsTabbedPane.removeTabAt(0);
-                GroupPanelNormalAdvanced ag = new GroupPanelNormalAdvanced(this, this.subjectInfo);
+                GroupPanelAdvanced ag = new GroupPanelAdvanced(this, this.subjectInfo);
                 ag.setGroup(g.getGroup());
                 advancedGroups.add(ag);
                 this.groupsTabbedPane.addTab("Group " + i, ag.getMainPanel());

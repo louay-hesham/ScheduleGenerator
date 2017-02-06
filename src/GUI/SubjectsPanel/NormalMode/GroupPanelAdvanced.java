@@ -11,7 +11,7 @@ import java.util.ArrayList;
 /**
  * Created by louay on 2/5/2017.
  */
-public class GroupPanelNormalAdvanced extends GroupPanel {
+public class GroupPanelAdvanced extends GroupPanel {
     private JPanel mainPanel;
     private JComboBox lectureDayComboBox;
     private JSpinner lectureFromSpinner;
@@ -48,7 +48,7 @@ public class GroupPanelNormalAdvanced extends GroupPanel {
     private JLabel lab1ToLabel;
     private JLabel lab2ToLabel;
 
-    GroupPanelNormalAdvanced(SubjectPanelNormal subject, SubjectInfo subjectInfo){
+    GroupPanelAdvanced(SubjectPanelNormal subject, SubjectInfo subjectInfo){
         super(subject, subjectInfo);
         this.initComponents();
     }

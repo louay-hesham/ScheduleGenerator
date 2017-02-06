@@ -11,7 +11,7 @@ import java.util.ArrayList;
 /*
  * Created by louay on 10/28/2016.
  */
-public class GroupPanelNormal extends GroupPanel{
+public class GroupPanelSimple extends GroupPanel{
 
     private JComboBox<String> lectureDayComboBox;
     private JSpinner lecturePeriodSpinner;
@@ -44,7 +44,7 @@ public class GroupPanelNormal extends GroupPanel{
      * @param subject     /
      * @param subjectInfo /
      */
-    GroupPanelNormal(SubjectPanelNormal subject, SubjectInfo subjectInfo) {
+    GroupPanelSimple(SubjectPanelNormal subject, SubjectInfo subjectInfo) {
         super(subject, subjectInfo);
         this.initComponents();
     }

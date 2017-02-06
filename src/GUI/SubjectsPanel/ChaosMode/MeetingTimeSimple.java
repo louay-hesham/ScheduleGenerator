@@ -8,12 +8,12 @@ import javax.swing.*;
 /*
  * Created by louay on 10/28/2016.
  */
-class MeetingTime {
+class MeetingTimeSimple {
 
     private static int totalIDs = 0;
 
     private final boolean secLec;
-    private final Meeting meeting;
+    private final MeetingsPanel meeting;
     private final int ID;
     private final MeetingType type;
     private JPanel mainPanel;
@@ -33,7 +33,7 @@ class MeetingTime {
      * @param meetingType /
      * @param meeting     /
      */
-    MeetingTime(MeetingType meetingType, Meeting meeting) {
+    MeetingTimeSimple(MeetingType meetingType, MeetingsPanel meeting) {
         this.type = meetingType;
         this.meeting = meeting;
         this.secLec = meetingType == MeetingType.SEC_LECTURE;
@@ -63,8 +63,8 @@ class MeetingTime {
         this.secLecPeriodLabel.setVisible(secLec);
         this.secLecPeriodSpinner.setVisible(secLec);
         this.meetingTypeLabel.setText(type);
-        this.ID = MeetingTime.totalIDs;
-        MeetingTime.totalIDs++;
+        this.ID = MeetingTimeSimple.totalIDs;
+        MeetingTimeSimple.totalIDs++;
         this.initComponents();
     }
 
@@ -108,7 +108,7 @@ class MeetingTime {
         if (getClass() != obj.getClass()) {
             return false;
         }
-        final MeetingTime other = (MeetingTime) obj;
+        final MeetingTimeSimple other = (MeetingTimeSimple) obj;
         return this.ID == other.ID;
     }
 
