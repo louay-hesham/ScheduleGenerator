@@ -8,14 +8,8 @@ import javax.swing.*;
 /*
  * Created by louay on 10/28/2016.
  */
-class MeetingTimeSimple {
+class MeetingTimeSimple extends MeetingTime{
 
-    private static int totalIDs = 0;
-
-    private final boolean secLec;
-    private final MeetingsPanel meeting;
-    private final int ID;
-    private final MeetingType type;
     private JPanel mainPanel;
     private JComboBox meetingDay;
     private JComboBox secLecDay;
@@ -24,7 +18,6 @@ class MeetingTimeSimple {
     private JButton deleteMeetingButton;
     private JLabel meetingTypeLabel;
     private JLabel secLecLabel;
-    private JLabel meetingPeriodLabel;
     private JLabel secLecPeriodLabel;
 
     /**
@@ -34,9 +27,7 @@ class MeetingTimeSimple {
      * @param meeting     /
      */
     MeetingTimeSimple(MeetingType meetingType, MeetingsPanel meeting) {
-        this.type = meetingType;
-        this.meeting = meeting;
-        this.secLec = meetingType == MeetingType.SEC_LECTURE;
+        super(meetingType, meeting);
         String type;
         switch (meetingType) {
             case LECTURE:
@@ -63,53 +54,25 @@ class MeetingTimeSimple {
         this.secLecPeriodLabel.setVisible(secLec);
         this.secLecPeriodSpinner.setVisible(secLec);
         this.meetingTypeLabel.setText(type);
-        this.ID = MeetingTimeSimple.totalIDs;
-        MeetingTimeSimple.totalIDs++;
         this.initComponents();
     }
 
-    private void deleteMeetingButtonActionPerformed() {
-        meeting.deleteTime(this);
-    }
-
-    private void initComponents() {
+    protected void initComponents() {
         deleteMeetingButton.addActionListener(e -> deleteMeetingButtonActionPerformed());
         meetingPeriodSpinner.setModel(new javax.swing.SpinnerNumberModel(1, 1, 7, 1));
         secLecPeriodSpinner.setModel(new javax.swing.SpinnerNumberModel(1, 1, 7, 1));
     }
 
-    void setMeetingTime(int day, int period) {
-        this.meetingDay.setSelectedIndex(day);
-        this.meetingPeriodSpinner.setValue(period);
+    protected void setMeetingTime(Time t) {
+        this.meetingDay.setSelectedIndex(t.day);
+        this.meetingPeriodSpinner.setValue(t.period);
     }
 
-    void setSecLecTime(int day, int period) {
+    protected void setSecLecTime(Time t) {
         if (this.secLec) {
-            this.secLecDay.setSelectedIndex(day);
-            this.secLecPeriodSpinner.setValue(period);
+            this.secLecDay.setSelectedIndex(t.day);
+            this.secLecPeriodSpinner.setValue(t.period);
         }
-    }
-
-    @Override
-    public int hashCode() {
-        int hash = 7;
-        hash = 29 * hash + this.ID;
-        return hash;
-    }
-
-    @Override
-    public boolean equals(Object obj) {
-        if (this == obj) {
-            return true;
-        }
-        if (obj == null) {
-            return false;
-        }
-        if (getClass() != obj.getClass()) {
-            return false;
-        }
-        final MeetingTimeSimple other = (MeetingTimeSimple) obj;
-        return this.ID == other.ID;
     }
 
     public Time getMeetingTime() {
