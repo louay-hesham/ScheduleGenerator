@@ -67,7 +67,6 @@ public class Generator {
         for (Time t : s.getTimesInPermutation()) {
             switch (t.getType()) {
                 case LECTURE:
-                case SEC_LECTURE:
                 case LAB_FULL:
                 case TUT_FULL: {
                     for (int i = t.from; i <= t.to; i++) {
@@ -86,6 +85,16 @@ public class Generator {
                     }
                     break;
                 }
+                case SEC_LECTURE: {
+                    int to = t.to % 2 ==0? t.to + 1: t.to - 1;
+                    success = success && ((this.currentSchedule[t.to][t.day].equals(this.emptyPeriod) && (!visited[t.to][t.day])) || (this.currentSchedule[to][t.day].equals(this.emptyPeriod) && (!visited[to][t.day])));
+                    if (this.currentSchedule[t.to][t.day].equals(this.emptyPeriod)) {
+                        visited[t.to][t.day] = true;
+                    } else if (this.currentSchedule[to][t.day].equals(this.emptyPeriod)) {
+                        visited[to][t.day] = true;
+                    }
+                    break;
+                }
             }
         }
         if (success) {
@@ -93,7 +102,6 @@ public class Generator {
             for (Time t : s.getTimesInPermutation()) {
                 switch (t.getType()) {
                     case LECTURE:
-                    case SEC_LECTURE:
                     case LAB_FULL:
                     case TUT_FULL: {
                         for (int i = t.from; i <= t.to; i++) {
@@ -107,6 +115,15 @@ public class Generator {
                             this.currentSchedule[t.to][t.day] = (s.getSubjectName() + "!" + t.getTypeString());
                         } else {
                             this.currentSchedule[t.to - 1][t.day] = (s.getSubjectName() + "!" + t.getTypeString());
+                        }
+                        break;
+                    }
+                    case SEC_LECTURE: {
+                        int to = t.to % 2 ==0? t.to + 1: t.to - 1;
+                        if (this.currentSchedule[t.to][t.day].equals(this.emptyPeriod)) {
+                            this.currentSchedule[t.to][t.day] = (s.getSubjectName() + "!" + t.getTypeString());
+                        } else {
+                            this.currentSchedule[to][t.day] = (s.getSubjectName() + "!" + t.getTypeString());
                         }
                         break;
                     }
@@ -126,7 +143,6 @@ public class Generator {
         for (Time t : s.getTimesInPermutation()) {
             switch (t.getType()) {
                 case LECTURE:
-                case SEC_LECTURE:
                 case LAB_FULL:
                 case TUT_FULL: {
                     for (int i = t.from; i <= t.to; i++) {
@@ -141,6 +157,16 @@ public class Generator {
                         this.currentSchedule[t.to][t.day] = "___";
                     } else {
                         this.currentSchedule[t.to - 1][t.day] = "___";
+                    }
+                    break;
+                }
+                case SEC_LECTURE: {
+                    int to = t.to % 2 ==0? t.to + 1: t.to - 1;
+                    String toSubjectName = this.currentSchedule[t.to][t.day].split("!")[0];
+                    if (s.getSubjectName().equals(toSubjectName)) {
+                        this.currentSchedule[t.to][t.day] = "___";
+                    } else {
+                        this.currentSchedule[to][t.day] = "___";
                     }
                     break;
                 }
