@@ -9,18 +9,20 @@ import java.util.ArrayList;
 /*
  * Created by louay on 10/28/2016.
  */
-public class Meeting {
+public class MeetingsPanel {
 
     private final MeetingType meetingType;
     private final ArrayList<MeetingTime> meetings;
 
+    private boolean advanced;
     private GroupLayout.ParallelGroup h;
     private GroupLayout.SequentialGroup v;
     private JButton newTimeButton;
     private JPanel timesPanel;
     private JPanel mainPanel;
 
-    public Meeting(MeetingType meetingType) {
+    public MeetingsPanel(MeetingType meetingType, boolean advanced) {
+        this.advanced = advanced;
         this.meetingType = meetingType;
         this.meetings = new ArrayList<>();
         newTimeButton.addActionListener(e -> newTimeButtonActionPerformed());
@@ -31,7 +33,12 @@ public class Meeting {
     }
 
     protected void newTimeButtonActionPerformed() {
-        MeetingTime meetingTime = new MeetingTime(this.meetingType, this);
+        MeetingTime meetingTime;
+        if (this.advanced){
+            meetingTime = new MeetingTimeAdvanced(this.meetingType, this);
+        } else {
+            meetingTime = new MeetingTimeSimple(this.meetingType, this);
+        }
         meetings.add(meetingTime);
         this.addMeetingToGUI(meetingTime);
     }
@@ -74,17 +81,48 @@ public class Meeting {
         }
     }
 
+    public void advancedModeConvert(){
+        this.advanced = !this.advanced;
+        ArrayList<MeetingTime> newTimes = new ArrayList<>();
+        for (MeetingTime m : this.meetings){
+            MeetingTime t;
+            if (this.advanced){
+                t = new MeetingTimeAdvanced(this.meetingType, this);
+            } else {
+                t = new MeetingTimeSimple(this.meetingType, this);
+            }
+            t.setMeetingTime(m.getMeetingTime());
+            if (this.meetingType == MeetingType.SEC_LECTURE){
+                t.setSecLecTime(m.getSecLecTime());
+            }
+            newTimes.add(t);
+        }
+        this.meetings.clear();
+        this.meetings.addAll(newTimes);
+        this.resetMeetingsGUI();
+    }
+
     private void addMeeting(Time t) {
-        MeetingTime meetingTime = new MeetingTime(this.meetingType, this);
-        meetingTime.setMeetingTime(t.day, t.period);
+        MeetingTime meetingTime;
+        if (this.advanced){
+            meetingTime = new MeetingTimeAdvanced(this.meetingType, this);
+        } else {
+            meetingTime = new MeetingTimeSimple(this.meetingType, this);
+        }
+        meetingTime.setMeetingTime(t);
         meetings.add(meetingTime);
         this.addMeetingToGUI(meetingTime);
     }
 
     private void addMeeting(Time lec, Time secLec) {
-        MeetingTime meetingTime = new MeetingTime(this.meetingType, this);
-        meetingTime.setMeetingTime(lec.day, lec.period);
-        meetingTime.setSecLecTime(secLec.day, secLec.period);
+        MeetingTime meetingTime;
+        if (this.advanced){
+            meetingTime = new MeetingTimeAdvanced(this.meetingType, this);
+        } else {
+            meetingTime = new MeetingTimeSimple(this.meetingType, this);
+        }
+        meetingTime.setMeetingTime(lec);
+        meetingTime.setSecLecTime(secLec);
         this.meetings.add(meetingTime);
         this.addMeetingToGUI(meetingTime);
     }

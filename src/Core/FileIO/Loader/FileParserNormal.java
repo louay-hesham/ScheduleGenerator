@@ -24,7 +24,7 @@ public class FileParserNormal extends FileParser {
         this.n = Integer.decode(this.getNextLine());
         for (int i = 0; i < n; i++) {
             SubjectNormal s = this.decodeSubject();
-            this.panels.add(new SubjectPanelNormal(this.gui, s));
+            this.panels.add(new SubjectPanelNormal(this.gui, s, this.gui.isAdvanced()));
         }
     }
 

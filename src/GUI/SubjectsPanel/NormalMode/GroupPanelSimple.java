@@ -11,14 +11,11 @@ import java.util.ArrayList;
 /*
  * Created by louay on 10/28/2016.
  */
-public class GroupPanelNormal {
+public class GroupPanelSimple extends GroupPanel{
 
-    private final SubjectInfo subjectInfo;
-    private final SubjectPanelNormal subject;
     private JComboBox<String> lectureDayComboBox;
     private JSpinner lecturePeriodSpinner;
     private JButton deleteGroupButton;
-    private JLabel lectureLabel;
     private JLabel secLecLabel;
     private JLabel tut1Label;
     private JLabel tut2Label;
@@ -29,7 +26,6 @@ public class GroupPanelNormal {
     private JComboBox<String> tut2DayComboBox;
     private JComboBox<String> lab1DayComboBox;
     private JComboBox<String> lab2DayComboBox;
-    private JLabel lecturePeriodLabel;
     private JLabel secLecturePeriodLabel;
     private JLabel tut1PeriodLabel;
     private JLabel tut2PeriodLabel;
@@ -48,11 +44,12 @@ public class GroupPanelNormal {
      * @param subject     /
      * @param subjectInfo /
      */
-    GroupPanelNormal(SubjectPanelNormal subject, SubjectInfo subjectInfo) {
+    GroupPanelSimple(SubjectPanelNormal subject, SubjectInfo subjectInfo) {
+        super(subject, subjectInfo);
         this.initComponents();
-        this.subject = subject;
-        this.subjectInfo = subjectInfo;
+    }
 
+    protected void initComponents() {
         secLectureDayComboBox.setVisible(subjectInfo.secLecExists);
         secLecturePeriodLabel.setVisible(subjectInfo.secLecExists);
         secLecturePeriodSpinner.setVisible(subjectInfo.secLecExists);
@@ -85,13 +82,7 @@ public class GroupPanelNormal {
         lab1DayComboBox.setVisible(subjectInfo.labExists);
         lab1PeriodSpinner.setVisible(subjectInfo.labExists);
         lab1PeriodLabel.setVisible(subjectInfo.labExists);
-    }
 
-    private void deleteGroupButtonActionPerformed() {
-        this.subject.deleteGroup(this);
-    }
-
-    private void initComponents() {
         deleteGroupButton.addActionListener(e -> deleteGroupButtonActionPerformed());
         lectureDayComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[]{"Saturday", "Sunday", "Monday", "Tuesday", "Wednesday", "Thursday"}));
         secLectureDayComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[]{"Saturday", "Sunday", "Monday", "Tuesday", "Wednesday", "Thursday"}));
@@ -178,6 +169,7 @@ public class GroupPanelNormal {
         }
     }
 
+    @Override
     public JPanel getMainPanel() {
         return mainPanel;
     }

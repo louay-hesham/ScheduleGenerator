@@ -16,7 +16,7 @@ import java.util.ArrayList;
  */
 public class SubjectPanelChaos extends SubjectPanel {
 
-    private Meeting lectures, tutorials, labs;
+    private MeetingsPanel lectures, tutorials, labs;
     private JTabbedPane subjectTabbedPane;
     private JPanel mainPanel;
     private JButton deleteSubjectButton;
@@ -31,8 +31,8 @@ public class SubjectPanelChaos extends SubjectPanel {
      * @param labExists    /
      * @param labBiWeek    /
      */
-    public SubjectPanelChaos(MainGUI gui, String subjectName, boolean secLecExists, boolean tutExists, boolean tutBiWeek, boolean labExists, boolean labBiWeek) {
-        super(gui, subjectName, secLecExists, tutExists, tutBiWeek, labExists, labBiWeek);
+    public SubjectPanelChaos(MainGUI gui, String subjectName, boolean secLecExists, boolean tutExists, boolean tutBiWeek, boolean labExists, boolean labBiWeek, boolean advanced) {
+        super(gui, subjectName, secLecExists, tutExists, tutBiWeek, labExists, labBiWeek, advanced);
         this.initComponents();
         this.lectures.newTimeButtonActionPerformed();
         if (this.tutorials != null) {
@@ -43,8 +43,8 @@ public class SubjectPanelChaos extends SubjectPanel {
         }
     }
 
-    public SubjectPanelChaos(MainGUI gui, String subjectName, SubjectInfo info, SubjectChaos sub) {
-        super(gui, subjectName, info);
+    public SubjectPanelChaos(MainGUI gui, String subjectName, SubjectInfo info, SubjectChaos sub, boolean advanced) {
+        super(gui, subjectName, info, advanced);
         this.initComponents();
         if (info.secLecExists) {
             this.lectures.addMeetings(sub.getLectures(), sub.getSecLectures());
@@ -81,33 +81,40 @@ public class SubjectPanelChaos extends SubjectPanel {
 
     protected void initComponents() {
         if (this.subjectInfo.secLecExists) {
-            this.lectures = new Meeting(MeetingType.SEC_LECTURE);
+            this.lectures = new MeetingsPanel(MeetingType.SEC_LECTURE, this.advanced);
         } else {
-            this.lectures = new Meeting(MeetingType.LECTURE);
+            this.lectures = new MeetingsPanel(MeetingType.LECTURE, this.advanced);
         }
         this.subjectTabbedPane.addTab("Lectures", lectures.getMainPanel());
         if (this.subjectInfo.tutExists) {
             if (this.subjectInfo.tutBiWeek) {
-                this.tutorials = new Meeting(MeetingType.TUT_HALF);
+                this.tutorials = new MeetingsPanel(MeetingType.TUT_HALF, this.advanced);
             } else {
-                this.tutorials = new Meeting(MeetingType.TUT_FULL);
+                this.tutorials = new MeetingsPanel(MeetingType.TUT_FULL, this.advanced);
             }
 
             this.subjectTabbedPane.addTab("Tutorials", tutorials.getMainPanel());
         }
         if (this.subjectInfo.labExists) {
             if (this.subjectInfo.labBiWeek) {
-                this.labs = new Meeting(MeetingType.LAB_HALF);
+                this.labs = new MeetingsPanel(MeetingType.LAB_HALF, this.advanced);
             } else {
-                this.labs = new Meeting(MeetingType.LAB_FULL);
+                this.labs = new MeetingsPanel(MeetingType.LAB_FULL, this.advanced);
             }
             this.subjectTabbedPane.addTab("Labs", labs.getMainPanel());
         }
         this.deleteSubjectButton.addActionListener(e -> deleteSubjectButtonActionPerformed());
     }
 
-    public String getSubjectName() {
-        return subjectName;
+    public void advancedModeConvert(){
+        this.advanced = !this.advanced;
+        this.lectures.advancedModeConvert();
+        if (this.tutorials != null){
+            this.tutorials.advancedModeConvert();
+        }
+        if (this.labs != null){
+            this.labs.advancedModeConvert();
+        }
     }
 
     public JPanel getMainPanel() {

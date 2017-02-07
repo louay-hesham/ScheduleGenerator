@@ -17,7 +17,7 @@ import java.util.ArrayList;
  */
 public class SubjectPanelNormal extends SubjectPanel {
 
-    private final ArrayList<GroupPanelNormal> groups;
+    private final ArrayList<GroupPanel> groups;
     private JPanel mainPanel;
     private JButton newGroupButton;
     private JButton deleteSubjectButton;
@@ -33,15 +33,15 @@ public class SubjectPanelNormal extends SubjectPanel {
      * @param labExists    /
      * @param labBiweek    /
      */
-    public SubjectPanelNormal(MainGUI gui, String subjectName, boolean secLecExists, boolean tutExists, boolean tutBiWeek, boolean labExists, boolean labBiweek) {
-        super(gui, subjectName, secLecExists, tutExists, tutBiWeek, labExists, labBiweek);
+    public SubjectPanelNormal(MainGUI gui, String subjectName, boolean secLecExists, boolean tutExists, boolean tutBiWeek, boolean labExists, boolean labBiweek, boolean advanced) {
+        super(gui, subjectName, secLecExists, tutExists, tutBiWeek, labExists, labBiweek, advanced);
         groups = new ArrayList<>();
         this.initComponents();
         this.newGroupButtonActionPerformed();
     }
 
-    public SubjectPanelNormal(MainGUI gui, SubjectNormal sub) {
-        super(gui, sub.getSubjectName(), sub.getInfo());
+    public SubjectPanelNormal(MainGUI gui, SubjectNormal sub, boolean advanced) {
+        super(gui, sub.getSubjectName(), sub.getInfo(), advanced);
         groups = new ArrayList<>();
         for (int i = 0; i < sub.getGroups().size(); i++) {
             this.newGroupButtonActionPerformed();
@@ -51,7 +51,12 @@ public class SubjectPanelNormal extends SubjectPanel {
     }
 
     private void newGroupButtonActionPerformed() {
-        GroupPanelNormal newGroup = new GroupPanelNormal(this, subjectInfo);
+        GroupPanel newGroup;
+        if (this.advanced){
+            newGroup = new GroupPanelAdvanced(this, subjectInfo);
+        } else {
+            newGroup = new GroupPanelSimple(this, subjectInfo);
+        }
         this.groups.add(newGroup);
         this.groupsTabbedPane.addTab("Group " + (groupsTabbedPane.getTabCount() + 1), newGroup.getMainPanel());
     }
@@ -65,7 +70,7 @@ public class SubjectPanelNormal extends SubjectPanel {
         this.deleteSubjectButton.addActionListener(e -> deleteSubjectButtonActionPerformed());
     }
 
-    void deleteGroup(GroupPanelNormal group) {
+    void deleteGroup(GroupPanel group) {
         if (this.groups.size() == 1) {
 
             JOptionPane.showMessageDialog(null,
@@ -81,13 +86,45 @@ public class SubjectPanelNormal extends SubjectPanel {
         }
     }
 
+    public void advancedModeConvert(){
+        if (this.advanced){
+            ArrayList<GroupPanelSimple> simpleGroups = new ArrayList<>();
+            int i = 1;
+            for (GroupPanel g : this.groups){
+                this.groupsTabbedPane.removeTabAt(0);
+                GroupPanelSimple ng = new GroupPanelSimple(this, this.subjectInfo);
+                ng.setGroup(g.getGroup());
+                simpleGroups.add(ng);
+                this.groupsTabbedPane.addTab("Group " + i, ng.getMainPanel());
+                i++;
+            }
+            this.groups.clear();
+            this.groups.addAll(simpleGroups);
+            this.advanced = false;
+        } else {
+            ArrayList<GroupPanelAdvanced> advancedGroups = new ArrayList<>();
+            int i = 1;
+            for (GroupPanel g : this.groups){
+                this.groupsTabbedPane.removeTabAt(0);
+                GroupPanelAdvanced ag = new GroupPanelAdvanced(this, this.subjectInfo);
+                ag.setGroup(g.getGroup());
+                advancedGroups.add(ag);
+                this.groupsTabbedPane.addTab("Group " + i, ag.getMainPanel());
+                i++;
+            }
+            this.groups.clear();
+            this.groups.addAll(advancedGroups);
+            this.advanced = true;
+        }
+    }
+
     public JPanel getMainPanel() {
         return mainPanel;
     }
 
     public Subject getSubject() {
         ArrayList<GroupNormal> grps = new ArrayList<>();
-        for (GroupPanelNormal g : this.groups) {
+        for (GroupPanel g : this.groups) {
             grps.add(g.getGroup());
         }
         return new SubjectNormal(this.subjectName, grps, this.subjectInfo);
@@ -95,7 +132,7 @@ public class SubjectPanelNormal extends SubjectPanel {
 
     public SubjectPanelChaos getChaos() {
         SubjectChaos chaos = ((SubjectNormal) this.getSubject()).getChaos();
-        return new SubjectPanelChaos(this.gui, this.subjectName, this.subjectInfo, chaos);
+        return new SubjectPanelChaos(this.gui, this.subjectName, this.subjectInfo, chaos, this.advanced);
     }
 
     public String toString() {
