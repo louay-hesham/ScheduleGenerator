@@ -15,6 +15,7 @@
         <properties>
           <background color="-13896385"/>
           <text value="New Group"/>
+          <toolTipText value="Add a new group."/>
         </properties>
       </component>
       <component id="67483" class="javax.swing.JButton" binding="deleteSubjectButton" default-binding="true">
@@ -24,6 +25,7 @@
         <properties>
           <background color="-65508"/>
           <text value="Delete Subject"/>
+          <toolTipText value="Delete this subject."/>
         </properties>
       </component>
       <tabbedpane id="f82a6" binding="groupsTabbedPane">
