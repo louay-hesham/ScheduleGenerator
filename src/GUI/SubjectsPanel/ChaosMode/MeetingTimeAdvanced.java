@@ -65,15 +65,15 @@ public class MeetingTimeAdvanced extends MeetingTime{
 
     protected void setMeetingTime(Time t) {
         this.meetingDay.setSelectedIndex(t.day);
-        this.meetingFromSpinner.setValue(t.from);
-        this.meetingToSpinner.setValue(t.to);
+        this.meetingFromSpinner.setValue(t.from + 1);
+        this.meetingToSpinner.setValue(t.to + 1);
     }
 
     protected void setSecLecTime(Time t) {
         if (this.secLec) {
             this.secLecDay.setSelectedIndex(t.day);
-            this.secLecFromSpinner.setValue(t.from);
-            this.secLecToSpinner.setValue(t.to);
+            this.secLecFromSpinner.setValue(t.from + 1);
+            this.secLecToSpinner.setValue(t.to + 1);
         }
     }
 
@@ -83,8 +83,8 @@ public class MeetingTimeAdvanced extends MeetingTime{
             type = MeetingType.LECTURE;
         }
         return new Time(this.meetingDay.getSelectedIndex(),
-                (int)this.meetingFromSpinner.getValue(),
-                (int)this.meetingToSpinner.getValue(),
+                (int)this.meetingFromSpinner.getValue() - 1,
+                (int)this.meetingToSpinner.getValue() - 1,
                 type);
     }
 
@@ -94,8 +94,8 @@ public class MeetingTimeAdvanced extends MeetingTime{
         }
 
         return new Time(this.secLecDay.getSelectedIndex(),
-                (int)this.secLecFromSpinner.getValue(),
-                (int)this.secLecToSpinner.getValue(),
+                (int)this.secLecFromSpinner.getValue() - 1,
+                (int)this.secLecToSpinner.getValue() - 1,
                 MeetingType.SEC_LECTURE);
     }
 

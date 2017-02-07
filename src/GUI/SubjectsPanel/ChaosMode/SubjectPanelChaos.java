@@ -81,25 +81,25 @@ public class SubjectPanelChaos extends SubjectPanel {
 
     protected void initComponents() {
         if (this.subjectInfo.secLecExists) {
-            this.lectures = new MeetingsPanel(MeetingType.SEC_LECTURE);
+            this.lectures = new MeetingsPanel(MeetingType.SEC_LECTURE, this.advanced);
         } else {
-            this.lectures = new MeetingsPanel(MeetingType.LECTURE);
+            this.lectures = new MeetingsPanel(MeetingType.LECTURE, this.advanced);
         }
         this.subjectTabbedPane.addTab("Lectures", lectures.getMainPanel());
         if (this.subjectInfo.tutExists) {
             if (this.subjectInfo.tutBiWeek) {
-                this.tutorials = new MeetingsPanel(MeetingType.TUT_HALF);
+                this.tutorials = new MeetingsPanel(MeetingType.TUT_HALF, this.advanced);
             } else {
-                this.tutorials = new MeetingsPanel(MeetingType.TUT_FULL);
+                this.tutorials = new MeetingsPanel(MeetingType.TUT_FULL, this.advanced);
             }
 
             this.subjectTabbedPane.addTab("Tutorials", tutorials.getMainPanel());
         }
         if (this.subjectInfo.labExists) {
             if (this.subjectInfo.labBiWeek) {
-                this.labs = new MeetingsPanel(MeetingType.LAB_HALF);
+                this.labs = new MeetingsPanel(MeetingType.LAB_HALF, this.advanced);
             } else {
-                this.labs = new MeetingsPanel(MeetingType.LAB_FULL);
+                this.labs = new MeetingsPanel(MeetingType.LAB_FULL, this.advanced);
             }
             this.subjectTabbedPane.addTab("Labs", labs.getMainPanel());
         }
@@ -107,11 +107,14 @@ public class SubjectPanelChaos extends SubjectPanel {
     }
 
     public void advancedModeConvert(){
-
-    }
-
-    public String getSubjectName() {
-        return subjectName;
+        this.advanced = !this.advanced;
+        this.lectures.advancedModeConvert();
+        if (this.tutorials != null){
+            this.tutorials.advancedModeConvert();
+        }
+        if (this.labs != null){
+            this.labs.advancedModeConvert();
+        }
     }
 
     public JPanel getMainPanel() {
