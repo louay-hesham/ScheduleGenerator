@@ -15,6 +15,7 @@
         <properties>
           <background color="-13896385"/>
           <text value="Add new time"/>
+          <toolTipText value="Add new meeting time."/>
         </properties>
       </component>
       <grid id="64fcc" binding="timesPanel" layout-manager="GridLayoutManager" row-count="1" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">

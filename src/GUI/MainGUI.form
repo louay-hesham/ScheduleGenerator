@@ -14,7 +14,9 @@
             <preferred-size width="150" height="-1"/>
           </grid>
         </constraints>
-        <properties/>
+        <properties>
+          <toolTipText value="Enter new subject name here. Can be anything really."/>
+        </properties>
       </component>
       <component id="bc5a" class="javax.swing.JCheckBox" binding="secondaryLectureCheckBox">
         <constraints>
@@ -22,6 +24,7 @@
         </constraints>
         <properties>
           <text value="Has Secondary Lecture"/>
+          <toolTipText value="Indicates that the subject has a secondary lecture which is on half a period."/>
         </properties>
       </component>
       <component id="2c6d5" class="javax.swing.JCheckBox" binding="tutorialCheckBox">
@@ -30,6 +33,7 @@
         </constraints>
         <properties>
           <text value="Has tutorial"/>
+          <toolTipText value="Indicates that the subject has tutorials."/>
         </properties>
       </component>
       <component id="611a3" class="javax.swing.JCheckBox" binding="tutBiWeekCheckBox">
@@ -38,6 +42,7 @@
         </constraints>
         <properties>
           <text value="Every two weeks"/>
+          <toolTipText value="Indicates that the tutorial is once every two weeks (half a period)"/>
         </properties>
       </component>
       <component id="16913" class="javax.swing.JCheckBox" binding="labCheckBox">
@@ -46,6 +51,7 @@
         </constraints>
         <properties>
           <text value="Has lab"/>
+          <toolTipText value="Indicates that the subject has labs."/>
         </properties>
       </component>
       <component id="c16cc" class="javax.swing.JButton" binding="addSubjectButton" default-binding="true">
@@ -56,6 +62,7 @@
           <actionCommand value="Add Subject"/>
           <background color="-13896385"/>
           <text value="Add Subject"/>
+          <toolTipText value="Add a subject with the selected properties."/>
         </properties>
       </component>
       <component id="5f679" class="javax.swing.JButton" binding="generateButton" default-binding="true">
@@ -65,6 +72,7 @@
         <properties>
           <background color="-16711690"/>
           <text value="Generate"/>
+          <toolTipText value="Starts generating the schedules. Please make sure the data you've entered is correct before clicking that button."/>
         </properties>
       </component>
       <component id="6a077" class="javax.swing.JButton" binding="saveFileButton">
@@ -73,6 +81,7 @@
         </constraints>
         <properties>
           <text value="Save To File"/>
+          <toolTipText value="Save the entered data to a file to be loaded later on."/>
         </properties>
       </component>
       <component id="c1fcd" class="javax.swing.JButton" binding="loadFileButton" default-binding="true">
@@ -81,6 +90,7 @@
         </constraints>
         <properties>
           <text value="Load File"/>
+          <toolTipText value="Load data from a previously saved file."/>
         </properties>
       </component>
       <component id="b939d" class="javax.swing.JLabel" binding="subjectNameLabel">
@@ -97,6 +107,7 @@
         </constraints>
         <properties>
           <text value="Every two weeks"/>
+          <toolTipText value="Indicates that the lab is once every two weeks (half a period)"/>
         </properties>
       </component>
       <tabbedpane id="e1e75" binding="subjectsTabbedPane">
@@ -105,7 +116,9 @@
             <preferred-size width="200" height="200"/>
           </grid>
         </constraints>
-        <properties/>
+        <properties>
+          <toolTipText value="Subjects should appear here."/>
+        </properties>
         <border type="none"/>
         <children/>
       </tabbedpane>
@@ -115,6 +128,7 @@
         </constraints>
         <properties>
           <text value="Convert to 7eby Mode"/>
+          <toolTipText value="Converts the generation mode to/from 7eby mode. The restriction of having to register a subject's meetings from the same group is lifted. The generated schedules may be incompatible with the website."/>
         </properties>
       </component>
       <component id="3554d" class="javax.swing.JButton" binding="goAdvancedButton" default-binding="true">
@@ -123,6 +137,7 @@
         </constraints>
         <properties>
           <text value="Enable Advanced Mode"/>
+          <toolTipText value="Advanced mode lets you define precisely the start and end of a meeting based on the website's periods. Used on meetings that have abnormal times."/>
         </properties>
       </component>
     </children>

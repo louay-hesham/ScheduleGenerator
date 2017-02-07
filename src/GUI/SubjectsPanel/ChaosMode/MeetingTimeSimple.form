@@ -26,6 +26,7 @@
             <item value="Wednesday"/>
             <item value="Thursday"/>
           </model>
+          <toolTipText value="Select meeting's day"/>
         </properties>
       </component>
       <component id="59850" class="javax.swing.JComboBox" binding="secLecDay">
@@ -41,6 +42,7 @@
             <item value="Wednesday"/>
             <item value="Thursday"/>
           </model>
+          <toolTipText value="Select secondary lecture's day"/>
         </properties>
       </component>
       <component id="f17d3" class="javax.swing.JLabel" binding="meetingTypeLabel">
@@ -84,13 +86,16 @@
           <enabled value="true"/>
           <opaque value="false"/>
           <requestFocusEnabled value="false"/>
+          <toolTipText value="Select meeting's period"/>
         </properties>
       </component>
       <component id="46256" class="javax.swing.JSpinner" binding="secLecPeriodSpinner">
         <constraints>
           <grid row="1" column="3" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false"/>
         </constraints>
-        <properties/>
+        <properties>
+          <toolTipText value="Select secondary lecture's period"/>
+        </properties>
       </component>
       <component id="4ed5d" class="javax.swing.JButton" binding="deleteMeetingButton">
         <constraints>
@@ -99,6 +104,7 @@
         <properties>
           <background color="-65508"/>
           <text value="Delete Meeting"/>
+          <toolTipText value="Delete this meeting"/>
         </properties>
       </component>
     </children>
