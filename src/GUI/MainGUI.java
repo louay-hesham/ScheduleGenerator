@@ -124,7 +124,7 @@ public class MainGUI {
                 subjectsTabbedPane.addTab(s.getSubjectName(), s.getMainPanel());
             }
         } catch (Exception e) {
-            this.showErrorMessage(e.getMessage());
+            this.showErrorMessage("Invalid file format:\r\n" + e.getMessage());
         }
     }
 
